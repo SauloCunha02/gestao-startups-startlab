@@ -23,8 +23,12 @@ Os 7 passos
 7. Melhore e apresente ....................... 40 min  (etapas 11 e 12)
 
 Cada passo traz: objetivo, tres acoes para fazer agora, campos para registrar,
-um criterio de "pronto quando", o erro mais comum e um link para a etapa
-completa correspondente.
+um exemplo preenchido do caso ficticio Fila Menor, um criterio de "pronto
+quando", o erro mais comum e um link para a etapa completa correspondente.
+
+O botao "Ver exemplos", no alto da pagina, abre e fecha todos os exemplos de
+uma vez. O exemplo serve de referencia do nivel de detalhe esperado; copiar o
+exemplo nao gera evidencia.
 
 Respostas
 ---------

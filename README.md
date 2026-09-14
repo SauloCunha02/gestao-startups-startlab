@@ -2,17 +2,23 @@
 
 Material didático para estudantes do 2º ano: 12 etapas para sair da observação de um problema e chegar ao primeiro teste de uma solução.
 
-## Versão 2.0.0
+## Versão 3.0.0
 
-Site estático interativo, com temas claro e escuro e layout adaptado para celular, tablet e computador. Cada etapa combina explicação, exemplo fictício, atividade e pergunta de revisão. Os arquivos em PDF e Word continuam disponíveis.
+Site estático interativo, com temas claro e escuro e layout adaptado para celular, tablet e computador. Cada etapa entrega o conteúdo em camadas — uma frase-chave, três pontos essenciais, os termos e a explicação completa recolhida — e cada campo das fichas tem um exemplo preenchido do caso fictício Fila Menor. Os arquivos em PDF e Word continuam disponíveis.
 
+- Etapa em camadas: frase-chave, três pontos essenciais, termos que revelam o significado ao toque e “Aprofundar” para o texto completo.
+- Exemplo preenchido campo a campo, nas 12 fichas e no modelo de entrevista, com aviso de que copiar não gera evidência. Um botão abre e fecha todos de uma vez.
+- Tarefas da etapa viram checklist, com contador e progresso guardado.
+- Widgets que calculam: médias de importância e satisfação com envio para a matriz (etapa 04), soma das notas das ideias com destaque da melhor e aviso de empate (etapa 06), contagem do teste (etapa 10) e ponto de equilíbrio na calculadora (etapa 08).
+- Progresso por ficha na navegação do caderno e números vivos na página inicial: etapas concluídas, tarefas marcadas e campos preenchidos.
+- Trilha Rápida (`trilha-rapida/`): versão curta de sete passos, também com exemplo preenchido em cada passo.
 - Trilha com busca, filtros, progresso e retomada de etapa.
-- Trilha Rápida (`trilha-rapida/`): versão curta de sete passos, com o essencial para chegar ao primeiro teste em cerca de seis aulas.
 - Caderno digital com 12 fichas e cinco registros de entrevistas.
 - Respostas salvas no navegador, cópia/restauração em JSON e exportação em texto para compartilhar com o professor.
-- Calculadora de modelo de negócio e cronômetro de foco.
 - Guia do professor com seções expansíveis e biblioteca para download.
 - Navegação por teclado, redução de movimento e impressão de respostas longas.
+
+Cópias exportadas pela versão 2 continuam válidas: o formato não mudou, apenas ganhou campos opcionais.
 
 Não há servidor de dados, login de estudante, serviços de terceiros ou sincronização automática. A equipe deve exportar uma cópia antes de trocar de aparelho, navegador ou limpar os dados locais. Cada navegador/origem mantém seu próprio projeto; abrir o HTML local e acessar um site publicado cria armazenamentos separados.
 
@@ -38,6 +44,8 @@ Não há etapa de instalação ou compilação para usar o site. HTML, CSS, Java
 
 O conteúdo pedagógico está em `conteudo/material.py` e o modelo da página em `scripts/pagina.html`. Execute `python scripts/gerar_dados.py` para atualizar `assets/conteudo.js` e `index.html`. O gerador usa somente a biblioteca padrão do Python.
 
+O exemplo Fila Menor preenchido campo a campo fica em `EXAMPLES` e `INTERVIEW_EXAMPLES`, dentro de `conteudo/material.py`, na mesma ordem de `WORKSHEETS` e `INTERVIEW`: texto simples para campos de escrita, lista de linhas para tabelas.
+
 Para os testes, instale Node.js e execute:
 
 ```sh
@@ -51,9 +59,13 @@ Inicie o servidor em um terminal:
 python -m http.server 8765 --bind 127.0.0.1
 ```
 
-Em outro terminal, execute `npm test`. Opcionalmente, defina `TEST_URL` para testar outra URL. O teste usa contextos isolados de navegador e grava evidências em `test-results/`, pasta ignorada pelo Git. `npm run check` confere a sintaxe do JavaScript.
+Em outro terminal, execute `npm test`. Opcionalmente, defina `TEST_URL` para testar outra URL. Os testes usam contextos isolados de navegador e gravam evidências em `test-results/`, pasta ignorada pelo Git. `npm run check` confere a sintaxe do JavaScript.
 
-O teste verifica fluxo de aprendizagem, busca, temas, persistência, importação/exportação, cálculos, downloads, impressão, navegação móvel e ausência de rolagem horizontal nas larguras 320, 390, 768 e 1440 pixels.
+`npm test` roda três suítes, que também podem ser executadas isoladamente:
+
+- `npm run test:smoke` — fluxo de aprendizagem, busca, temas, persistência, importação/exportação, cálculos, downloads, impressão, navegação móvel e ausência de rolagem horizontal nas larguras 320, 390, 768 e 1440 pixels.
+- `npm run test:interativo` — conteúdo em camadas, termos, checklist de tarefas, exemplos nas 12 fichas e na entrevista, os quatro widgets de cálculo, progresso por ficha e compatibilidade com cópias da versão anterior.
+- `npm run test:rapida` — os sete passos da Trilha Rápida, exemplos, progresso, resumo exportado e armazenamento separado do caderno.
 
 ## Origem
 

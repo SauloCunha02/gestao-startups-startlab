@@ -73,6 +73,14 @@ textarea:hover{border-color:var(--forest)}
 .ready{margin-top:16px;background:var(--soft-green);border-radius:14px;padding:13px 15px;font-size:14px}
 .ready b{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 .trap{margin-top:10px;border-left:3px solid var(--orange);padding:4px 0 4px 12px;font-size:14px;color:var(--muted)}
+.example-row{margin:14px 0 0}
+.ex-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:650;color:var(--muted)}
+.ex-toggle:hover{background:var(--soft-green);color:var(--text)}
+.ex-toggle[aria-expanded=true]{background:var(--soft-green);color:var(--text);border-color:var(--forest)}
+.example-box{border-left:4px solid var(--forest);background:var(--soft-green);border-radius:10px;padding:16px 18px;margin-top:12px}
+.example-tag{display:block;font-size:9.5px;font-weight:750;letter-spacing:.11em;color:var(--muted);margin-bottom:9px}
+.example-text{font-size:13.5px;line-height:1.75}
+.example-warn{margin-top:11px;font-size:11px;line-height:1.6;color:var(--muted)}
 .step-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .check{display:inline-flex;align-items:center;gap:9px;font-weight:650;cursor:pointer}
 .check input{width:20px;height:20px;accent-color:var(--forest);margin:0}
@@ -94,7 +102,7 @@ textarea:hover{border-color:var(--forest)}
 @media (max-width:520px){.wrap{padding-block:16px 44px}.hero{padding:22px 18px;border-radius:18px}.step{padding:18px 16px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 @media print{
- .topbar,.actions,.progress-card,.toast,.deep,.skip-link{display:none}
+ .topbar,.actions,.progress-card,.toast,.deep,.skip-link,.example-row,.example-box{display:none}
  body{background:#fff}
  .step,.hero,.final,.rule{box-shadow:none;break-inside:avoid;border-color:#bbb}
  textarea{min-height:0;height:auto;overflow:visible}
@@ -108,6 +116,7 @@ textarea:hover{border-color:var(--forest)}
   <div class="topbar">
     <a class="back" href="../index.html#/trilha">← Trilha completa (12 etapas)</a>
     <div class="topbar-actions">
+      <button class="tool" id="examples-button" type="button" aria-pressed="false">Ver exemplos</button>
       <button class="tool" id="theme-button" type="button">Tema escuro</button>
       <button class="tool" id="print-button" type="button">Imprimir</button>
     </div>
@@ -179,6 +188,17 @@ textarea:hover{border-color:var(--forest)}
 (function(){
 'use strict';
 var KEY='startlab-rapida-v1';
+
+// Exemplo fictício Fila Menor, condensado: um por passo.
+var EXEMPLOS={
+ 1:'Frase do problema: “Estudantes do 2º ano que compram na cantina enfrentam espera longa quando o intervalo começa e todos chegam ao mesmo tempo.”\n\nSuposição mais arriscada: “pedidos antecipados reduziriam a espera”. Se for falsa, o projeto inteiro cai.',
+ 2:'P1 · 2º ano, compra quase todo dia — terça: esperou 8 min e comeu andando; acontece 4x por semana; chega antes do sinal e mesmo assim pega fila.\nP2 · 1º ano — ontem desistiu ao ver a fila e ficou sem comer; passou a trazer bolacha de casa.\nP3 · 3º ano — quinta: 10 min entre entrar na fila e receber; pede para um colega guardar lugar.\n\nNão esperávamos: P1 e P3 reclamaram do momento de PAGAR, não do preparo.',
+ 3:'Dor prioritária: comprar dentro do tempo do intervalo — importância 4,6 contra satisfação 2,0 (5 respostas).\n\nPersona: Lia, 16 anos, chega antes do sinal para pegar fila menor, gasta de 8 a 10 min e come andando até a sala.\n\nUsuário: estudante · Pagador: cantina (hipótese, ninguém falou em pagar) · Decisor: direção.\n\nDesafio: como podemos ajudar estudantes que compram na cantina a receber o lanche dentro do intervalo, nos dias de maior movimento?',
+ 4:'Três opções e notas (benefício · facilidade · recursos):\n1) Pedido em papel antes do sinal — 3·3·3 = 9\n2) Fila separada para quem já decidiu — 2·3·3 = 8\n3) Cardápio com os prontos sinalizados — 2·2·3 = 7\n\nEscolhida: a 1, única que ataca a causa observada (todos chegam juntos) e dá para testar só com papel.\n\nProposta: Ajudamos estudantes que compram no intervalo a receber o lanche dentro do tempo, organizando os pedidos antes de o sinal tocar.',
+ 5:'Modelo: usa = estudante · paga = cantina (hipótese) · recebe = lanche sem fila · chega = papel entregue na sala · fazemos = recolher e organizar pedidos · precisamos = papel, caneta e 10 min de duas pessoas.\n\nConta do mês: 4 cantinas × R$ 30 = R$ 120 de receita. Gastos: 4 × R$ 5 + R$ 60 fixos = R$ 80. Saldo = R$ 40.\nCom metade (2 cantinas): 60 − (10 + 60) = − R$ 10. O gasto fixo derruba o cenário menor.\n\nNão entrou na conta: as ~10 horas de trabalho da equipe por mês.',
+ 6:'Plano (escrito ANTES): hipótese — estudantes entendem sozinhos como pedir. Tarefa — “faça um pedido usando este material”. Medida — concluiu sem ajuda e em quanto tempo. Critério — 2 de 3 concluem sem ajuda em até 2 min.\n\nResultados: T1 concluiu em 1min20 sem ajuda · T2 não concluiu, 2min40, pediu ajuda, não achou a confirmação · T3 não concluiu, 2min10, marcou 3 itens sem ver o limite de 2.\n\nCritério NÃO atingido (1 de 3). NÃO prova que a fila diminuiria: testamos compreensão em papel, não a operação real.',
+ 7:'Mudança: o terceiro cartão só dizia “pedido recebido”. Passou a trazer número do pedido, itens, valor e “retire no balcão lateral quando chamarem seu número”.\nNovo teste: T4 concluiu em 1min05, sem ajuda. Uma pessoa só — ainda precisa repetir.\n\nPitch: problema (30s) · evidências: 4 de 5 com prejuízo concreto, importância 4,6 x satisfação 2,0 (30s) · demonstrar os 3 cartões (60s) · modelo: cantina pagaria R$ 30/mês, ainda hipótese (30s) · teste e próximo passo: medir a fila real (30s).\n\nUma evidência: a espera passa de 8 min. Uma estimativa: o preço de R$ 30. Uma dúvida: alguém pagaria?'
+};
 
 var STEPS=[
  {n:1,title:'Escolha o problema',time:'25 min',etapas:'Etapas 01 e 02',link:'../index.html#/etapa/1',
@@ -273,12 +293,18 @@ function render(){
       return '<label class="field"><span>'+esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+esc(f[2])+'"></textarea></label>';
     }).join('');
     var acts=s.acts.map(function(a){return '<li>'+a+'</li>'}).join('');
+    var exemplo=EXEMPLOS[s.n]
+      ? '<p class="example-row"><button class="ex-toggle" data-example="'+s.n+'" aria-expanded="false" aria-controls="ex-'+s.n+'">💡 <span>Ver exemplo preenchido</span></button></p>'+
+        '<div class="example-box" id="ex-'+s.n+'" hidden><span class="example-tag">EXEMPLO FICTÍCIO · FILA MENOR</span>'+
+        '<p class="example-text">'+esc(EXEMPLOS[s.n]).replace(/\n/g,'<br>')+'</p>'+
+        '<p class="example-warn">Referência de detalhe, não resposta pronta. Copiar o exemplo não gera evidência: escreva com os registros da sua equipe.</p></div>'
+      : '';
     return '<section class="step" id="passo-'+s.n+'">'+
       '<div class="step-head"><div class="num">'+s.n+'</div><div style="flex:1">'+
         '<div style="display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap"><h3>'+esc(s.title)+'</h3><span class="time">'+esc(s.time)+'</span></div>'+
         '<p class="goal">'+esc(s.goal)+'</p></div></div>'+
       '<div class="block"><span class="eyebrow">Faça agora</span><ol class="acts">'+acts+'</ol></div>'+
-      '<div class="block"><span class="eyebrow">Registre aqui</span>'+fields+'</div>'+
+      '<div class="block"><span class="eyebrow">Registre aqui</span>'+fields+exemplo+'</div>'+
       '<div class="ready"><b>Pronto quando</b>'+esc(s.ready)+'</div>'+
       '<p class="trap"><b>Erro comum:</b> '+esc(s.trap)+'</p>'+
       '<div class="step-foot"><label class="check"><input type="checkbox" id="done-'+s.n+'"> Passo '+s.n+' concluído</label>'+
@@ -375,6 +401,27 @@ document.getElementById('clear-button').addEventListener('click',function(){
 });
 
 document.getElementById('print-button').addEventListener('click',function(){window.print()});
+
+// Exemplos: um por passo, mais um botão que abre e fecha todos.
+var examplesOpen=false;
+document.addEventListener('click',function(e){
+  var btn=e.target.closest('.ex-toggle');
+  if(!btn)return;
+  var box=document.getElementById('ex-'+btn.dataset.example),open=!box.hidden;
+  box.hidden=open;
+  btn.setAttribute('aria-expanded',String(!open));
+  btn.querySelector('span').textContent=open?'Ver exemplo preenchido':'Ocultar exemplo';
+});
+document.getElementById('examples-button').addEventListener('click',function(){
+  examplesOpen=!examplesOpen;
+  Array.prototype.forEach.call(document.querySelectorAll('.example-box'),function(b){b.hidden=!examplesOpen});
+  Array.prototype.forEach.call(document.querySelectorAll('.ex-toggle'),function(b){
+    b.setAttribute('aria-expanded',String(examplesOpen));
+    b.querySelector('span').textContent=examplesOpen?'Ocultar exemplo':'Ver exemplo preenchido';
+  });
+  this.setAttribute('aria-pressed',String(examplesOpen));
+  this.textContent=examplesOpen?'Ocultar exemplos':'Ver exemplos';
+});
 
 var themeBtn=document.getElementById('theme-button');
 function themeLabel(){
