@@ -1,13 +1,14 @@
 {
   "name": "startlab-gestao-startups",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "private": true,
   "description": "Trilha didática interativa de Gestão de Startups",
   "scripts": {
-    "test": "node tests/smoke.cjs && node tests/interativo.cjs && node tests/trilha-rapida.cjs",
+    "test": "node tests/smoke.cjs && node tests/interativo.cjs && node tests/trilha-rapida.cjs && node tests/trilha-extrema.cjs",
     "test:smoke": "node tests/smoke.cjs",
     "test:interativo": "node tests/interativo.cjs",
     "test:rapida": "node tests/trilha-rapida.cjs",
+    "test:extrema": "node tests/trilha-extrema.cjs",
     "check": "node --check assets/app.js"
   },
   "devDependencies": {

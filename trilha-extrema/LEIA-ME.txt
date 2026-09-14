@@ -1,0 +1,71 @@
+TRILHA EXTREMA — StartLab / Gestao de Startups
+==============================================
+
+O que e
+-------
+O percurso mais curto do StartLab: um sprint cronometrado de 50 minutos,
+em quatro blocos, que vai do problema ao pitch de 60 segundos. Cabe em
+uma unica aula.
+
+Como abrir
+----------
+Abra o arquivo index.html desta pasta com duplo clique, ou clique em
+"Trilha extrema" no menu lateral do StartLab.
+
+Os 4 blocos (50 minutos)
+------------------------
+1. O problema em uma frase ............ 10 min  (etapa 01 · passo 1 da Rapida)
+2. Tres conversas de 3 minutos ........ 15 min  (etapa 03 · passo 2 da Rapida)
+3. Um desenho e dois testes ........... 15 min  (etapa 09 · passo 6 da Rapida)
+4. Pitch de 60 segundos ............... 10 min  (etapa 12 · passo 7 da Rapida)
+
+O cronometro
+------------
+O relogio conduz o percurso. "Iniciar sprint" comeca o bloco 1; quando o
+tempo do bloco acaba, a pagina avanca sozinha para o proximo e rola ate
+ele. "Proximo bloco" pula adiante, "Zerar" reinicia o relogio sem apagar
+as respostas. O bloco em andamento fica destacado.
+
+O cronometro nao e salvo: recarregar a pagina reinicia o relogio. As
+respostas continuam salvas.
+
+IMPORTANTE: o que este sprint NAO e
+-----------------------------------
+Tres conversas e dois testes em uma aula sao um PRIMEIRO CONTATO com o
+metodo. Nao sao evidencia suficiente para afirmar que o problema existe,
+que o publico e aquele, ou que a solucao funciona. A propria pagina diz
+isso ao aluno, e o bloco 4 exige que a equipe declare em voz alta o que
+ainda nao sabe.
+
+Quando usar
+-----------
+- Primeira aula do modulo, para abrir o assunto.
+- Oficina avulsa, feira, semana tematica ou aula de reposicao.
+- Destravar uma equipe parada, dando um ciclo completo rapido.
+- Aquecimento antes de comecar a trilha que vale nota.
+
+Quando NAO usar
+---------------
+Como substituto da investigacao avaliada. Para nota, use a Trilha Rapida
+(7 passos, ~6 aulas) ou a trilha completa (12 etapas, 24 aulas), que
+pedem cinco entrevistas, criterio previo e registro de evidencias.
+
+Respostas
+---------
+Ficam apenas no navegador daquele aparelho, na chave
+startlab-extrema-v1 — separada da Trilha Rapida e do caderno das 12
+etapas. Uma nao apaga a outra. Antes de trocar de aparelho, use
+"Baixar meu resumo (.txt)". O resumo inclui o aviso sobre os limites
+do sprint, para o professor ler junto com as respostas.
+
+Exemplo
+-------
+Cada bloco traz um exemplo preenchido do caso ficticio Fila Menor. O
+botao "Ver exemplos", no alto, abre e fecha todos de uma vez. No bloco 1
+o exemplo mostra tambem a versao ERRADA da frase, para o aluno reconhecer
+quando uma solucao se disfarcou de problema.
+
+Impressao
+---------
+O botao "Imprimir" gera a versao em papel com os campos preenchidos, sem
+cronometro nem exemplos — util quando a turma nao tem aparelhos.

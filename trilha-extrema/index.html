@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f7f2">
+<meta name="description" content="Trilha extrema: um sprint cronometrado de 50 minutos, em quatro blocos, do problema ao pitch de 60 segundos.">
+<title>Trilha Extrema — StartLab</title>
+<link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('startlab-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<style>
+:root{color-scheme:light;--bg:#f6f7f2;--surface:#fff;--surface-2:#eef1e8;--text:#203d33;--muted:#65756b;--line:#dfe5db;--forest:#194c3b;--accent:#d8ec91;--accent-text:#274332;--soft-green:#e6eddf;--hero:#eaf0df;--shadow:0 12px 32px #1c3b2d0a;--flame:#b4541b;--flame-soft:#f6e0cd}
+:root[data-theme=dark]{color-scheme:dark;--bg:#101b17;--surface:#19271f;--surface-2:#223228;--text:#ebf0e6;--muted:#acb9ab;--line:#34463b;--forest:#cae699;--accent:#d8ec91;--accent-text:#203c2d;--soft-green:#2a3d2e;--hero:#22352a;--shadow:0 12px 32px #0002;--flame:#f0a672;--flame-soft:#4a2f1c}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 'Segoe UI',Arial,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer;color:inherit;border:0;background:none}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{line-height:1.2;letter-spacing:-.035em}
+:focus-visible{outline:3px solid var(--forest);outline-offset:3px}
+[hidden]{display:none!important}
+.muted{color:var(--muted)}
+.eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.skip-link{position:fixed;top:-70px;left:16px;padding:12px;background:var(--accent);color:var(--accent-text);z-index:100}
+.skip-link:focus{top:12px}
+.wrap{max-width:820px;margin:0 auto;padding-block:22px 60px;padding-left:18px;padding-right:18px}
+
+.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-bottom:24px}
+.back{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.back:hover{background:var(--surface-2)}
+.tool{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 14px;font-weight:600}
+.tool:hover{background:var(--surface-2)}
+.topbar-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+.hero{background:var(--flame-soft);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(28px,6vw,40px);font-weight:680;margin:10px 0 12px}
+.hero p{max-width:60ch;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600}
+.chip.solid{background:var(--flame);color:var(--bg);border-color:transparent}
+
+/* Painel do cronômetro do sprint */
+.sprint{position:sticky;top:0;z-index:10;margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow)}
+.sprint-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.clock{font-size:42px;font-weight:720;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1;color:var(--flame)}
+.sprint-now{flex:1 1 180px;min-width:0}
+.sprint-now .eyebrow{display:block;margin-bottom:3px}
+.sprint-now b{font-size:15px;display:block;overflow-wrap:anywhere}
+.sprint-controls{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border-radius:999px;padding:10px 17px;font-weight:650;border:1px solid var(--line);background:var(--surface)}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--flame);color:var(--bg);border-color:transparent}
+.btn.primary:hover{filter:brightness(.94)}
+.btn.lime{background:var(--accent);color:var(--accent-text);border-color:transparent}
+.sprint-bar{margin-top:14px;height:9px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.sprint-bar span{display:block;height:100%;width:0;background:var(--flame);border-radius:999px;transition:width .4s linear}
+.sprint-note{margin-top:9px;font-size:12px;color:var(--muted)}
+
+.warn{margin-top:22px;border-left:4px solid var(--flame);background:var(--surface);border-radius:12px;padding:18px 20px}
+.warn b{display:block;margin-bottom:7px}
+.warn p{font-size:13.5px;color:var(--muted);line-height:1.7}
+
+.section-title{margin:34px 0 14px}
+.section-title h2{font-size:22px}
+.section-title p{font-size:13.5px;color:var(--muted);margin-top:5px}
+
+.block{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow);transition:border-color .2s}
+.block.active{border-color:var(--flame);border-width:2px;padding:21px}
+.block.done .num{background:var(--forest);color:var(--bg)}
+.block-head{display:flex;gap:14px;align-items:flex-start}
+.num{flex:none;width:38px;height:38px;border-radius:12px;background:var(--flame-soft);color:var(--flame);display:grid;place-items:center;font-weight:750;font-size:17px}
+.block.active .num{background:var(--flame);color:var(--bg)}
+.block-head h3{font-size:19px}
+.mins{font-size:12.5px;font-weight:700;color:var(--flame);white-space:nowrap}
+.goal{margin-top:4px;font-size:14.5px;color:var(--muted)}
+.block-body{margin-top:16px}
+.block-body>.eyebrow{display:block;margin-bottom:7px}
+ol.acts{margin:0;padding-left:20px}
+ol.acts li{margin-bottom:6px}
+label.field{display:block;margin-top:13px}
+label.field span{display:block;font-size:13px;font-weight:650;margin-bottom:5px}
+textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical;min-height:56px}
+textarea:hover{border-color:var(--forest)}
+.example-row{margin:13px 0 0}
+.ex-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:650;color:var(--muted)}
+.ex-toggle:hover{background:var(--flame-soft);color:var(--text)}
+.ex-toggle[aria-expanded=true]{background:var(--flame-soft);color:var(--text);border-color:var(--flame)}
+.example-box{border-left:4px solid var(--flame);background:var(--flame-soft);border-radius:10px;padding:16px 18px;margin-top:12px}
+.example-tag{display:block;font-size:9.5px;font-weight:750;letter-spacing:.11em;color:var(--muted);margin-bottom:9px}
+.example-text{font-size:13.5px;line-height:1.75}
+.example-warn{margin-top:11px;font-size:11px;line-height:1.6;color:var(--muted)}
+.ready{margin-top:16px;background:var(--soft-green);border-radius:14px;padding:13px 15px;font-size:14px}
+.ready b{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.block-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.check{display:inline-flex;align-items:center;gap:9px;font-weight:650;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--forest);margin:0}
+.deep{font-size:13px;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--line);padding-bottom:2px}
+.deep:hover{border-color:var(--flame)}
+
+.final{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--shadow)}
+.final h2{font-size:21px;margin:8px 0 10px}
+.next{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin-top:18px}
+.next a{display:block;border:1px solid var(--line);border-radius:14px;padding:16px 17px;text-decoration:none;background:var(--bg)}
+.next a:hover{border-color:var(--forest);background:var(--surface-2)}
+.next b{display:block;margin-bottom:4px}
+.next small{color:var(--muted);font-size:12px;line-height:1.6;display:block}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.saved{font-size:13px;color:var(--muted);margin-top:12px}
+.footer{margin-top:34px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--flame);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:650;z-index:80;box-shadow:var(--shadow);max-width:92vw;text-align:center}
+
+@media (max-width:520px){.wrap{padding-block:16px 44px}.hero{padding:22px 18px;border-radius:18px}.block{padding:18px 16px}.block.active{padding:17px 15px}.clock{font-size:34px}.sprint{position:static}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{
+ .topbar,.actions,.sprint,.toast,.deep,.skip-link,.example-row,.example-box,.next{display:none}
+ body{background:#fff}
+ .block,.hero,.final,.warn{box-shadow:none;break-inside:avoid;border-color:#bbb}
+ .block.active{border-width:1px}
+ textarea{min-height:0;height:auto;overflow:visible}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#blocos">Pular para os blocos</a>
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="back" href="../index.html#/trilha">← StartLab</a>
+    <div class="topbar-actions">
+      <button class="tool" id="examples-button" type="button" aria-pressed="false">Ver exemplos</button>
+      <button class="tool" id="theme-button" type="button">Tema escuro</button>
+      <button class="tool" id="print-button" type="button">Imprimir</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <span class="eyebrow">StartLab · Sprint de uma aula</span>
+    <h1>Trilha Extrema</h1>
+    <p>Uma aula. Cinquenta minutos. Do problema ao pitch de 60 segundos, com o relógio correndo. É o percurso mais curto do StartLab — feito para dar o primeiro contato com o método em uma única aula.</p>
+    <div class="chips">
+      <span class="chip solid">4 blocos</span>
+      <span class="chip">50 minutos</span>
+      <span class="chip">3 conversas</span>
+      <span class="chip">2 testes</span>
+      <span class="chip">Só papel e caneta</span>
+    </div>
+  </header>
+
+  <section class="sprint" aria-label="Cronômetro do sprint">
+    <div class="sprint-top">
+      <output class="clock" id="clock" aria-label="Tempo restante no bloco">10:00</output>
+      <div class="sprint-now">
+        <span class="eyebrow">Bloco atual</span>
+        <b id="now-name">1 · O problema em uma frase</b>
+        <span class="muted" id="now-total">50:00 restantes no sprint</span>
+      </div>
+      <div class="sprint-controls">
+        <button class="btn primary" id="start-button" type="button">Iniciar sprint</button>
+        <button class="btn" id="next-button" type="button">Próximo bloco</button>
+        <button class="btn" id="reset-button" type="button">Zerar</button>
+      </div>
+    </div>
+    <div class="sprint-bar"><span id="sprint-bar"></span></div>
+    <p class="sprint-note" id="sprint-note" role="status">O relógio é o professor deste percurso. Quando o bloco acaba, siga em frente mesmo incompleto.</p>
+  </section>
+
+  <div class="warn">
+    <b>Antes de começar: o que este sprint não é</b>
+    <p>Três conversas e dois testes em uma aula são um <strong>primeiro contato com o método</strong> — não são evidência suficiente para afirmar que o problema existe, que o público é aquele ou que a solução funciona. Use para abrir o assunto, para uma oficina avulsa, para uma feira, ou para destravar uma equipe parada. Quando o projeto for valer nota de investigação, faça a <a href="../trilha-rapida/index.html">Trilha Rápida</a> ou a <a href="../index.html#/trilha">trilha completa de 12 etapas</a>.</p>
+  </div>
+
+  <div class="section-title" id="blocos">
+    <h2>Os 4 blocos</h2>
+    <p>Cada bloco tem tempo fixo. Não dá para voltar: o que ficou incompleto vira anotação para o próximo ciclo.</p>
+  </div>
+
+  <main id="blocks"></main>
+
+  <div class="final">
+    <span class="eyebrow">Acabou o sprint</span>
+    <h2>Levem embora estas três coisas</h2>
+    <p class="muted">Uma frase de problema testada contra três relatos. Um papel que duas pessoas tentaram usar. Uma lista do que vocês ainda não sabem — essa é a parte mais valiosa.</p>
+    <div class="next">
+      <a href="../trilha-rapida/index.html"><b>Continuar na Trilha Rápida →</b><small>7 passos, cerca de 6 aulas. Aprofunda o que você acabou de esboçar, com cinco entrevistas e um modelo de negócio.</small></a>
+      <a href="../index.html#/trilha"><b>Ir para a trilha completa →</b><small>12 etapas, 24 aulas. O percurso com avaliação, fichas e portfólio da equipe.</small></a>
+    </div>
+    <div class="actions">
+      <button class="btn lime" id="export-button" type="button">Baixar meu resumo (.txt)</button>
+      <button class="btn" id="copy-button" type="button">Copiar tudo</button>
+      <button class="btn" id="clear-button" type="button">Apagar respostas</button>
+    </div>
+    <p class="saved">As respostas ficam só neste navegador e neste aparelho, em espaço separado das outras trilhas. Antes de trocar de aparelho, baixe o resumo.</p>
+  </div>
+
+  <div class="footer">
+    <span>StartLab · Gestão de Startups · Trilha Extrema</span>
+    <span><a href="../trilha-rapida/index.html">Trilha Rápida</a> · <a href="../index.html#/trilha">12 etapas</a></span>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+'use strict';
+var KEY='startlab-extrema-v1';
+
+var BLOCKS=[
+ {n:1,title:'O problema em uma frase',min:10,link:'../index.html#/etapa/1',rapida:'Passo 1',
+  goal:'Sair da ideia e cravar uma dificuldade real, sem solução escondida dentro.',
+  acts:['<b>2 min, em silêncio:</b> cada integrante escreve uma dificuldade que viu nos últimos sete dias.',
+        '<b>3 min:</b> escolham a que mais se repete <b>e</b> cujo público está neste prédio agora.',
+        '<b>5 min:</b> escrevam a frase e risquem qualquer solução que tenha entrado nela.'],
+  fields:[['e1a','A frase: [público] enfrenta [dificuldade] quando [situação]','Descreva o que acontece, não o que vocês querem construir.',3]],
+  ready:'A frase não contém nenhuma solução — nem app, nem site, nem sistema.',
+  ex:'CERTO: “Estudantes do 2º ano que compram na cantina enfrentam espera longa quando o intervalo começa e todos chegam ao mesmo tempo.”\n\nERRADO: “Falta um aplicativo de pedidos na cantina.” — isso já é uma solução, e ela fecha a investigação antes de ela começar.'},
+
+ {n:2,title:'Três conversas de 3 minutos',min:15,link:'../index.html#/etapa/3',rapida:'Passo 2',
+  goal:'Trocar o achismo da equipe por três relatos de quem vive a situação.',
+  acts:['<b>Saiam da sala agora.</b> Três pessoas, fora da equipe, três minutos cada.',
+        'Só <b>duas perguntas</b>: “Quando foi a última vez que isso aconteceu?” e “Como você resolve hoje?”',
+        'Anotem o que a pessoa disse. <b>Não expliquem a ideia de vocês</b> — explicar contamina a resposta.'],
+  fields:[['e2a','Os três relatos (P1, P2, P3)','P1: quando aconteceu · como resolve hoje\nP2: …\nP3: …',5],
+          ['e2b','O que contrariou a ideia da equipe','A frase mais útil da aula costuma estar aqui.',2]],
+  ready:'Há três episódios concretos, cada um com um dia ou uma frequência.',
+  ex:'P1 · 2º ano — terça, esperou 8 min e comeu andando; chega antes do sinal e mesmo assim pega fila.\nP2 · 1º ano — ontem desistiu ao ver a fila e ficou sem comer; passou a trazer bolacha de casa.\nP3 · 3º ano — quinta, 10 min na fila; pede para um colega guardar lugar.\n\nContrariou: achávamos que a demora era no preparo. P1 e P3 reclamaram do momento de PAGAR.'},
+
+ {n:3,title:'Um desenho e dois testes',min:15,link:'../index.html#/etapa/9',rapida:'Passo 6',
+  goal:'Colocar um papel na mão de duas pessoas e ver onde elas travam.',
+  acts:['<b>5 min:</b> desenhem três quadros em uma folha — entrada → ação principal → resultado.',
+        '<b>2 min:</b> escrevam o critério <b>antes</b> de testar. Ex.: “2 de 2 concluem sozinhos em até 1 minuto”.',
+        '<b>8 min:</b> entreguem o papel a duas pessoas, deem a tarefa e <b>fiquem calados</b>. Anotem onde travaram.'],
+  fields:[['e3a','Os três quadros: entrada → ação → resultado','Descreva o que está desenhado em cada quadro.',3],
+          ['e3b','O critério, escrito ANTES do teste','Quantos, fazendo o quê, em quanto tempo.',2],
+          ['e3c','Onde as duas pessoas travaram','Anote o que você viu, não o que você concluiu.',3]],
+  ready:'O critério foi escrito antes do primeiro teste e ninguém o alterou depois.',
+  ex:'QUADROS: 1) cardápio do dia com 6 opções e o campo “sua turma”. 2) marcar até 2 itens e entregar ao colega. 3) confirmação com número do pedido e ponto de retirada.\n\nCRITÉRIO (antes): 2 de 2 concluem sozinhos em até 1 minuto.\n\nTRAVARAM: T1 concluiu em 50 s. T2 não achou a confirmação e perguntou “já foi?”. Resultado 1 de 2 — abaixo do critério. O problema está no terceiro quadro.'},
+
+ {n:4,title:'Pitch de 60 segundos',min:10,link:'../index.html#/etapa/12',rapida:'Passo 7',
+  goal:'Explicar em quatro frases — e admitir em voz alta o que ainda não se sabe.',
+  acts:['Escrevam <b>quatro frases</b>: o problema · a evidência · a solução · o que ainda falta descobrir.',
+        '<b>2 min:</b> ensaiem com o relógio na mão. Passou de 60 segundos, corte palavras.',
+        'Apresentem. A quarta frase é obrigatória: quem esconde a dúvida perde a aula.'],
+  fields:[['e4a','As quatro frases do pitch','1. Problema:\n2. Evidência:\n3. Solução:\n4. O que ainda não sabemos:',5]],
+  ready:'A quarta frase diz claramente o que vocês NÃO descobriram nesta aula.',
+  ex:'1. PROBLEMA: estudantes perdem quase metade do intervalo na fila da cantina.\n2. EVIDÊNCIA: das três pessoas que ouvimos hoje, duas já desistiram de comprar por causa da espera.\n3. SOLUÇÃO: um pedido em papel entregue antes de o sinal tocar.\n4. NÃO SABEMOS: se a cantina consegue separar esses pedidos no pico, e se alguém pagaria por isso. Ouvimos três pessoas em uma aula — é pouco para afirmar qualquer coisa.'}
+];
+
+var TOTAL=BLOCKS.reduce(function(a,b){return a+b.min},0)*60;
+
+var state=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){toast('Não foi possível salvar. Baixe o resumo para não perder.')}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function pad(n){return String(n).padStart(2,'0')}
+function fmt(s){return pad(Math.floor(s/60))+':'+pad(s%60)}
+
+function render(){
+  document.getElementById('blocks').innerHTML=BLOCKS.map(function(b){
+    var fields=b.fields.map(function(f){
+      return '<label class="field"><span>'+esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+esc(f[2])+'"></textarea></label>';
+    }).join('');
+    return '<section class="block" id="bloco-'+b.n+'">'+
+      '<div class="block-head"><div class="num">'+b.n+'</div><div style="flex:1">'+
+        '<div style="display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap"><h3>'+esc(b.title)+'</h3><span class="mins">'+b.min+' min</span></div>'+
+        '<p class="goal">'+esc(b.goal)+'</p></div></div>'+
+      '<div class="block-body"><span class="eyebrow">Faça agora</span><ol class="acts">'+b.acts.map(function(a){return '<li>'+a+'</li>'}).join('')+'</ol></div>'+
+      '<div class="block-body"><span class="eyebrow">Registre aqui</span>'+fields+
+        '<p class="example-row"><button class="ex-toggle" data-example="'+b.n+'" aria-expanded="false" aria-controls="ex-'+b.n+'">💡 <span>Ver exemplo preenchido</span></button></p>'+
+        '<div class="example-box" id="ex-'+b.n+'" hidden><span class="example-tag">EXEMPLO FICTÍCIO · FILA MENOR</span>'+
+        '<p class="example-text">'+esc(b.ex).replace(/\n/g,'<br>')+'</p>'+
+        '<p class="example-warn">Referência de detalhe, não resposta pronta. Copiar o exemplo não gera evidência: escreva o que a sua equipe viu.</p></div></div>'+
+      '<div class="ready"><b>Pronto quando</b>'+esc(b.ready)+'</div>'+
+      '<div class="block-foot"><label class="check"><input type="checkbox" id="done-'+b.n+'"> Bloco '+b.n+' concluído</label>'+
+      '<a class="deep" href="'+b.link+'">Aprofundar · '+esc(b.rapida)+' da Trilha Rápida →</a></div>'+
+    '</section>';
+  }).join('');
+
+  BLOCKS.forEach(function(b){
+    b.fields.forEach(function(f){
+      var el=document.getElementById(f[0]);
+      el.value=state[f[0]]||'';
+      grow(el);
+    });
+    var box=document.getElementById('done-'+b.n);
+    box.checked=!!state['done-'+b.n];
+    document.getElementById('bloco-'+b.n).classList.toggle('done',!!state['done-'+b.n]);
+  });
+  paint();
+}
+function grow(el){if(el.scrollHeight>el.clientHeight){el.style.height='auto';el.style.height=el.scrollHeight+4+'px';}}
+
+// --- Cronômetro do sprint: percorre os blocos em sequência ---
+var index=0, left=BLOCKS[0].min*60, timer=null, deadline=0, running=false;
+
+function elapsed(){
+  var before=0;
+  for(var i=0;i<index;i++)before+=BLOCKS[i].min*60;
+  return before+(BLOCKS[index].min*60-left);
+}
+function paint(){
+  var b=BLOCKS[index];
+  document.getElementById('clock').textContent=fmt(left);
+  document.getElementById('now-name').textContent=b.n+' · '+b.title;
+  document.getElementById('now-total').textContent=fmt(Math.max(0,TOTAL-elapsed()))+' restantes no sprint';
+  document.getElementById('sprint-bar').style.width=(elapsed()/TOTAL*100)+'%';
+  document.getElementById('start-button').textContent=running?'Pausar':(elapsed()?'Continuar':'Iniciar sprint');
+  BLOCKS.forEach(function(x,i){
+    document.getElementById('bloco-'+x.n).classList.toggle('active',running&&i===index);
+  });
+}
+function tick(){
+  left=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+  if(left===0){
+    if(index<BLOCKS.length-1){
+      index++;
+      left=BLOCKS[index].min*60;
+      deadline=Date.now()+left*1000;
+      note('Bloco '+BLOCKS[index].n+' começou: '+BLOCKS[index].title+'.');
+      toast('Tempo! Sigam para o bloco '+BLOCKS[index].n+'.');
+      document.getElementById('bloco-'+BLOCKS[index].n).scrollIntoView({block:'start'});
+    } else {
+      stop();
+      note('Sprint concluído. Registrem o que ficou incompleto antes de sair.');
+      toast('Sprint concluído em 50 minutos.');
+    }
+  }
+  paint();
+}
+function stop(){clearInterval(timer);timer=null;running=false;}
+function note(t){document.getElementById('sprint-note').textContent=t}
+
+document.getElementById('start-button').addEventListener('click',function(){
+  if(running){stop();note('Sprint pausado. O relógio para, o intervalo não.');}
+  else{running=true;deadline=Date.now()+left*1000;timer=setInterval(tick,250);note('Bloco '+BLOCKS[index].n+' em andamento: '+BLOCKS[index].title+'.');}
+  paint();
+});
+document.getElementById('next-button').addEventListener('click',function(){
+  if(index<BLOCKS.length-1){
+    index++;
+    left=BLOCKS[index].min*60;
+    if(running)deadline=Date.now()+left*1000;
+    note('Pularam para o bloco '+BLOCKS[index].n+': '+BLOCKS[index].title+'.');
+    document.getElementById('bloco-'+BLOCKS[index].n).scrollIntoView({block:'start'});
+    paint();
+  } else {stop();note('Este era o último bloco. Fechem o pitch.');paint();}
+});
+document.getElementById('reset-button').addEventListener('click',function(){
+  stop();index=0;left=BLOCKS[0].min*60;
+  note('Cronômetro zerado. As respostas continuam salvas.');
+  paint();
+});
+
+// --- Respostas ---
+var saveTimer;
+document.addEventListener('input',function(e){
+  if(e.target.tagName!=='TEXTAREA')return;
+  state[e.target.id]=e.target.value;
+  grow(e.target);
+  clearTimeout(saveTimer);saveTimer=setTimeout(save,500);
+});
+document.addEventListener('change',function(e){
+  if(e.target.type!=='checkbox')return;
+  var n=Number(e.target.id.split('-')[1]);
+  state[e.target.id]=e.target.checked;
+  document.getElementById('bloco-'+n).classList.toggle('done',e.target.checked);
+  save();
+});
+
+// --- Exemplos ---
+var examplesOpen=false;
+document.addEventListener('click',function(e){
+  var btn=e.target.closest('.ex-toggle');
+  if(!btn)return;
+  var box=document.getElementById('ex-'+btn.dataset.example),open=!box.hidden;
+  box.hidden=open;
+  btn.setAttribute('aria-expanded',String(!open));
+  btn.querySelector('span').textContent=open?'Ver exemplo preenchido':'Ocultar exemplo';
+});
+document.getElementById('examples-button').addEventListener('click',function(){
+  examplesOpen=!examplesOpen;
+  Array.prototype.forEach.call(document.querySelectorAll('.example-box'),function(b){b.hidden=!examplesOpen});
+  Array.prototype.forEach.call(document.querySelectorAll('.ex-toggle'),function(b){
+    b.setAttribute('aria-expanded',String(examplesOpen));
+    b.querySelector('span').textContent=examplesOpen?'Ocultar exemplo':'Ver exemplo preenchido';
+  });
+  this.setAttribute('aria-pressed',String(examplesOpen));
+  this.textContent=examplesOpen?'Ocultar exemplos':'Ver exemplos';
+});
+
+// --- Resumo ---
+function summary(){
+  var out=['STARTLAB — TRILHA EXTREMA (sprint de 50 minutos)','Gerado em '+new Date().toLocaleString('pt-BR'),''];
+  BLOCKS.forEach(function(b){
+    out.push('== BLOCO '+b.n+': '+b.title.toUpperCase()+' ('+b.min+' min)'+(state['done-'+b.n]?'  [concluido]':'  [em aberto]')+' ==');
+    b.fields.forEach(function(f){
+      out.push('- '+f[1]+':');
+      out.push((state[f[0]]||'(em branco)').trim());
+      out.push('');
+    });
+  });
+  out.push('LIMITE DESTE SPRINT: tres conversas e dois testes em uma aula sao um primeiro contato com o metodo,');
+  out.push('nao evidencia suficiente para afirmar que o problema existe ou que a solucao funciona.');
+  out.push('Proximo passo: Trilha Rapida (7 passos) ou trilha completa (12 etapas).');
+  return out.join('\n');
+}
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.hidden=false;
+  clearTimeout(t._t);t._t=setTimeout(function(){t.hidden=true},3200);
+}
+document.getElementById('export-button').addEventListener('click',function(){
+  var blob=new Blob([summary()],{type:'text/plain;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='trilha-extrema-resumo.txt';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+  toast('Resumo baixado.');
+});
+document.getElementById('copy-button').addEventListener('click',function(){
+  var text=summary();
+  function fallback(){
+    var ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');toast('Resumo copiado.')}catch(e){toast('Copie pelo arquivo .txt.')}
+    ta.remove();
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){toast('Resumo copiado.')},fallback);
+  }else fallback();
+});
+document.getElementById('clear-button').addEventListener('click',function(){
+  if(!confirm('Apagar todas as respostas da trilha extrema neste navegador? Não dá para desfazer.'))return;
+  state={};
+  try{localStorage.removeItem(KEY)}catch(e){}
+  render();
+  toast('Respostas apagadas.');
+});
+document.getElementById('print-button').addEventListener('click',function(){window.print()});
+
+var themeBtn=document.getElementById('theme-button');
+function themeLabel(){
+  var dark=document.documentElement.dataset.theme==='dark';
+  themeBtn.textContent=dark?'Tema claro':'Tema escuro';
+  var meta=document.querySelector('meta[name=theme-color]');
+  if(meta)meta.content=dark?'#101b17':'#f6f7f2';
+}
+themeBtn.addEventListener('click',function(){
+  var dark=document.documentElement.dataset.theme==='dark';
+  document.documentElement.dataset.theme=dark?'light':'dark';
+  try{localStorage.setItem('startlab-theme',dark?'light':'dark')}catch(e){}
+  themeLabel();
+});
+
+render();
+themeLabel();
+})();
+</script>
+</body>
+</html>

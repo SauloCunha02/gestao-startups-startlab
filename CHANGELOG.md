@@ -1,5 +1,14 @@
 # Histórico de versões
 
+## 3.1.0
+
+- Trilha Extrema em `trilha-extrema/`: o percurso mais curto do StartLab — quatro blocos que somam 50 minutos, do problema ao pitch de 60 segundos, em uma única aula.
+- Cronômetro do sprint conduz o percurso: avança sozinho quando o bloco acaba, rola até o bloco novo, destaca o que está em andamento e permite pausar, pular e zerar sem apagar respostas.
+- Aviso permanente de que três conversas e dois testes em uma aula são um primeiro contato com o método, não evidência avaliável; o aviso também vai no resumo exportado, para o professor.
+- Exemplo do caso Fila Menor em cada bloco; no bloco 1, o exemplo mostra também a frase errada, em que uma solução se disfarça de problema.
+- Menu lateral, Trilha Rápida e o fim do sprint ligam os três percursos entre si.
+- Suíte `test:extrema`, que adianta o sprint inteiro com relógio virtual, roda junto com as outras em `npm test`.
+
 ## 3.0.0
 
 - Etapa em camadas: frase-chave, três pontos essenciais, termos que revelam o significado ao toque e o texto completo recolhido em “Aprofundar”.

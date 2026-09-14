@@ -2,7 +2,17 @@
 
 Material didático para estudantes do 2º ano: 12 etapas para sair da observação de um problema e chegar ao primeiro teste de uma solução.
 
-## Versão 3.0.0
+## Três percursos
+
+| Percurso | Tamanho | Quando usar |
+| --- | --- | --- |
+| Trilha completa (`index.html`) | 12 etapas · 24 aulas | O percurso que vale nota, com fichas, portfólio e avaliação de 10 pontos. |
+| Trilha Rápida (`trilha-rapida/`) | 7 passos · ~6 aulas | Carga horária reduzida, recuperação de percurso, feira ou revisão antes de apresentar. |
+| Trilha Extrema (`trilha-extrema/`) | 4 blocos · 50 minutos | Sprint cronometrado de uma aula, para o primeiro contato com o método. Não produz evidência avaliável. |
+
+As três guardam respostas em espaços separados no navegador: uma não apaga a outra.
+
+## Versão 3.1.0
 
 Site estático interativo, com temas claro e escuro e layout adaptado para celular, tablet e computador. Cada etapa entrega o conteúdo em camadas — uma frase-chave, três pontos essenciais, os termos e a explicação completa recolhida — e cada campo das fichas tem um exemplo preenchido do caso fictício Fila Menor. Os arquivos em PDF e Word continuam disponíveis.
 
@@ -12,6 +22,7 @@ Site estático interativo, com temas claro e escuro e layout adaptado para celul
 - Widgets que calculam: médias de importância e satisfação com envio para a matriz (etapa 04), soma das notas das ideias com destaque da melhor e aviso de empate (etapa 06), contagem do teste (etapa 10) e ponto de equilíbrio na calculadora (etapa 08).
 - Progresso por ficha na navegação do caderno e números vivos na página inicial: etapas concluídas, tarefas marcadas e campos preenchidos.
 - Trilha Rápida (`trilha-rapida/`): versão curta de sete passos, também com exemplo preenchido em cada passo.
+- Trilha Extrema (`trilha-extrema/`): sprint de 50 minutos em quatro blocos, conduzido por um cronômetro que avança sozinho de bloco em bloco, com aviso explícito de que o resultado não é evidência avaliável.
 - Trilha com busca, filtros, progresso e retomada de etapa.
 - Caderno digital com 12 fichas e cinco registros de entrevistas.
 - Respostas salvas no navegador, cópia/restauração em JSON e exportação em texto para compartilhar com o professor.
@@ -66,6 +77,7 @@ Em outro terminal, execute `npm test`. Opcionalmente, defina `TEST_URL` para tes
 - `npm run test:smoke` — fluxo de aprendizagem, busca, temas, persistência, importação/exportação, cálculos, downloads, impressão, navegação móvel e ausência de rolagem horizontal nas larguras 320, 390, 768 e 1440 pixels.
 - `npm run test:interativo` — conteúdo em camadas, termos, checklist de tarefas, exemplos nas 12 fichas e na entrevista, os quatro widgets de cálculo, progresso por ficha e compatibilidade com cópias da versão anterior.
 - `npm run test:rapida` — os sete passos da Trilha Rápida, exemplos, progresso, resumo exportado e armazenamento separado do caderno.
+- `npm run test:extrema` — os quatro blocos da Trilha Extrema, o cronômetro (incluindo o sprint inteiro adiantado com relógio virtual), o aviso dos limites e a navegação entre os três percursos.
 
 ## Origem
 

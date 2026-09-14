@@ -71,10 +71,11 @@ const path = require('node:path');
     await page.screenshot({path: path.join(out, 'rapida-escuro.png'), fullPage: true});
     await page.evaluate(() => localStorage.setItem('startlab-theme', 'light'));
 
-    // --- Volta para a trilha completa ---
+    // --- Liga as outras duas trilhas ---
     await page.reload();
     await page.locator('.step').last().waitFor();
-    await page.locator('.back').click();
+    assert.ok(await page.locator('a[href*="trilha-extrema"]').count() > 0, 'aponta para a Trilha Extrema');
+    await page.locator('.back[href*="../index.html"]').click();
     await page.locator('.lesson-card').last().waitFor();
     assert.equal(await page.locator('.lesson-card').count(), 12, 'o link volta para as 12 etapas');
 
