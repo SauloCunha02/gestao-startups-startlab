@@ -1,5 +1,15 @@
 # Histórico de versões
 
+## 3.2.0
+
+- Trilha Extrema reorientada: a entrega deixou de ser um problema investigado e passou a ser **uma startup montada**. Os quatro blocos agora são para quem é a startup, nome e proposta, como ela ganha dinheiro, e a prova com o pitch.
+- Nova ficha “A sua startup em uma folha”, que se monta sozinha enquanto a equipe escreve e mostra em porcentagem o quanto já está pronta, indicando o que ainda falta.
+- Calculadora do primeiro mês no bloco 3: receita, gastos, saldo, cenário com metade dos clientes e ponto de equilíbrio, com aviso quando cada cliente custa mais do que paga. O resultado entra sozinho na ficha.
+- Campo próprio e obrigatório para o que a equipe ainda não sabe sobre a startup; ele ocupa lugar de destaque na ficha.
+- A exportação virou a ficha da startup (`ficha-da-startup.txt`), com nome, proposta, público, papéis, canal, a conta do mês, a prova, o pitch, as dúvidas e o aviso sobre os limites do sprint.
+- Aviso inicial reescrito: o que se monta em 50 minutos é a primeira versão da startup, com duas conversas e dois testes — não um negócio comprovado.
+- Respostas migraram para a chave `startlab-extrema-v2`, já que os campos mudaram de significado.
+
 ## 3.1.0
 
 - Trilha Extrema em `trilha-extrema/`: o percurso mais curto do StartLab — quatro blocos que somam 50 minutos, do problema ao pitch de 60 segundos, em uma única aula.

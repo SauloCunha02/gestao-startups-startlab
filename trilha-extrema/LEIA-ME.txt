@@ -4,8 +4,13 @@ TRILHA EXTREMA — StartLab / Gestao de Startups
 O que e
 -------
 O percurso mais curto do StartLab: um sprint cronometrado de 50 minutos,
-em quatro blocos, que vai do problema ao pitch de 60 segundos. Cabe em
-uma unica aula.
+em quatro blocos, no fim do qual a equipe tem UMA STARTUP MONTADA — para
+quem ela e, o nome, o que entrega, como ganha dinheiro, o que o primeiro
+teste mostrou e o pitch de 60 segundos. Cabe em uma unica aula.
+
+A entrega nao e "um problema investigado": e a startup. A ficha "A sua
+startup em uma folha", no fim da pagina, se monta sozinha enquanto a
+equipe escreve, e mostra em porcentagem o quanto ja esta montada.
 
 Como abrir
 ----------
@@ -14,10 +19,18 @@ Abra o arquivo index.html desta pasta com duplo clique, ou clique em
 
 Os 4 blocos (50 minutos)
 ------------------------
-1. O problema em uma frase ............ 10 min  (etapa 01 · passo 1 da Rapida)
-2. Tres conversas de 3 minutos ........ 15 min  (etapa 03 · passo 2 da Rapida)
-3. Um desenho e dois testes ........... 15 min  (etapa 09 · passo 6 da Rapida)
-4. Pitch de 60 segundos ............... 10 min  (etapa 12 · passo 7 da Rapida)
+1. Para quem e a sua startup ......... 10 min  (etapa 05 · passos 1 e 3 da Rapida)
+2. A startup: nome e proposta ........ 10 min  (etapa 06 · passo 4 da Rapida)
+3. Como a startup ganha dinheiro ..... 15 min  (etapa 08 · passo 5 da Rapida)
+4. A prova e o pitch de 60 segundos .. 15 min  (etapa 10 · passos 6 e 7 da Rapida)
+
+A conta do primeiro mes
+-----------------------
+O bloco 3 tem uma calculadora: preco, clientes, gasto por cliente e
+gasto fixo. Ela mostra receita, gastos, saldo, o cenario com metade dos
+clientes e quantos clientes cobrem os gastos (ponto de equilibrio).
+Avisa quando cada cliente custa mais do que paga. O resultado entra
+sozinho na ficha da startup.
 
 O cronometro
 ------------
@@ -29,17 +42,18 @@ as respostas. O bloco em andamento fica destacado.
 O cronometro nao e salvo: recarregar a pagina reinicia o relogio. As
 respostas continuam salvas.
 
-IMPORTANTE: o que este sprint NAO e
------------------------------------
-Tres conversas e dois testes em uma aula sao um PRIMEIRO CONTATO com o
-metodo. Nao sao evidencia suficiente para afirmar que o problema existe,
-que o publico e aquele, ou que a solucao funciona. A propria pagina diz
-isso ao aluno, e o bloco 4 exige que a equipe declare em voz alta o que
-ainda nao sabe.
+IMPORTANTE: os limites do sprint
+--------------------------------
+Da para montar a startup inteira em 50 minutos, mas com DUAS CONVERSAS e
+DOIS TESTES. Isso e a primeira versao da startup, nao um negocio
+comprovado: os numeros da conta sao hipoteses da equipe, e o teste mostra
+se a pessoa entende a solucao, nao se o mercado compraria. A propria
+pagina diz isso ao aluno, o bloco 4 tem um campo obrigatorio para o que a
+equipe ainda nao sabe, e a ficha exportada repete o aviso.
 
 Quando usar
 -----------
-- Primeira aula do modulo, para abrir o assunto.
+- Primeira aula do modulo, para a turma ver uma startup nascer inteira.
 - Oficina avulsa, feira, semana tematica ou aula de reposicao.
 - Destravar uma equipe parada, dando um ciclo completo rapido.
 - Aquecimento antes de comecar a trilha que vale nota.
@@ -48,24 +62,27 @@ Quando NAO usar
 ---------------
 Como substituto da investigacao avaliada. Para nota, use a Trilha Rapida
 (7 passos, ~6 aulas) ou a trilha completa (12 etapas, 24 aulas), que
-pedem cinco entrevistas, criterio previo e registro de evidencias.
+pedem cinco entrevistas, criterio previo e registro de evidencias. Se
+receber um sprint como entrega de nota, peca a investigacao antes de
+pontuar.
 
 Respostas
 ---------
 Ficam apenas no navegador daquele aparelho, na chave
-startlab-extrema-v1 — separada da Trilha Rapida e do caderno das 12
+startlab-extrema-v2 — separada da Trilha Rapida e do caderno das 12
 etapas. Uma nao apaga a outra. Antes de trocar de aparelho, use
-"Baixar meu resumo (.txt)". O resumo inclui o aviso sobre os limites
-do sprint, para o professor ler junto com as respostas.
+"Baixar a ficha da startup (.txt)". A ficha exportada traz nome,
+proposta, publico, papeis, canal, a conta do mes, a prova, o pitch, o
+que a equipe ainda nao sabe e o aviso sobre os limites.
 
 Exemplo
 -------
-Cada bloco traz um exemplo preenchido do caso ficticio Fila Menor. O
-botao "Ver exemplos", no alto, abre e fecha todos de uma vez. No bloco 1
-o exemplo mostra tambem a versao ERRADA da frase, para o aluno reconhecer
-quando uma solucao se disfarcou de problema.
+Cada bloco traz um exemplo preenchido do caso ficticio Fila Menor,
+mostrando a startup sendo montada parte por parte. O botao "Ver
+exemplos", no alto, abre e fecha todos de uma vez.
 
 Impressao
 ---------
-O botao "Imprimir" gera a versao em papel com os campos preenchidos, sem
-cronometro nem exemplos — util quando a turma nao tem aparelhos.
+O botao "Imprimir" gera a versao em papel com os campos preenchidos e a
+ficha da startup, sem cronometro nem exemplos — util quando a turma nao
+tem aparelhos.

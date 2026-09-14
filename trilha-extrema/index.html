@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f6f7f2">
-<meta name="description" content="Trilha extrema: um sprint cronometrado de 50 minutos, em quatro blocos, do problema ao pitch de 60 segundos.">
+<meta name="description" content="Trilha extrema: monte sua startup em 50 minutos — público, nome, proposta, modelo de receita, prova e pitch, em quatro blocos cronometrados.">
 <title>Trilha Extrema — StartLab</title>
 <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('startlab-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
@@ -17,8 +17,8 @@ body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 'Segoe UI',Ar
 button,input,textarea{font:inherit}
 button{cursor:pointer;color:inherit;border:0;background:none}
 a{color:inherit}
-h1,h2,h3,p{margin:0}
-h1,h2,h3{line-height:1.2;letter-spacing:-.035em}
+h1,h2,h3{margin:0;line-height:1.2;letter-spacing:-.035em}
+p{margin:0}
 :focus-visible{outline:3px solid var(--forest);outline-offset:3px}
 [hidden]{display:none!important}
 .muted{color:var(--muted)}
@@ -36,12 +36,11 @@ h1,h2,h3{line-height:1.2;letter-spacing:-.035em}
 
 .hero{background:var(--flame-soft);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:var(--shadow)}
 .hero h1{font-size:clamp(28px,6vw,40px);font-weight:680;margin:10px 0 12px}
-.hero p{max-width:60ch;color:var(--muted)}
+.hero p{max-width:62ch;color:var(--muted)}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600}
 .chip.solid{background:var(--flame);color:var(--bg);border-color:transparent}
 
-/* Painel do cronômetro do sprint */
 .sprint{position:sticky;top:0;z-index:10;margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow)}
 .sprint-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .clock{font-size:42px;font-weight:720;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1;color:var(--flame)}
@@ -81,8 +80,23 @@ ol.acts{margin:0;padding-left:20px}
 ol.acts li{margin-bottom:6px}
 label.field{display:block;margin-top:13px}
 label.field span{display:block;font-size:13px;font-weight:650;margin-bottom:5px}
-textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical;min-height:56px}
+textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical;min-height:52px}
 textarea:hover{border-color:var(--forest)}
+
+/* Calculadora do modelo de receita, no bloco 3 */
+.money{margin-top:16px;background:var(--surface-2);border-radius:14px;padding:18px}
+.money h4{margin:0 0 4px;font-size:15px}
+.money>p{font-size:12px;color:var(--muted);margin-bottom:14px}
+.money-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.money-grid label{display:grid;gap:5px;min-width:0}
+.money-grid span{font-size:10.5px;font-weight:700;color:var(--muted);line-height:1.35}
+.money-grid input{width:100%;min-width:0;padding:9px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font-size:14px;text-align:center}
+.money-out{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.money-out div{background:var(--surface);border-radius:10px;padding:11px 12px;min-width:0}
+.money-out small{display:block;font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.06em}
+.money-out b{font-size:16px;overflow-wrap:anywhere}
+.money-note{margin-top:11px;font-size:12px;line-height:1.65;color:var(--muted)}
+
 .example-row{margin:13px 0 0}
 .ex-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:650;color:var(--muted)}
 .ex-toggle:hover{background:var(--flame-soft);color:var(--text)}
@@ -99,7 +113,22 @@ textarea:hover{border-color:var(--forest)}
 .deep{font-size:13px;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--line);padding-bottom:2px}
 .deep:hover{border-color:var(--flame)}
 
-.final{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--shadow)}
+/* Ficha da startup: monta sozinha com o que a equipe escreveu */
+.card{margin-top:34px;background:var(--surface);border:2px solid var(--flame);border-radius:20px;padding:26px 24px;box-shadow:var(--shadow)}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.card h2{font-size:22px}
+.card-name{font-size:clamp(26px,6vw,36px);font-weight:700;letter-spacing:-.04em;color:var(--flame);margin:14px 0 6px;overflow-wrap:anywhere}
+.card-pitch{font-size:16px;line-height:1.55;overflow-wrap:anywhere}
+.card-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));margin-top:20px}
+.card-grid div{background:var(--bg);border-radius:12px;padding:13px 15px;min-width:0}
+.card-grid small{display:block;font-size:9.5px;font-weight:750;letter-spacing:.1em;color:var(--muted);margin-bottom:5px}
+.card-grid p{font-size:13px;line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}
+.card-money{margin-top:12px;background:var(--flame-soft);border-radius:12px;padding:14px 16px;font-size:14px;font-weight:650}
+.card-money span{display:block;font-size:11.5px;font-weight:500;color:var(--muted);margin-top:4px}
+.blank{color:var(--muted);font-style:italic}
+.card-missing{margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.7}
+
+.final{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--shadow)}
 .final h2{font-size:21px;margin:8px 0 10px}
 .next{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin-top:18px}
 .next a{display:block;border:1px solid var(--line);border-radius:14px;padding:16px 17px;text-decoration:none;background:var(--bg)}
@@ -111,12 +140,13 @@ textarea:hover{border-color:var(--forest)}
 .footer{margin-top:34px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--flame);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:650;z-index:80;box-shadow:var(--shadow);max-width:92vw;text-align:center}
 
-@media (max-width:520px){.wrap{padding-block:16px 44px}.hero{padding:22px 18px;border-radius:18px}.block{padding:18px 16px}.block.active{padding:17px 15px}.clock{font-size:34px}.sprint{position:static}}
+@media (max-width:620px){.money-grid{grid-template-columns:repeat(2,1fr)}.money-out{grid-template-columns:1fr}}
+@media (max-width:520px){.wrap{padding-block:16px 44px}.hero{padding:22px 18px;border-radius:18px}.block{padding:18px 16px}.block.active{padding:17px 15px}.clock{font-size:34px}.sprint{position:static}.card{padding:20px 17px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 @media print{
  .topbar,.actions,.sprint,.toast,.deep,.skip-link,.example-row,.example-box,.next{display:none}
  body{background:#fff}
- .block,.hero,.final,.warn{box-shadow:none;break-inside:avoid;border-color:#bbb}
+ .block,.hero,.final,.warn,.card{box-shadow:none;break-inside:avoid;border-color:#bbb}
  .block.active{border-width:1px}
  textarea{min-height:0;height:auto;overflow:visible}
 }
@@ -137,13 +167,13 @@ textarea:hover{border-color:var(--forest)}
 
   <header class="hero">
     <span class="eyebrow">StartLab · Sprint de uma aula</span>
-    <h1>Trilha Extrema</h1>
-    <p>Uma aula. Cinquenta minutos. Do problema ao pitch de 60 segundos, com o relógio correndo. É o percurso mais curto do StartLab — feito para dar o primeiro contato com o método em uma única aula.</p>
+    <h1>Monte sua startup em 50 minutos</h1>
+    <p>O percurso mais curto do StartLab. Em quatro blocos cronometrados, sua equipe sai com uma startup montada: para quem ela é, o nome, o que ela entrega, como ela ganha dinheiro, o que o primeiro teste mostrou e o pitch de 60 segundos. A ficha da startup se monta sozinha enquanto vocês escrevem.</p>
     <div class="chips">
       <span class="chip solid">4 blocos</span>
       <span class="chip">50 minutos</span>
-      <span class="chip">3 conversas</span>
-      <span class="chip">2 testes</span>
+      <span class="chip">1 startup montada</span>
+      <span class="chip">Conta do mês incluída</span>
       <span class="chip">Só papel e caneta</span>
     </div>
   </header>
@@ -153,7 +183,7 @@ textarea:hover{border-color:var(--forest)}
       <output class="clock" id="clock" aria-label="Tempo restante no bloco">10:00</output>
       <div class="sprint-now">
         <span class="eyebrow">Bloco atual</span>
-        <b id="now-name">1 · O problema em uma frase</b>
+        <b id="now-name">1 · Para quem é a sua startup</b>
         <span class="muted" id="now-total">50:00 restantes no sprint</span>
       </div>
       <div class="sprint-controls">
@@ -167,31 +197,54 @@ textarea:hover{border-color:var(--forest)}
   </section>
 
   <div class="warn">
-    <b>Antes de começar: o que este sprint não é</b>
-    <p>Três conversas e dois testes em uma aula são um <strong>primeiro contato com o método</strong> — não são evidência suficiente para afirmar que o problema existe, que o público é aquele ou que a solução funciona. Use para abrir o assunto, para uma oficina avulsa, para uma feira, ou para destravar uma equipe parada. Quando o projeto for valer nota de investigação, faça a <a href="../trilha-rapida/index.html">Trilha Rápida</a> ou a <a href="../index.html#/trilha">trilha completa de 12 etapas</a>.</p>
+    <b>O que você monta aqui é a primeira versão da startup</b>
+    <p>Em 50 minutos dá para montar a startup inteira — público, proposta, receita, prova e pitch — mas com <strong>duas conversas e dois testes</strong>. Isso é um ponto de partida, não um negócio comprovado: os números da conta são hipóteses da equipe, e o teste mostra se a pessoa entende a solução, não se o mercado a compraria. Para transformar esta startup em um projeto sustentado por investigação, siga na <a href="../trilha-rapida/index.html">Trilha Rápida</a> ou na <a href="../index.html#/trilha">trilha completa de 12 etapas</a>.</p>
   </div>
 
   <div class="section-title" id="blocos">
     <h2>Os 4 blocos</h2>
-    <p>Cada bloco tem tempo fixo. Não dá para voltar: o que ficou incompleto vira anotação para o próximo ciclo.</p>
+    <p>Cada bloco tem tempo fixo e entrega uma parte da startup. O que ficar incompleto vira a primeira tarefa do próximo ciclo.</p>
   </div>
 
   <main id="blocks"></main>
 
+  <section class="card" aria-labelledby="card-title">
+    <div class="card-head">
+      <div>
+        <span class="eyebrow">Sua entrega</span>
+        <h2 id="card-title">A sua startup em uma folha</h2>
+      </div>
+      <span class="muted" id="card-fill">0% montada</span>
+    </div>
+    <p class="muted" style="font-size:13px">Esta ficha se monta sozinha com o que vocês escreveram nos blocos.</p>
+    <p class="card-name" id="card-name">—</p>
+    <p class="card-pitch" id="card-pitch"></p>
+    <div class="card-grid">
+      <div><small>PARA QUEM É</small><p id="card-publico"></p></div>
+      <div><small>O QUE ENTREGA</small><p id="card-solucao"></p></div>
+      <div><small>QUEM USA · QUEM PAGA</small><p id="card-papeis"></p></div>
+      <div><small>COMO O CLIENTE CHEGA</small><p id="card-canal"></p></div>
+      <div><small>O QUE O TESTE MOSTROU</small><p id="card-teste"></p></div>
+      <div><small>O QUE AINDA NÃO SABEMOS</small><p id="card-duvida"></p></div>
+    </div>
+    <div class="card-money" id="card-money"></div>
+    <p class="card-missing" id="card-missing"></p>
+  </section>
+
   <div class="final">
     <span class="eyebrow">Acabou o sprint</span>
-    <h2>Levem embora estas três coisas</h2>
-    <p class="muted">Uma frase de problema testada contra três relatos. Um papel que duas pessoas tentaram usar. Uma lista do que vocês ainda não sabem — essa é a parte mais valiosa.</p>
+    <h2>E agora?</h2>
+    <p class="muted">Vocês têm uma startup montada e uma lista do que ainda não sabem sobre ela. Essa lista é o roteiro do próximo passo.</p>
     <div class="next">
-      <a href="../trilha-rapida/index.html"><b>Continuar na Trilha Rápida →</b><small>7 passos, cerca de 6 aulas. Aprofunda o que você acabou de esboçar, com cinco entrevistas e um modelo de negócio.</small></a>
+      <a href="../trilha-rapida/index.html"><b>Continuar na Trilha Rápida →</b><small>7 passos, cerca de 6 aulas. Aprofunda esta startup com cinco entrevistas, alternativas de mercado e um modelo de negócio testado.</small></a>
       <a href="../index.html#/trilha"><b>Ir para a trilha completa →</b><small>12 etapas, 24 aulas. O percurso com avaliação, fichas e portfólio da equipe.</small></a>
     </div>
     <div class="actions">
-      <button class="btn lime" id="export-button" type="button">Baixar meu resumo (.txt)</button>
+      <button class="btn lime" id="export-button" type="button">Baixar a ficha da startup (.txt)</button>
       <button class="btn" id="copy-button" type="button">Copiar tudo</button>
       <button class="btn" id="clear-button" type="button">Apagar respostas</button>
     </div>
-    <p class="saved">As respostas ficam só neste navegador e neste aparelho, em espaço separado das outras trilhas. Antes de trocar de aparelho, baixe o resumo.</p>
+    <p class="saved">As respostas ficam só neste navegador e neste aparelho, em espaço separado das outras trilhas. Antes de trocar de aparelho, baixe a ficha.</p>
   </div>
 
   <div class="footer">
@@ -205,96 +258,184 @@ textarea:hover{border-color:var(--forest)}
 <script>
 (function(){
 'use strict';
-var KEY='startlab-extrema-v1';
+var KEY='startlab-extrema-v2';
 
 var BLOCKS=[
- {n:1,title:'O problema em uma frase',min:10,link:'../index.html#/etapa/1',rapida:'Passo 1',
-  goal:'Sair da ideia e cravar uma dificuldade real, sem solução escondida dentro.',
-  acts:['<b>2 min, em silêncio:</b> cada integrante escreve uma dificuldade que viu nos últimos sete dias.',
-        '<b>3 min:</b> escolham a que mais se repete <b>e</b> cujo público está neste prédio agora.',
-        '<b>5 min:</b> escrevam a frase e risquem qualquer solução que tenha entrado nela.'],
-  fields:[['e1a','A frase: [público] enfrenta [dificuldade] quando [situação]','Descreva o que acontece, não o que vocês querem construir.',3]],
-  ready:'A frase não contém nenhuma solução — nem app, nem site, nem sistema.',
-  ex:'CERTO: “Estudantes do 2º ano que compram na cantina enfrentam espera longa quando o intervalo começa e todos chegam ao mesmo tempo.”\n\nERRADO: “Falta um aplicativo de pedidos na cantina.” — isso já é uma solução, e ela fecha a investigação antes de ela começar.'},
+ {n:1,title:'Para quem é a sua startup',min:10,link:'../index.html#/etapa/5',rapida:'Passos 1 e 3',
+  goal:'Escolher o cliente da startup e a dificuldade que ela vai resolver para ele.',
+  acts:['<b>2 min, em silêncio:</b> cada integrante escreve um público que consegue encontrar hoje e uma dificuldade que ele vive.',
+        '<b>4 min:</b> escolham a combinação mais frequente e perguntem a <b>duas pessoas desse público</b>: “quando foi a última vez?” e “como você resolve hoje?”.',
+        '<b>4 min:</b> escrevam quem é o cliente e o que trava para ele hoje.'],
+  fields:[['e1a','Cliente da startup: quem é e onde encontramos','Um grupo específico que vocês acham amanhã. “Todo mundo” não serve.',2],
+          ['e1b','O que trava para ele hoje (e o que as duas pessoas contaram)','Episódio real, não suposição da equipe.',3]],
+  ready:'O cliente é um grupo específico que vocês conseguem encontrar amanhã.',
+  ex:'CLIENTE: estudantes do 2º ano que compram na cantina no primeiro intervalo. Achamos todos os dias, das 9h40 às 10h, no pátio.\n\nO QUE TRAVA: perdem de 8 a 10 minutos na fila e comem andando. P1 esperou 8 min na terça e chega antes do sinal para tentar furar a espera. P2 desistiu de comprar ontem e trouxe bolacha de casa.'},
 
- {n:2,title:'Três conversas de 3 minutos',min:15,link:'../index.html#/etapa/3',rapida:'Passo 2',
-  goal:'Trocar o achismo da equipe por três relatos de quem vive a situação.',
-  acts:['<b>Saiam da sala agora.</b> Três pessoas, fora da equipe, três minutos cada.',
-        'Só <b>duas perguntas</b>: “Quando foi a última vez que isso aconteceu?” e “Como você resolve hoje?”',
-        'Anotem o que a pessoa disse. <b>Não expliquem a ideia de vocês</b> — explicar contamina a resposta.'],
-  fields:[['e2a','Os três relatos (P1, P2, P3)','P1: quando aconteceu · como resolve hoje\nP2: …\nP3: …',5],
-          ['e2b','O que contrariou a ideia da equipe','A frase mais útil da aula costuma estar aqui.',2]],
-  ready:'Há três episódios concretos, cada um com um dia ou uma frequência.',
-  ex:'P1 · 2º ano — terça, esperou 8 min e comeu andando; chega antes do sinal e mesmo assim pega fila.\nP2 · 1º ano — ontem desistiu ao ver a fila e ficou sem comer; passou a trazer bolacha de casa.\nP3 · 3º ano — quinta, 10 min na fila; pede para um colega guardar lugar.\n\nContrariou: achávamos que a demora era no preparo. P1 e P3 reclamaram do momento de PAGAR.'},
+ {n:2,title:'A startup: nome e proposta',min:10,link:'../index.html#/etapa/6',rapida:'Passo 4',
+  goal:'Dar identidade à startup: o que ela entrega, como se chama e a frase que a explica.',
+  acts:['<b>3 min:</b> listem cinco soluções possíveis. Escolham a que vocês conseguem colocar de pé com o que têm em mãos.',
+        '<b>3 min:</b> escolham um nome curto. Nome é rótulo, não estratégia — não gastem mais que isso nele.',
+        '<b>4 min:</b> completem a frase da proposta e leiam em voz alta. Se não couber em um fôlego, corte.'],
+  fields:[['e2a','Nome da startup','Curto. Dá para trocar depois.',2],
+          ['e2b','O que ela entrega (a solução escolhida entre as cinco)','Descreva o que o cliente recebe, não a tecnologia.',3],
+          ['e2c','A frase: A [nome] ajuda [público] a [benefício] por meio de [solução]','',3]],
+  ready:'A frase cabe em um fôlego e não usa “inovador” nem “revolucionário” para se explicar.',
+  ex:'NOME: Fila Menor\n\nENTREGA: o estudante faz o pedido antes de o sinal tocar e retira o lanche direto, sem entrar na fila. As cinco opções levantadas foram: pedido antecipado em papel, fila separada para quem já decidiu, cardápio com os prontos sinalizados, senha por ordem de chegada e combo pronto do dia.\n\nFRASE: A Fila Menor ajuda estudantes que compram no intervalo a receber o lanche dentro do tempo, organizando os pedidos antes de o sinal tocar.'},
 
- {n:3,title:'Um desenho e dois testes',min:15,link:'../index.html#/etapa/9',rapida:'Passo 6',
-  goal:'Colocar um papel na mão de duas pessoas e ver onde elas travam.',
-  acts:['<b>5 min:</b> desenhem três quadros em uma folha — entrada → ação principal → resultado.',
-        '<b>2 min:</b> escrevam o critério <b>antes</b> de testar. Ex.: “2 de 2 concluem sozinhos em até 1 minuto”.',
-        '<b>8 min:</b> entreguem o papel a duas pessoas, deem a tarefa e <b>fiquem calados</b>. Anotem onde travaram.'],
-  fields:[['e3a','Os três quadros: entrada → ação → resultado','Descreva o que está desenhado em cada quadro.',3],
-          ['e3b','O critério, escrito ANTES do teste','Quantos, fazendo o quê, em quanto tempo.',2],
-          ['e3c','Onde as duas pessoas travaram','Anote o que você viu, não o que você concluiu.',3]],
-  ready:'O critério foi escrito antes do primeiro teste e ninguém o alterou depois.',
-  ex:'QUADROS: 1) cardápio do dia com 6 opções e o campo “sua turma”. 2) marcar até 2 itens e entregar ao colega. 3) confirmação com número do pedido e ponto de retirada.\n\nCRITÉRIO (antes): 2 de 2 concluem sozinhos em até 1 minuto.\n\nTRAVARAM: T1 concluiu em 50 s. T2 não achou a confirmação e perguntou “já foi?”. Resultado 1 de 2 — abaixo do critério. O problema está no terceiro quadro.'},
+ {n:3,title:'Como a startup ganha dinheiro',min:15,link:'../index.html#/etapa/8',rapida:'Passo 5',
+  goal:'Transformar a ideia em negócio: quem paga, quanto entra, quanto sai e o que sobra no mês.',
+  acts:['<b>5 min:</b> separem quem <b>usa</b> de quem <b>paga</b> e de quem <b>autoriza</b>. Podem ser três pessoas diferentes.',
+        '<b>5 min:</b> preencham a calculadora abaixo: preço, clientes no primeiro mês, gasto por cliente e gasto fixo.',
+        '<b>5 min:</b> olhem o cenário com metade dos clientes e o ponto de equilíbrio. Anotem de onde vieram os números.'],
+  fields:[['e3a','Quem usa · quem paga · quem autoriza','Se o pagador for outra pessoa, marque que ainda não conversaram com ela.',3],
+          ['e3b','Como o cliente chega até a startup (canal)','Onde e como ele encontra vocês.',2]],
+  money:true,
+  after:[['e3c','De onde vieram esses números? O que ainda é chute?','Separe o que vocês observaram do que estimaram.',2]],
+  ready:'Dá para dizer em voz alta quem assina o pagamento e por qual benefício.',
+  ex:'PAPÉIS: usa = estudante que compra no intervalo (5 conversas). Paga = responsável pela cantina — hipótese, ainda não conversamos. Autoriza = direção da escola, para usar o pátio.\n\nCANAL: formulário em papel entregue na sala, 10 minutos antes do sinal.\n\nCONTA: R$ 30 por cantina × 4 cantinas = R$ 120 de receita. Gastos: R$ 5 por cantina + R$ 60 fixos = R$ 80. Saldo R$ 40. Com 2 cantinas o saldo vira − R$ 10 — o gasto fixo derruba o cenário menor.\n\nDE ONDE VIERAM: o preço é chute nosso; ninguém falou em pagar. O gasto de R$ 5 é o custo real da impressão que consultamos na secretaria.'},
 
- {n:4,title:'Pitch de 60 segundos',min:10,link:'../index.html#/etapa/12',rapida:'Passo 7',
-  goal:'Explicar em quatro frases — e admitir em voz alta o que ainda não se sabe.',
-  acts:['Escrevam <b>quatro frases</b>: o problema · a evidência · a solução · o que ainda falta descobrir.',
-        '<b>2 min:</b> ensaiem com o relógio na mão. Passou de 60 segundos, corte palavras.',
-        'Apresentem. A quarta frase é obrigatória: quem esconde a dúvida perde a aula.'],
-  fields:[['e4a','As quatro frases do pitch','1. Problema:\n2. Evidência:\n3. Solução:\n4. O que ainda não sabemos:',5]],
-  ready:'A quarta frase diz claramente o que vocês NÃO descobriram nesta aula.',
-  ex:'1. PROBLEMA: estudantes perdem quase metade do intervalo na fila da cantina.\n2. EVIDÊNCIA: das três pessoas que ouvimos hoje, duas já desistiram de comprar por causa da espera.\n3. SOLUÇÃO: um pedido em papel entregue antes de o sinal tocar.\n4. NÃO SABEMOS: se a cantina consegue separar esses pedidos no pico, e se alguém pagaria por isso. Ouvimos três pessoas em uma aula — é pouco para afirmar qualquer coisa.'}
+ {n:4,title:'A prova e o pitch de 60 segundos',min:15,link:'../index.html#/etapa/10',rapida:'Passos 6 e 7',
+  goal:'Colocar a startup na mão de duas pessoas e apresentá-la em um minuto.',
+  acts:['<b>5 min:</b> desenhem em papel os três momentos de quem usa — entrada → ação → resultado — e escrevam o critério <b>antes</b> de testar.',
+        '<b>5 min:</b> entreguem a duas pessoas do público, deem a tarefa e <b>fiquem calados</b>. Anotem onde travaram.',
+        '<b>5 min:</b> montem o pitch em cinco frases e ensaiem com o relógio. A quinta frase é obrigatória.'],
+  fields:[['e4a','Os três momentos + o critério escrito ANTES do teste','Critério: quantos, fazendo o quê, em quanto tempo.',4],
+          ['e4b','O que as duas pessoas realmente fizeram','Anote o que você viu, não o que você concluiu.',3],
+          ['e4c','O pitch em cinco frases','1. A startup:\n2. Para quem:\n3. Como ganha dinheiro:\n4. O que o teste mostrou:\n5. O que ainda não sabemos:',5],
+          ['e4d','O que ainda NÃO sabemos sobre esta startup','Esta é a frase mais valiosa do sprint. Ela entra na ficha.',2]],
+  ready:'A equipe consegue apresentar em 60 segundos e dizer o que ainda não sabe.',
+  ex:'MOMENTOS: 1) cardápio do dia com 6 opções e o campo “sua turma”. 2) marcar até 2 itens e entregar ao colega responsável. 3) confirmação com número do pedido e ponto de retirada.\nCRITÉRIO (antes): 2 de 2 concluem sozinhos em até 1 minuto.\n\nO QUE FIZERAM: T1 concluiu em 50 s. T2 não achou a confirmação e perguntou “já foi?”. Resultado 1 de 2 — abaixo do critério.\n\nPITCH: 1. A Fila Menor organiza os pedidos da cantina antes do intervalo. 2. Para estudantes que perdem metade do intervalo na fila. 3. A cantina pagaria R$ 30 por mês para atender mais gente no pico. 4. No teste, 1 de 2 concluiu sozinho: o passo da confirmação não está claro. 5. Não sabemos se a cantina consegue separar os pedidos no pico, nem se ela pagaria — isso é chute nosso.\n\nNÃO SABEMOS: se alguém paga. Falamos com estudantes, não com quem assinaria o pagamento.'}
 ];
 
 var TOTAL=BLOCKS.reduce(function(a,b){return a+b.min},0)*60;
+var MONEY=[['m_price','Preço por cliente (R$)',30,'0.01'],['m_clients','Clientes no 1º mês',4,'1'],['m_var','Gasto por cliente (R$)',5,'0.01'],['m_fixed','Gastos fixos do mês (R$)',60,'0.01']];
 
 var state=load();
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){toast('Não foi possível salvar. Baixe o resumo para não perder.')}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){toast('Não foi possível salvar. Baixe a ficha para não perder.')}}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function pad(n){return String(n).padStart(2,'0')}
 function fmt(s){return pad(Math.floor(s/60))+':'+pad(s%60)}
+function val(id){return (state[id]||'').trim()}
+function brl(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+
+function fieldHTML(f){
+  return '<label class="field"><span>'+esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+esc(f[2])+'"></textarea></label>';
+}
+function moneyHTML(){
+  return '<div class="money"><h4>A conta do primeiro mês</h4><p>Mude os números e veja o saldo. Os valores iniciais são do exemplo e precisam virar os seus.</p>'+
+    '<div class="money-grid">'+MONEY.map(function(m){
+      return '<label><span>'+esc(m[1])+'</span><input type="number" min="0" step="'+m[3]+'" id="'+m[0]+'" data-money="1" value="'+esc(state[m[0]]!==undefined?state[m[0]]:m[2])+'"></label>';
+    }).join('')+'</div>'+
+    '<div class="money-out" aria-live="polite"><div><small>RECEITA</small><b id="out-receita">—</b></div><div><small>GASTOS</small><b id="out-gastos">—</b></div><div><small>SALDO DO MÊS</small><b id="out-saldo">—</b></div></div>'+
+    '<p class="money-note" id="out-note"></p></div>';
+}
 
 function render(){
   document.getElementById('blocks').innerHTML=BLOCKS.map(function(b){
-    var fields=b.fields.map(function(f){
-      return '<label class="field"><span>'+esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+esc(f[2])+'"></textarea></label>';
-    }).join('');
+    var corpo=b.fields.map(fieldHTML).join('')+(b.money?moneyHTML():'')+(b.after?b.after.map(fieldHTML).join(''):'');
     return '<section class="block" id="bloco-'+b.n+'">'+
       '<div class="block-head"><div class="num">'+b.n+'</div><div style="flex:1">'+
         '<div style="display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap"><h3>'+esc(b.title)+'</h3><span class="mins">'+b.min+' min</span></div>'+
         '<p class="goal">'+esc(b.goal)+'</p></div></div>'+
       '<div class="block-body"><span class="eyebrow">Faça agora</span><ol class="acts">'+b.acts.map(function(a){return '<li>'+a+'</li>'}).join('')+'</ol></div>'+
-      '<div class="block-body"><span class="eyebrow">Registre aqui</span>'+fields+
+      '<div class="block-body"><span class="eyebrow">Monte sua startup aqui</span>'+corpo+
         '<p class="example-row"><button class="ex-toggle" data-example="'+b.n+'" aria-expanded="false" aria-controls="ex-'+b.n+'">💡 <span>Ver exemplo preenchido</span></button></p>'+
         '<div class="example-box" id="ex-'+b.n+'" hidden><span class="example-tag">EXEMPLO FICTÍCIO · FILA MENOR</span>'+
         '<p class="example-text">'+esc(b.ex).replace(/\n/g,'<br>')+'</p>'+
-        '<p class="example-warn">Referência de detalhe, não resposta pronta. Copiar o exemplo não gera evidência: escreva o que a sua equipe viu.</p></div></div>'+
+        '<p class="example-warn">Referência de detalhe, não resposta pronta. Copiar o exemplo não cria a sua startup: escreva a de vocês.</p></div></div>'+
       '<div class="ready"><b>Pronto quando</b>'+esc(b.ready)+'</div>'+
       '<div class="block-foot"><label class="check"><input type="checkbox" id="done-'+b.n+'"> Bloco '+b.n+' concluído</label>'+
       '<a class="deep" href="'+b.link+'">Aprofundar · '+esc(b.rapida)+' da Trilha Rápida →</a></div>'+
     '</section>';
   }).join('');
 
+  allFields().forEach(function(f){
+    var el=document.getElementById(f[0]);
+    el.value=state[f[0]]||'';
+    grow(el);
+  });
   BLOCKS.forEach(function(b){
-    b.fields.forEach(function(f){
-      var el=document.getElementById(f[0]);
-      el.value=state[f[0]]||'';
-      grow(el);
-    });
     var box=document.getElementById('done-'+b.n);
     box.checked=!!state['done-'+b.n];
     document.getElementById('bloco-'+b.n).classList.toggle('done',!!state['done-'+b.n]);
   });
+  money();
+  card();
   paint();
+}
+function allFields(){
+  var list=[];
+  BLOCKS.forEach(function(b){
+    b.fields.forEach(function(f){list.push(f)});
+    if(b.after)b.after.forEach(function(f){list.push(f)});
+  });
+  return list;
 }
 function grow(el){if(el.scrollHeight>el.clientHeight){el.style.height='auto';el.style.height=el.scrollHeight+4+'px';}}
 
-// --- Cronômetro do sprint: percorre os blocos em sequência ---
-var index=0, left=BLOCKS[0].min*60, timer=null, deadline=0, running=false;
+// --- Conta do mês ---
+function money(){
+  if(!document.getElementById('out-saldo'))return null;
+  var v={};
+  var ok=MONEY.every(function(m){
+    var el=document.getElementById(m[0]), n=Number(el.value);
+    if(el.value===''||!Number.isFinite(n)||n<0)return false;
+    v[m[0]]=n;return true;
+  });
+  if(!ok){
+    ['receita','gastos','saldo'].forEach(function(k){document.getElementById('out-'+k).textContent='—'});
+    document.getElementById('out-note').textContent='Preencha os quatro campos com valores não negativos.';
+    return null;
+  }
+  var receita=v.m_price*v.m_clients, gastos=v.m_var*v.m_clients+v.m_fixed, saldo=receita-gastos;
+  var margem=v.m_price-v.m_var, metade=Math.floor(v.m_clients/2);
+  document.getElementById('out-receita').textContent=brl(receita);
+  document.getElementById('out-gastos').textContent=brl(gastos);
+  document.getElementById('out-saldo').textContent=brl(saldo);
+  var equilibrio = margem<=0
+    ? 'Cada cliente custa mais do que paga: nenhuma quantidade de clientes fecha a conta. Revejam o preço ou o gasto por cliente.'
+    : 'Precisam de '+Math.ceil(v.m_fixed/margem)+' cliente(s) só para cobrir os gastos.';
+  document.getElementById('out-note').textContent='Com '+metade+' cliente(s), o saldo seria '+brl(metade*margem-v.m_fixed)+'. '+equilibrio+' O saldo não é lucro: falta o tempo de trabalho da equipe.';
+  return {receita:receita,gastos:gastos,saldo:saldo,metade:metade,saldoMetade:metade*margem-v.m_fixed};
+}
 
+// --- Ficha da startup, montada com o que a equipe escreveu ---
+var CARD=[['card-publico','e1a','Para quem é'],['card-solucao','e2b','O que entrega'],['card-papeis','e3a','Quem usa e quem paga'],['card-canal','e3b','Como o cliente chega'],['card-teste','e4b','O que o teste mostrou'],['card-duvida','e4d','O que ainda não sabemos']];
+function card(){
+  var nome=val('e2a'), pitch=val('e2c');
+  document.getElementById('card-name').textContent=nome||'—';
+  document.getElementById('card-name').classList.toggle('blank',!nome);
+  var p=document.getElementById('card-pitch');
+  p.textContent=pitch||'A frase da proposta aparece aqui quando o bloco 2 estiver preenchido.';
+  p.classList.toggle('blank',!pitch);
+  var faltando=[];
+  if(!nome)faltando.push('o nome');
+  if(!pitch)faltando.push('a frase da proposta');
+  CARD.forEach(function(c){
+    var v=val(c[1]), el=document.getElementById(c[0]);
+    el.textContent=v||'—';
+    el.classList.toggle('blank',!v);
+    if(!v)faltando.push(c[2].toLowerCase());
+  });
+  var m=money(), box=document.getElementById('card-money');
+  box.textContent = m
+    ? 'Saldo do primeiro mês: '+brl(m.saldo)+' — receita '+brl(m.receita)+' menos gastos '+brl(m.gastos)+'.'
+    : 'A conta do mês aparece aqui quando a calculadora do bloco 3 estiver preenchida.';
+  if(m){
+    var s=document.createElement('span');
+    s.textContent='Com '+m.metade+' cliente(s), o saldo seria '+brl(m.saldoMetade)+'. Os números são hipóteses da equipe.';
+    box.appendChild(s);
+  }
+  var total=2+CARD.length, cheios=total-faltando.length;
+  document.getElementById('card-fill').textContent=Math.round(cheios/total*100)+'% montada';
+  document.getElementById('card-missing').textContent = faltando.length
+    ? 'Ainda falta: '+faltando.join(', ')+'.'
+    : 'Ficha completa. Vocês conseguem explicar a startup inteira sem consultar mais nada — e sabem o que ainda precisam descobrir.';
+}
+
+// --- Cronômetro do sprint ---
+var index=0, left=BLOCKS[0].min*60, timer=null, deadline=0, running=false;
 function elapsed(){
   var before=0;
   for(var i=0;i<index;i++)before+=BLOCKS[i].min*60;
@@ -323,8 +464,8 @@ function tick(){
       document.getElementById('bloco-'+BLOCKS[index].n).scrollIntoView({block:'start'});
     } else {
       stop();
-      note('Sprint concluído. Registrem o que ficou incompleto antes de sair.');
-      toast('Sprint concluído em 50 minutos.');
+      note('Sprint concluído. Confiram a ficha da startup e o que ficou faltando.');
+      toast('Sprint concluído. Vejam a ficha da sua startup.');
     }
   }
   paint();
@@ -345,7 +486,7 @@ document.getElementById('next-button').addEventListener('click',function(){
     note('Pularam para o bloco '+BLOCKS[index].n+': '+BLOCKS[index].title+'.');
     document.getElementById('bloco-'+BLOCKS[index].n).scrollIntoView({block:'start'});
     paint();
-  } else {stop();note('Este era o último bloco. Fechem o pitch.');paint();}
+  } else {stop();note('Este era o último bloco. Fechem o pitch e confiram a ficha.');paint();}
 });
 document.getElementById('reset-button').addEventListener('click',function(){
   stop();index=0;left=BLOCKS[0].min*60;
@@ -353,12 +494,14 @@ document.getElementById('reset-button').addEventListener('click',function(){
   paint();
 });
 
-// --- Respostas ---
+// --- Entradas ---
 var saveTimer;
 document.addEventListener('input',function(e){
-  if(e.target.tagName!=='TEXTAREA')return;
-  state[e.target.id]=e.target.value;
-  grow(e.target);
+  var el=e.target;
+  if(el.tagName==='TEXTAREA'){state[el.id]=el.value;grow(el);}
+  else if(el.dataset.money){state[el.id]=el.value;}
+  else return;
+  card();
   clearTimeout(saveTimer);saveTimer=setTimeout(save,500);
 });
 document.addEventListener('change',function(e){
@@ -390,19 +533,33 @@ document.getElementById('examples-button').addEventListener('click',function(){
   this.textContent=examplesOpen?'Ocultar exemplos':'Ver exemplos';
 });
 
-// --- Resumo ---
+// --- Ficha exportada ---
 function summary(){
-  var out=['STARTLAB — TRILHA EXTREMA (sprint de 50 minutos)','Gerado em '+new Date().toLocaleString('pt-BR'),''];
-  BLOCKS.forEach(function(b){
-    out.push('== BLOCO '+b.n+': '+b.title.toUpperCase()+' ('+b.min+' min)'+(state['done-'+b.n]?'  [concluido]':'  [em aberto]')+' ==');
-    b.fields.forEach(function(f){
-      out.push('- '+f[1]+':');
-      out.push((state[f[0]]||'(em branco)').trim());
-      out.push('');
-    });
-  });
-  out.push('LIMITE DESTE SPRINT: tres conversas e dois testes em uma aula sao um primeiro contato com o metodo,');
-  out.push('nao evidencia suficiente para afirmar que o problema existe ou que a solucao funciona.');
+  var m=money();
+  var out=['STARTLAB — TRILHA EXTREMA','FICHA DA STARTUP (sprint de 50 minutos)','Gerado em '+new Date().toLocaleString('pt-BR'),'',
+    'NOME: '+(val('e2a')||'(em branco)'),
+    'PROPOSTA: '+(val('e2c')||'(em branco)'),'',
+    '--- A STARTUP ---',
+    'Para quem e: '+(val('e1a')||'(em branco)'),
+    'O que trava hoje: '+(val('e1b')||'(em branco)'),
+    'O que entrega: '+(val('e2b')||'(em branco)'),
+    'Quem usa / paga / autoriza: '+(val('e3a')||'(em branco)'),
+    'Como o cliente chega: '+(val('e3b')||'(em branco)'),''];
+  out.push('--- A CONTA DO PRIMEIRO MES ---');
+  if(m){
+    out.push('Receita: '+brl(m.receita)+' | Gastos: '+brl(m.gastos)+' | Saldo: '+brl(m.saldo));
+    out.push('Com '+m.metade+' cliente(s): saldo de '+brl(m.saldoMetade)+'.');
+  } else out.push('(calculadora nao preenchida)');
+  out.push('De onde vieram os numeros: '+(val('e3c')||'(em branco)'),'');
+  out.push('--- A PROVA ---',
+    'Momentos e criterio (escrito antes): '+(val('e4a')||'(em branco)'),
+    'O que as duas pessoas fizeram: '+(val('e4b')||'(em branco)'),'',
+    '--- O PITCH DE 60 SEGUNDOS ---',
+    (val('e4c')||'(em branco)'),'',
+    '--- O QUE AINDA NAO SABEMOS ---',
+    (val('e4d')||'(em branco)'),'');
+  out.push('LIMITE DESTE SPRINT: esta startup foi montada em 50 minutos, com duas conversas e dois testes.');
+  out.push('Os numeros da conta sao hipoteses da equipe e o teste mostra compreensao, nao demanda de mercado.');
   out.push('Proximo passo: Trilha Rapida (7 passos) ou trilha completa (12 etapas).');
   return out.join('\n');
 }
@@ -415,21 +572,21 @@ document.getElementById('export-button').addEventListener('click',function(){
   var blob=new Blob([summary()],{type:'text/plain;charset=utf-8'});
   var a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download='trilha-extrema-resumo.txt';
+  a.download='ficha-da-startup.txt';
   document.body.appendChild(a);a.click();a.remove();
   setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
-  toast('Resumo baixado.');
+  toast('Ficha da startup baixada.');
 });
 document.getElementById('copy-button').addEventListener('click',function(){
   var text=summary();
   function fallback(){
     var ta=document.createElement('textarea');
     ta.value=text;document.body.appendChild(ta);ta.select();
-    try{document.execCommand('copy');toast('Resumo copiado.')}catch(e){toast('Copie pelo arquivo .txt.')}
+    try{document.execCommand('copy');toast('Ficha copiada.')}catch(e){toast('Copie pelo arquivo .txt.')}
     ta.remove();
   }
   if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(function(){toast('Resumo copiado.')},fallback);
+    navigator.clipboard.writeText(text).then(function(){toast('Ficha copiada.')},fallback);
   }else fallback();
 });
 document.getElementById('clear-button').addEventListener('click',function(){
