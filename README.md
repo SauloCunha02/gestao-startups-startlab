@@ -7,6 +7,7 @@ Material didático para estudantes do 2º ano: 12 etapas para sair da observaç�
 Site estático interativo, com temas claro e escuro e layout adaptado para celular, tablet e computador. Cada etapa combina explicação, exemplo fictício, atividade e pergunta de revisão. Os arquivos em PDF e Word continuam disponíveis.
 
 - Trilha com busca, filtros, progresso e retomada de etapa.
+- Trilha Rápida (`trilha-rapida/`): versão curta de sete passos, com o essencial para chegar ao primeiro teste em cerca de seis aulas.
 - Caderno digital com 12 fichas e cinco registros de entrevistas.
 - Respostas salvas no navegador, cópia/restauração em JSON e exportação em texto para compartilhar com o professor.
 - Calculadora de modelo de negócio e cronômetro de foco.

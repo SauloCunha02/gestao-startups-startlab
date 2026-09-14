@@ -1,5 +1,12 @@
 # Histórico de versões
 
+## 2.1.0
+
+- Trilha Rápida em `trilha-rapida/`: sete passos diretos ao ponto, com o essencial das 12 etapas, para cerca de seis aulas.
+- Cada passo traz objetivo, três ações, campos de registro, critério de conclusão, erro comum e link para a etapa completa.
+- Respostas salvas no navegador em chave própria, com resumo em `.txt`, cópia e impressão.
+- Entrada "Trilha rápida" no menu lateral.
+
 ## 2.0.0
 
 - Nova interface StartLab com temas claro e escuro e layout responsivo.
