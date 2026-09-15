@@ -8,105 +8,24 @@
 <title>Trilha Rápida — StartLab</title>
 <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('startlab-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="stylesheet" href="../assets/trilha-curta.css">
 <style>
-:root{color-scheme:light;--bg:#f6f7f2;--surface:#fff;--surface-2:#eef1e8;--text:#203d33;--muted:#65756b;--line:#dfe5db;--forest:#194c3b;--accent:#d8ec91;--accent-text:#274332;--soft-green:#e6eddf;--hero:#eaf0df;--shadow:0 12px 32px #1c3b2d0a;--orange:#efcead;--blue:#d3e4ef}
-:root[data-theme=dark]{color-scheme:dark;--bg:#101b17;--surface:#19271f;--surface-2:#223228;--text:#ebf0e6;--muted:#acb9ab;--line:#34463b;--forest:#cae699;--accent:#d8ec91;--accent-text:#203c2d;--soft-green:#2a3d2e;--hero:#22352a;--shadow:0 12px 32px #0002;--orange:#795437;--blue:#3e5e70}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 'Segoe UI',Arial,sans-serif}
-button,input,textarea{font:inherit}
-button{cursor:pointer;color:inherit;border:0;background:none}
-a{color:inherit}
-h1,h2,h3,p{margin:0}
-h1,h2,h3{line-height:1.2;letter-spacing:-.035em}
-:focus-visible{outline:3px solid var(--forest);outline-offset:3px}
-[hidden]{display:none!important}
-.muted{color:var(--muted)}
-.eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
-.skip-link{position:fixed;top:-70px;left:16px;padding:12px;background:var(--accent);color:var(--accent-text);z-index:100}
-.skip-link:focus{top:12px}
-.wrap{max-width:860px;margin:0 auto;padding-block:22px 60px;padding-left:18px;padding-right:18px}
-
-.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-bottom:26px}
-.back{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
-.back:hover{background:var(--surface-2)}
-.tool{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 14px;font-weight:600}
-.tool:hover{background:var(--surface-2)}
-.topbar-actions{display:flex;gap:8px;flex-wrap:wrap}
-
-.hero{background:var(--hero);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:var(--shadow)}
-.hero h1{font-size:clamp(28px,6vw,40px);font-weight:680;margin:10px 0 12px}
-.hero p{max-width:60ch;color:var(--muted)}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600}
-.chip.solid{background:var(--accent);color:var(--accent-text);border-color:transparent}
-
+/* Só o que é desta trilha. O resto vem de assets/trilha-curta.css. */
 .progress-card{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .bar{flex:1 1 220px;height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden}
 .bar span{display:block;height:100%;width:0;background:var(--forest);border-radius:999px;transition:width .3s}
 .progress-card b{font-size:15px;white-space:nowrap}
-
 .rules{margin-top:26px;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
 .rule{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 17px}
 .rule b{display:block;margin-bottom:5px}
 .rule p{font-size:14px;color:var(--muted)}
-
 .section-title{margin:38px 0 14px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .section-title h2{font-size:22px}
-
-.step{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 22px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
-.step.done{border-color:var(--forest)}
-.step-head{display:flex;gap:14px;align-items:flex-start}
-.num{flex:none;width:38px;height:38px;border-radius:12px;background:var(--accent);color:var(--accent-text);display:grid;place-items:center;font-weight:750;font-size:17px}
-.step.done .num{background:var(--forest);color:var(--bg)}
-.step-head h3{font-size:19px}
-.time{font-size:12.5px;font-weight:650;color:var(--muted);white-space:nowrap}
-.goal{margin-top:4px;font-size:14.5px;color:var(--muted)}
-.block{margin-top:16px}
-.block>.eyebrow{display:block;margin-bottom:7px}
-ol.acts{margin:0;padding-left:20px}
-ol.acts li{margin-bottom:6px}
-label.field{display:block;margin-top:12px}
-label.field span{display:block;font-size:13px;font-weight:650;margin-bottom:5px}
-textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical;min-height:56px}
-textarea:hover{border-color:var(--forest)}
-.ready{margin-top:16px;background:var(--soft-green);border-radius:14px;padding:13px 15px;font-size:14px}
-.ready b{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.trap{margin-top:10px;border-left:3px solid var(--orange);padding:4px 0 4px 12px;font-size:14px;color:var(--muted)}
-.example-row{margin:14px 0 0}
-.ex-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:650;color:var(--muted)}
-.ex-toggle:hover{background:var(--soft-green);color:var(--text)}
-.ex-toggle[aria-expanded=true]{background:var(--soft-green);color:var(--text);border-color:var(--forest)}
-.example-box{border-left:4px solid var(--forest);background:var(--soft-green);border-radius:10px;padding:16px 18px;margin-top:12px}
-.example-tag{display:block;font-size:9.5px;font-weight:750;letter-spacing:.11em;color:var(--muted);margin-bottom:9px}
-.example-text{font-size:13.5px;line-height:1.75}
-.example-warn{margin-top:11px;font-size:11px;line-height:1.6;color:var(--muted)}
-.step-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.check{display:inline-flex;align-items:center;gap:9px;font-weight:650;cursor:pointer}
-.check input{width:20px;height:20px;accent-color:var(--forest);margin:0}
-.deep{font-size:13.5px;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--line);padding-bottom:2px}
-.deep:hover{border-color:var(--forest)}
-
-.final{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--shadow)}
+.trap{margin-top:10px;border-left:3px solid #efcead;padding:4px 0 4px 12px;font-size:14px;color:var(--muted)}
+:root[data-theme=dark] .trap{border-left-color:#795437}
 .final ul{margin:14px 0 0;padding-left:20px}
 .final li{margin-bottom:6px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.btn{border-radius:999px;padding:11px 18px;font-weight:650;border:1px solid var(--line);background:var(--surface)}
-.btn:hover{background:var(--surface-2)}
-.btn.primary{background:var(--accent);color:var(--accent-text);border-color:transparent}
-.btn.primary:hover{filter:brightness(.96)}
-.saved{font-size:13px;color:var(--muted);margin-top:12px}
-.footer{margin-top:34px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--forest);color:var(--bg);padding:11px 18px;border-radius:999px;font-weight:600;z-index:80;box-shadow:var(--shadow)}
-
-@media (max-width:520px){.wrap{padding-block:16px 44px}.hero{padding:22px 18px;border-radius:18px}.step{padding:18px 16px}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-@media print{
- .topbar,.actions,.progress-card,.toast,.deep,.skip-link,.example-row,.example-box{display:none}
- body{background:#fff}
- .step,.hero,.final,.rule{box-shadow:none;break-inside:avoid;border-color:#bbb}
- textarea{min-height:0;height:auto;overflow:visible}
-}
+@media print{.progress-card{display:none}.rule{box-shadow:none;border-color:#bbb}}
 </style>
 </head>
 <body>
@@ -185,10 +104,12 @@ textarea:hover{border-color:var(--forest)}
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
+<script src="../assets/trilha-curta.js"></script>
 <script>
 (function(){
 'use strict';
-var KEY='startlab-rapida-v1';
+var TC=window.TrilhaCurta;
+var CHAVE='startlab-rapida-v1';
 
 // Caso real do Duolingo, condensado: um por passo. As informacoes sobre a
 // empresa sao publicas; entrevistas, notas e tempos de teste sao ilustrativos.
@@ -283,164 +204,85 @@ var STEPS=[
   trap:'Apresentar só a ideia bonita. O que deu errado no teste é a parte que mostra aprendizado.'}
 ];
 
-var state=load();
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));note('Salvo neste navegador.')}catch(e){note('Não foi possível salvar. Baixe o resumo para não perder.')}}
-function note(t){var s=document.getElementById('save-state');s.textContent=t}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var estado=TC.carregar(CHAVE);
 
-function render(){
-  var html=STEPS.map(function(s){
-    var fields=s.fields.map(function(f){
-      return '<label class="field"><span>'+esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+esc(f[2])+'"></textarea></label>';
+function exemplo(n){
+  if(EXEMPLOS[n]===undefined)return '';
+  return '<p class="example-row"><button class="ex-toggle" data-example="'+n+'" aria-expanded="false" aria-controls="ex-'+n+'">💡 <span>Ver exemplo preenchido</span></button></p>'+
+    '<div class="example-box" id="ex-'+n+'" hidden><span class="example-tag">EXEMPLO REAL · DUOLINGO</span>'+
+    '<p class="example-text">'+TC.paragrafo(EXEMPLOS[n])+'</p>'+
+    '<p class="example-warn">O Duolingo está aqui como referência de <b>raciocínio</b>, não de tamanho: a sua startup pode atender vinte pessoas do bairro e seguir o mesmo caminho. As informações sobre a empresa são públicas; entrevistas, notas e valores são ilustrativos, para mostrar o formato. Copiar o exemplo não cria a sua startup.</p></div>';
+}
+
+function desenhar(){
+  document.getElementById('steps').innerHTML=STEPS.map(function(s){
+    var campos=s.fields.map(function(f){
+      return '<label class="field"><span>'+TC.esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+TC.esc(f[2])+'"></textarea></label>';
     }).join('');
-    var acts=s.acts.map(function(a){return '<li>'+a+'</li>'}).join('');
-    var exemplo=EXEMPLOS[s.n]
-      ? '<p class="example-row"><button class="ex-toggle" data-example="'+s.n+'" aria-expanded="false" aria-controls="ex-'+s.n+'">💡 <span>Ver exemplo preenchido</span></button></p>'+
-        '<div class="example-box" id="ex-'+s.n+'" hidden><span class="example-tag">EXEMPLO REAL · DUOLINGO</span>'+
-        '<p class="example-text">'+esc(EXEMPLOS[s.n]).replace(/\n/g,'<br>')+'</p>'+
-        '<p class="example-warn">O Duolingo está aqui como referência de <b>raciocínio</b>, não de tamanho: a sua startup pode atender vinte pessoas do bairro e seguir o mesmo caminho. As informações sobre a empresa são públicas; entrevistas, notas e valores são ilustrativos, para mostrar o formato. Copiar o exemplo não cria a sua startup.</p></div>'
-      : '';
-    return '<section class="step" id="passo-'+s.n+'">'+
-      '<div class="step-head"><div class="num">'+s.n+'</div><div style="flex:1">'+
-        '<div style="display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap"><h3>'+esc(s.title)+'</h3><span class="time">'+esc(s.time)+'</span></div>'+
-        '<p class="goal">'+esc(s.goal)+'</p></div></div>'+
-      '<div class="block"><span class="eyebrow">Faça agora</span><ol class="acts">'+acts+'</ol></div>'+
-      '<div class="block"><span class="eyebrow">Registre aqui</span>'+fields+exemplo+'</div>'+
-      '<div class="ready"><b>Pronto quando</b>'+esc(s.ready)+'</div>'+
-      '<p class="trap"><b>Erro comum:</b> '+esc(s.trap)+'</p>'+
-      '<div class="step-foot"><label class="check"><input type="checkbox" id="done-'+s.n+'"> Passo '+s.n+' concluído</label>'+
-      '<a class="deep" href="'+s.link+'">Aprofundar · '+esc(s.etapas)+' →</a></div>'+
+    return '<section class="passo" id="passo-'+s.n+'">'+
+      '<div class="passo-head"><div class="num">'+s.n+'</div><div style="flex:1">'+
+        '<div class="passo-titulo"><h3>'+TC.esc(s.title)+'</h3><span class="tempo">'+TC.esc(s.time)+'</span></div>'+
+        '<p class="goal">'+TC.esc(s.goal)+'</p></div></div>'+
+      '<div class="passo-body"><span class="eyebrow">Faça agora</span><ol class="acts">'+s.acts.map(function(a){return '<li>'+a+'</li>'}).join('')+'</ol></div>'+
+      '<div class="passo-body"><span class="eyebrow">Monte sua startup aqui</span>'+campos+exemplo(s.n)+'</div>'+
+      '<div class="ready"><b>Pronto quando</b>'+TC.esc(s.ready)+'</div>'+
+      '<p class="trap"><b>Erro comum:</b> '+TC.esc(s.trap)+'</p>'+
+      '<div class="passo-foot"><label class="check"><input type="checkbox" id="done-'+s.n+'"> Passo '+s.n+' concluído</label>'+
+      '<a class="deep" href="'+s.link+'">Aprofundar · '+TC.esc(s.etapas)+' →</a></div>'+
     '</section>';
   }).join('');
-  document.getElementById('steps').innerHTML=html;
 
   STEPS.forEach(function(s){
     s.fields.forEach(function(f){
-      var el=document.getElementById(f[0]);
-      el.value=state[f[0]]||'';
-      grow(el);
+      var campo=document.getElementById(f[0]);
+      campo.value=estado[f[0]]||'';
+      TC.crescer(campo);
     });
-    var box=document.getElementById('done-'+s.n);
-    box.checked=!!state['done-'+s.n];
-    mark(s.n);
+    document.getElementById('done-'+s.n).checked=!!estado['done-'+s.n];
+    marcar(s.n);
   });
-  progress();
+  progresso();
 }
 
-function grow(el){if(el.scrollHeight>el.clientHeight){el.style.height='auto';el.style.height=el.scrollHeight+4+'px';}}
-function mark(n){document.getElementById('passo-'+n).classList.toggle('done',!!state['done-'+n])}
+function marcar(n){document.getElementById('passo-'+n).classList.toggle('done',!!estado['done-'+n]);}
 
-function progress(){
-  var d=STEPS.filter(function(s){return state['done-'+s.n]}).length;
-  document.getElementById('progress-text').textContent=d+' de 7 passos';
-  document.getElementById('progress-bar').style.width=(d/7*100)+'%';
+function progresso(){
+  var feitos=STEPS.filter(function(s){return estado['done-'+s.n]}).length;
+  document.getElementById('progress-text').textContent=feitos+' de '+STEPS.length+' passos';
+  document.getElementById('progress-bar').style.width=(feitos/STEPS.length*100)+'%';
 }
 
-var timer;
-document.addEventListener('input',function(e){
-  if(e.target.tagName!=='TEXTAREA')return;
-  state[e.target.id]=e.target.value;
-  grow(e.target);
-  clearTimeout(timer);timer=setTimeout(save,500);
-});
-document.addEventListener('change',function(e){
-  if(e.target.type!=='checkbox')return;
-  var n=Number(e.target.id.split('-')[1]);
-  state[e.target.id]=e.target.checked;
-  mark(n);progress();save();
-});
-
-function summary(){
-  var out=['STARTLAB — TRILHA RAPIDA','Resumo gerado em '+new Date().toLocaleString('pt-BR'),''];
+function resumo(){
+  var linhas=['STARTLAB — TRILHA RAPIDA','Resumo gerado em '+new Date().toLocaleString('pt-BR'),''];
   STEPS.forEach(function(s){
-    out.push('== PASSO '+s.n+': '+s.title.toUpperCase()+(state['done-'+s.n]?'  [concluido]':'  [em aberto]')+' ==');
+    linhas.push('== PASSO '+s.n+': '+s.title.toUpperCase()+(estado['done-'+s.n]?'  [concluido]':'  [em aberto]')+' ==');
     s.fields.forEach(function(f){
-      out.push('- '+f[1]+':');
-      out.push((state[f[0]]||'(em branco)').trim());
-      out.push('');
+      linhas.push('- '+f[1]+':');
+      linhas.push((estado[f[0]]||'(em branco)').trim());
+      linhas.push('');
     });
   });
-  out.push('Trilha completa: 12 etapas no StartLab.');
-  return out.join('\n');
+  linhas.push('Exemplo desta trilha: Duolingo. Informacoes da empresa sao publicas;');
+  linhas.push('entrevistas, notas e valores do exemplo sao ilustrativos.');
+  linhas.push('Trilha completa: 12 etapas no StartLab.');
+  return linhas.join('\n');
 }
 
-function toast(msg){
-  var t=document.getElementById('toast');
-  t.textContent=msg;t.hidden=false;
-  clearTimeout(t._t);t._t=setTimeout(function(){t.hidden=true},2600);
-}
-
-document.getElementById('export-button').addEventListener('click',function(){
-  var blob=new Blob([summary()],{type:'text/plain;charset=utf-8'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='trilha-rapida-resumo.txt';
-  document.body.appendChild(a);a.click();a.remove();
-  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
-  toast('Resumo baixado.');
+TC.ligarCampos(CHAVE,estado,function(campo){
+  if(campo.type==='checkbox'){marcar(Number(campo.id.split('-')[1]));progresso();}
+  document.getElementById('save-state').textContent='Salvo neste navegador.';
+});
+TC.ligarExemplos();
+TC.ligarTema();
+TC.ligarAcoes({
+  chave:CHAVE,
+  resumo:resumo,
+  arquivo:'trilha-rapida-resumo.txt',
+  perguntaApagar:'Apagar todas as respostas da trilha rápida neste navegador? Não dá para desfazer.',
+  aoApagar:function(){estado={};desenhar();}
 });
 
-document.getElementById('copy-button').addEventListener('click',function(){
-  var text=summary();
-  function fallback(){
-    var ta=document.createElement('textarea');
-    ta.value=text;document.body.appendChild(ta);ta.select();
-    try{document.execCommand('copy');toast('Resumo copiado.')}catch(e){toast('Copie manualmente pelo arquivo .txt.')}
-    ta.remove();
-  }
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(function(){toast('Resumo copiado.')},fallback);
-  }else fallback();
-});
-
-document.getElementById('clear-button').addEventListener('click',function(){
-  if(!confirm('Apagar todas as respostas da trilha rápida neste navegador? Não dá para desfazer.'))return;
-  state={};
-  try{localStorage.removeItem(KEY)}catch(e){}
-  render();
-  toast('Respostas apagadas.');
-});
-
-document.getElementById('print-button').addEventListener('click',function(){window.print()});
-
-// Exemplos: um por passo, mais um botão que abre e fecha todos.
-var examplesOpen=false;
-document.addEventListener('click',function(e){
-  var btn=e.target.closest('.ex-toggle');
-  if(!btn)return;
-  var box=document.getElementById('ex-'+btn.dataset.example),open=!box.hidden;
-  box.hidden=open;
-  btn.setAttribute('aria-expanded',String(!open));
-  btn.querySelector('span').textContent=open?'Ver exemplo preenchido':'Ocultar exemplo';
-});
-document.getElementById('examples-button').addEventListener('click',function(){
-  examplesOpen=!examplesOpen;
-  Array.prototype.forEach.call(document.querySelectorAll('.example-box'),function(b){b.hidden=!examplesOpen});
-  Array.prototype.forEach.call(document.querySelectorAll('.ex-toggle'),function(b){
-    b.setAttribute('aria-expanded',String(examplesOpen));
-    b.querySelector('span').textContent=examplesOpen?'Ocultar exemplo':'Ver exemplo preenchido';
-  });
-  this.setAttribute('aria-pressed',String(examplesOpen));
-  this.textContent=examplesOpen?'Ocultar exemplos':'Ver exemplos';
-});
-
-var themeBtn=document.getElementById('theme-button');
-function themeLabel(){
-  var dark=document.documentElement.dataset.theme==='dark';
-  themeBtn.textContent=dark?'Tema claro':'Tema escuro';
-  var meta=document.querySelector('meta[name=theme-color]');
-  if(meta)meta.content=dark?'#101b17':'#f6f7f2';
-}
-themeBtn.addEventListener('click',function(){
-  var dark=document.documentElement.dataset.theme==='dark';
-  document.documentElement.dataset.theme=dark?'light':'dark';
-  try{localStorage.setItem('startlab-theme',dark?'light':'dark')}catch(e){}
-  themeLabel();
-});
-
-render();
-themeLabel();
+desenhar();
 })();
 </script>
 </body>

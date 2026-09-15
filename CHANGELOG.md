@@ -1,5 +1,18 @@
 # Histórico de versões
 
+## 4.0.0
+
+Refatoração. Nenhuma mudança de conteúdo pedagógico: as quatro suítes de teste passam sem alteração de comportamento.
+
+- **Base compartilhada pelas trilhas curtas.** `assets/trilha-curta.css` e `assets/trilha-curta.js` reúnem o que a Trilha Rápida e a Trilha Extrema faziam igual — salvar, crescer o campo, exemplos, tema, avisos, baixar/copiar/apagar/imprimir. As duas páginas encolheram de 71,7 KB para 54,7 KB somadas; entre elas restam 2 linhas de CSS idênticas, contra 43 antes. Uma correção agora vale para as duas.
+- **Vocabulário unificado.** O mesmo componente era `.step` numa trilha e `.block` na outra; virou `.passo` nas duas, com `.passo-head`, `.passo-body`, `.passo-foot` e `.tempo`. A cor de cada trilha sai de `--marca`.
+- **Seis scripts mortos removidos de `apoio/`**, dois deles perigosos: `preparar_projeto.py` reescrevia README e CHANGELOG com o texto da versão 1, e `publicar_github.py` estava quebrado, afirmando que a v2 era a última. Também saíram `conteudo.py` (cópia antiga), `extrair_material.py`, `verificar_entrega.py` e `preparar_ferramentas.py`, todos de uso único. Arquivados em `versoes/apoio-scripts-removidos-v4.zip`.
+- **52 MB de instaladores `.zip` já extraídos** removidos de `apoio/.tools`, além das pastas `__pycache__`.
+- `docs/VALIDACAO.md` removido: era um retrato da versão 2, hoje substituído pelo que as suítes imprimem.
+- Regra CSS órfã `.button.ghost` removida.
+- **README reescrito** como mapa do repositório: o que é cada pasta, a fonte única de conteúdo, o que cada suíte cobre. O histórico de versões saiu dele e ficou só aqui.
+- `STATUS_GITHUB.txt` e o novo `apoio/LEIA-ME.txt` deixaram de duplicar o histórico e passaram a apontar para as fontes canônicas.
+
 ## 3.4.0
 
 - **Todo o material reorientado à construção de uma startup.** A sequência das 12 etapas deixou de ser “investigar um problema” e passou a construir a startup: escolher o território, separar fato de suposição, ouvir o cliente, priorizar a dor, definir o cliente, desenhar a proposta, estudar o mercado, montar o modelo, construir, testar, melhorar e apresentar.

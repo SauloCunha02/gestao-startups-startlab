@@ -1,6 +1,6 @@
 {
   "name": "startlab-gestao-startups",
-  "version": "3.4.0",
+  "version": "4.0.0",
   "private": true,
   "description": "Trilha didática interativa de Gestão de Startups",
   "scripts": {

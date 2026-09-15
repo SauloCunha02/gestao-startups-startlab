@@ -8,39 +8,14 @@
 <title>Trilha Extrema — StartLab</title>
 <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('startlab-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<link rel="stylesheet" href="../assets/trilha-curta.css">
 <style>
-:root{color-scheme:light;--bg:#f6f7f2;--surface:#fff;--surface-2:#eef1e8;--text:#203d33;--muted:#65756b;--line:#dfe5db;--forest:#194c3b;--accent:#d8ec91;--accent-text:#274332;--soft-green:#e6eddf;--hero:#eaf0df;--shadow:0 12px 32px #1c3b2d0a;--flame:#b4541b;--flame-soft:#f6e0cd}
-:root[data-theme=dark]{color-scheme:dark;--bg:#101b17;--surface:#19271f;--surface-2:#223228;--text:#ebf0e6;--muted:#acb9ab;--line:#34463b;--forest:#cae699;--accent:#d8ec91;--accent-text:#203c2d;--soft-green:#2a3d2e;--hero:#22352a;--shadow:0 12px 32px #0002;--flame:#f0a672;--flame-soft:#4a2f1c}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 'Segoe UI',Arial,sans-serif}
-button,input,textarea{font:inherit}
-button{cursor:pointer;color:inherit;border:0;background:none}
-a{color:inherit}
-h1,h2,h3{margin:0;line-height:1.2;letter-spacing:-.035em}
-p{margin:0}
-:focus-visible{outline:3px solid var(--forest);outline-offset:3px}
-[hidden]{display:none!important}
-.muted{color:var(--muted)}
-.eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
-.skip-link{position:fixed;top:-70px;left:16px;padding:12px;background:var(--accent);color:var(--accent-text);z-index:100}
-.skip-link:focus{top:12px}
-.wrap{max-width:820px;margin:0 auto;padding-block:22px 60px;padding-left:18px;padding-right:18px}
+/* Só o que é desta trilha. O resto vem de assets/trilha-curta.css. */
+:root{--flame:#b4541b;--flame-soft:#f6e0cd;--marca:var(--flame);--marca-suave:var(--flame-soft);--marca-hero:var(--flame-soft)}
+:root[data-theme=dark]{--flame:#f0a672;--flame-soft:#4a2f1c}
+.wrap{max-width:820px}
 
-.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-bottom:24px}
-.back{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
-.back:hover{background:var(--surface-2)}
-.tool{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 14px;font-weight:600}
-.tool:hover{background:var(--surface-2)}
-.topbar-actions{display:flex;gap:8px;flex-wrap:wrap}
-
-.hero{background:var(--flame-soft);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:var(--shadow)}
-.hero h1{font-size:clamp(28px,6vw,40px);font-weight:680;margin:10px 0 12px}
-.hero p{max-width:62ch;color:var(--muted)}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600}
-.chip.solid{background:var(--flame);color:var(--bg);border-color:transparent}
-
+/* Cronômetro do sprint */
 .sprint{position:sticky;top:0;z-index:10;margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow)}
 .sprint-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .clock{font-size:42px;font-weight:720;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1;color:var(--flame)}
@@ -48,11 +23,6 @@ p{margin:0}
 .sprint-now .eyebrow{display:block;margin-bottom:3px}
 .sprint-now b{font-size:15px;display:block;overflow-wrap:anywhere}
 .sprint-controls{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border-radius:999px;padding:10px 17px;font-weight:650;border:1px solid var(--line);background:var(--surface)}
-.btn:hover{background:var(--surface-2)}
-.btn.primary{background:var(--flame);color:var(--bg);border-color:transparent}
-.btn.primary:hover{filter:brightness(.94)}
-.btn.lime{background:var(--accent);color:var(--accent-text);border-color:transparent}
 .sprint-bar{margin-top:14px;height:9px;background:var(--surface-2);border-radius:999px;overflow:hidden}
 .sprint-bar span{display:block;height:100%;width:0;background:var(--flame);border-radius:999px;transition:width .4s linear}
 .sprint-note{margin-top:9px;font-size:12px;color:var(--muted)}
@@ -60,30 +30,11 @@ p{margin:0}
 .warn{margin-top:22px;border-left:4px solid var(--flame);background:var(--surface);border-radius:12px;padding:18px 20px}
 .warn b{display:block;margin-bottom:7px}
 .warn p{font-size:13.5px;color:var(--muted);line-height:1.7}
-
 .section-title{margin:34px 0 14px}
 .section-title h2{font-size:22px}
 .section-title p{font-size:13.5px;color:var(--muted);margin-top:5px}
 
-.block{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow);transition:border-color .2s}
-.block.active{border-color:var(--flame);border-width:2px;padding:21px}
-.block.done .num{background:var(--forest);color:var(--bg)}
-.block-head{display:flex;gap:14px;align-items:flex-start}
-.num{flex:none;width:38px;height:38px;border-radius:12px;background:var(--flame-soft);color:var(--flame);display:grid;place-items:center;font-weight:750;font-size:17px}
-.block.active .num{background:var(--flame);color:var(--bg)}
-.block-head h3{font-size:19px}
-.mins{font-size:12.5px;font-weight:700;color:var(--flame);white-space:nowrap}
-.goal{margin-top:4px;font-size:14.5px;color:var(--muted)}
-.block-body{margin-top:16px}
-.block-body>.eyebrow{display:block;margin-bottom:7px}
-ol.acts{margin:0;padding-left:20px}
-ol.acts li{margin-bottom:6px}
-label.field{display:block;margin-top:13px}
-label.field span{display:block;font-size:13px;font-weight:650;margin-bottom:5px}
-textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical;min-height:52px}
-textarea:hover{border-color:var(--forest)}
-
-/* Calculadora do modelo de receita, no bloco 3 */
+/* Conta do primeiro mês */
 .money{margin-top:16px;background:var(--surface-2);border-radius:14px;padding:18px}
 .money h4{margin:0 0 4px;font-size:15px}
 .money>p{font-size:12px;color:var(--muted);margin-bottom:14px}
@@ -97,23 +48,7 @@ textarea:hover{border-color:var(--forest)}
 .money-out b{font-size:16px;overflow-wrap:anywhere}
 .money-note{margin-top:11px;font-size:12px;line-height:1.65;color:var(--muted)}
 
-.example-row{margin:13px 0 0}
-.ex-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:650;color:var(--muted)}
-.ex-toggle:hover{background:var(--flame-soft);color:var(--text)}
-.ex-toggle[aria-expanded=true]{background:var(--flame-soft);color:var(--text);border-color:var(--flame)}
-.example-box{border-left:4px solid var(--flame);background:var(--flame-soft);border-radius:10px;padding:16px 18px;margin-top:12px}
-.example-tag{display:block;font-size:9.5px;font-weight:750;letter-spacing:.11em;color:var(--muted);margin-bottom:9px}
-.example-text{font-size:13.5px;line-height:1.75}
-.example-warn{margin-top:11px;font-size:11px;line-height:1.6;color:var(--muted)}
-.ready{margin-top:16px;background:var(--soft-green);border-radius:14px;padding:13px 15px;font-size:14px}
-.ready b{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.block-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.check{display:inline-flex;align-items:center;gap:9px;font-weight:650;cursor:pointer}
-.check input{width:20px;height:20px;accent-color:var(--forest);margin:0}
-.deep{font-size:13px;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--line);padding-bottom:2px}
-.deep:hover{border-color:var(--flame)}
-
-/* Ficha da startup: monta sozinha com o que a equipe escreveu */
+/* Ficha da startup */
 .card{margin-top:34px;background:var(--surface);border:2px solid var(--flame);border-radius:20px;padding:26px 24px;box-shadow:var(--shadow)}
 .card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
 .card h2{font-size:22px}
@@ -128,28 +63,16 @@ textarea:hover{border-color:var(--forest)}
 .blank{color:var(--muted);font-style:italic}
 .card-missing{margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.7}
 
-.final{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--shadow)}
-.final h2{font-size:21px;margin:8px 0 10px}
+.final{margin-top:20px}
 .next{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));margin-top:18px}
 .next a{display:block;border:1px solid var(--line);border-radius:14px;padding:16px 17px;text-decoration:none;background:var(--bg)}
 .next a:hover{border-color:var(--forest);background:var(--surface-2)}
 .next b{display:block;margin-bottom:4px}
 .next small{color:var(--muted);font-size:12px;line-height:1.6;display:block}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.saved{font-size:13px;color:var(--muted);margin-top:12px}
-.footer{margin-top:34px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--flame);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:650;z-index:80;box-shadow:var(--shadow);max-width:92vw;text-align:center}
 
 @media (max-width:620px){.money-grid{grid-template-columns:repeat(2,1fr)}.money-out{grid-template-columns:1fr}}
-@media (max-width:520px){.wrap{padding-block:16px 44px}.hero{padding:22px 18px;border-radius:18px}.block{padding:18px 16px}.block.active{padding:17px 15px}.clock{font-size:34px}.sprint{position:static}.card{padding:20px 17px}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-@media print{
- .topbar,.actions,.sprint,.toast,.deep,.skip-link,.example-row,.example-box,.next{display:none}
- body{background:#fff}
- .block,.hero,.final,.warn,.card{box-shadow:none;break-inside:avoid;border-color:#bbb}
- .block.active{border-width:1px}
- textarea{min-height:0;height:auto;overflow:visible}
-}
+@media (max-width:520px){.clock{font-size:34px}.sprint{position:static}.card{padding:20px 17px}}
+@media print{.sprint,.next{display:none}.warn,.card{box-shadow:none;break-inside:avoid;border-color:#bbb}}
 </style>
 </head>
 <body>
@@ -256,10 +179,12 @@ textarea:hover{border-color:var(--forest)}
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
+<script src="../assets/trilha-curta.js"></script>
 <script>
 (function(){
 'use strict';
-var KEY='startlab-extrema-v2';
+var TC=window.TrilhaCurta;
+var CHAVE='startlab-extrema-v2';
 
 var BLOCKS=[
  {n:1,title:'Para quem é a sua startup',min:10,link:'../index.html#/etapa/5',rapida:'Passos 1 e 3',
@@ -311,77 +236,69 @@ var BLOCKS=[
 var TOTAL=BLOCKS.reduce(function(a,b){return a+b.min},0)*60;
 var MONEY=[['m_price','Preço por cliente (R$)',30,'0.01'],['m_clients','Clientes no 1º mês',4,'1'],['m_var','Gasto por cliente (R$)',5,'0.01'],['m_fixed','Gastos fixos do mês (R$)',60,'0.01']];
 
-var state=load();
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){toast('Não foi possível salvar. Baixe a ficha para não perder.')}}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function pad(n){return String(n).padStart(2,'0')}
-function fmt(s){return pad(Math.floor(s/60))+':'+pad(s%60)}
-function val(id){return (state[id]||'').trim()}
-function brl(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+var estado=TC.carregar(CHAVE);
+var val=function(id){return (estado[id]||'').trim();};
+var brl=function(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});};
 
-function fieldHTML(f){
-  return '<label class="field"><span>'+esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+esc(f[2])+'"></textarea></label>';
+// ---- Montagem da pagina ----
+function campoHTML(f){
+  return '<label class="field"><span>'+TC.esc(f[1])+'</span><textarea id="'+f[0]+'" rows="'+f[3]+'" placeholder="'+TC.esc(f[2])+'"></textarea></label>';
 }
-function moneyHTML(){
+function contaHTML(){
   return '<div class="money"><h4>A conta do primeiro mês</h4><p>Mude os números e veja o saldo. Os valores iniciais são do exemplo e precisam virar os seus.</p>'+
     '<div class="money-grid">'+MONEY.map(function(m){
-      return '<label><span>'+esc(m[1])+'</span><input type="number" min="0" step="'+m[3]+'" id="'+m[0]+'" data-money="1" value="'+esc(state[m[0]]!==undefined?state[m[0]]:m[2])+'"></label>';
+      return '<label><span>'+TC.esc(m[1])+'</span><input type="number" min="0" step="'+m[3]+'" id="'+m[0]+'" data-guardar="1" value="'+TC.esc(estado[m[0]]!==undefined?estado[m[0]]:m[2])+'"></label>';
     }).join('')+'</div>'+
     '<div class="money-out" aria-live="polite"><div><small>RECEITA</small><b id="out-receita">—</b></div><div><small>GASTOS</small><b id="out-gastos">—</b></div><div><small>SALDO DO MÊS</small><b id="out-saldo">—</b></div></div>'+
     '<p class="money-note" id="out-note"></p></div>';
 }
-
-function render(){
+function desenhar(){
   document.getElementById('blocks').innerHTML=BLOCKS.map(function(b){
-    var corpo=b.fields.map(fieldHTML).join('')+(b.money?moneyHTML():'')+(b.after?b.after.map(fieldHTML).join(''):'');
-    return '<section class="block" id="bloco-'+b.n+'">'+
-      '<div class="block-head"><div class="num">'+b.n+'</div><div style="flex:1">'+
-        '<div style="display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap"><h3>'+esc(b.title)+'</h3><span class="mins">'+b.min+' min</span></div>'+
-        '<p class="goal">'+esc(b.goal)+'</p></div></div>'+
-      '<div class="block-body"><span class="eyebrow">Faça agora</span><ol class="acts">'+b.acts.map(function(a){return '<li>'+a+'</li>'}).join('')+'</ol></div>'+
-      '<div class="block-body"><span class="eyebrow">Monte sua startup aqui</span>'+corpo+
+    var miolo=b.fields.map(campoHTML).join('')+(b.money?contaHTML():'')+(b.after?b.after.map(campoHTML).join(''):'');
+    return '<section class="passo" id="bloco-'+b.n+'">'+
+      '<div class="passo-head"><div class="num">'+b.n+'</div><div style="flex:1">'+
+        '<div class="passo-titulo"><h3>'+TC.esc(b.title)+'</h3><span class="tempo">'+b.min+' min</span></div>'+
+        '<p class="goal">'+TC.esc(b.goal)+'</p></div></div>'+
+      '<div class="passo-body"><span class="eyebrow">Faça agora</span><ol class="acts">'+b.acts.map(function(a){return '<li>'+a+'</li>'}).join('')+'</ol></div>'+
+      '<div class="passo-body"><span class="eyebrow">Monte sua startup aqui</span>'+miolo+
         '<p class="example-row"><button class="ex-toggle" data-example="'+b.n+'" aria-expanded="false" aria-controls="ex-'+b.n+'">💡 <span>Ver exemplo preenchido</span></button></p>'+
         '<div class="example-box" id="ex-'+b.n+'" hidden><span class="example-tag">EXEMPLO REAL · NUBANK</span>'+
-        '<p class="example-text">'+esc(b.ex).replace(/\n/g,'<br>')+'</p>'+
+        '<p class="example-text">'+TC.paragrafo(b.ex)+'</p>'+
         '<p class="example-warn">A Nubank está aqui como referência de <b>raciocínio</b>, não de tamanho: a sua startup pode resolver algo do tamanho da sua escola e ainda assim seguir o mesmo caminho. Copiar o exemplo não cria a sua startup — escreva a de vocês.</p></div></div>'+
-      '<div class="ready"><b>Pronto quando</b>'+esc(b.ready)+'</div>'+
-      '<div class="block-foot"><label class="check"><input type="checkbox" id="done-'+b.n+'"> Bloco '+b.n+' concluído</label>'+
-      '<a class="deep" href="'+b.link+'">Aprofundar · '+esc(b.rapida)+' da Trilha Rápida →</a></div>'+
+      '<div class="ready"><b>Pronto quando</b>'+TC.esc(b.ready)+'</div>'+
+      '<div class="passo-foot"><label class="check"><input type="checkbox" id="done-'+b.n+'"> Bloco '+b.n+' concluído</label>'+
+      '<a class="deep" href="'+b.link+'">Aprofundar · '+TC.esc(b.rapida)+' da Trilha Rápida →</a></div>'+
     '</section>';
   }).join('');
 
-  allFields().forEach(function(f){
-    var el=document.getElementById(f[0]);
-    el.value=state[f[0]]||'';
-    grow(el);
+  todosCampos().forEach(function(f){
+    var campo=document.getElementById(f[0]);
+    campo.value=estado[f[0]]||'';
+    TC.crescer(campo);
   });
   BLOCKS.forEach(function(b){
-    var box=document.getElementById('done-'+b.n);
-    box.checked=!!state['done-'+b.n];
-    document.getElementById('bloco-'+b.n).classList.toggle('done',!!state['done-'+b.n]);
+    document.getElementById('done-'+b.n).checked=!!estado['done-'+b.n];
+    document.getElementById('bloco-'+b.n).classList.toggle('done',!!estado['done-'+b.n]);
   });
-  money();
-  card();
-  paint();
+  conta();
+  ficha();
+  pintar();
 }
-function allFields(){
-  var list=[];
+function todosCampos(){
+  var lista=[];
   BLOCKS.forEach(function(b){
-    b.fields.forEach(function(f){list.push(f)});
-    if(b.after)b.after.forEach(function(f){list.push(f)});
+    b.fields.forEach(function(f){lista.push(f)});
+    if(b.after)b.after.forEach(function(f){lista.push(f)});
   });
-  return list;
+  return lista;
 }
-function grow(el){if(el.scrollHeight>el.clientHeight){el.style.height='auto';el.style.height=el.scrollHeight+4+'px';}}
 
-// --- Conta do mês ---
-function money(){
+// ---- Conta do mes ----
+function conta(){
   if(!document.getElementById('out-saldo'))return null;
-  var v={};
-  var ok=MONEY.every(function(m){
-    var el=document.getElementById(m[0]), n=Number(el.value);
-    if(el.value===''||!Number.isFinite(n)||n<0)return false;
+  var v={}, ok=MONEY.every(function(m){
+    var campo=document.getElementById(m[0]), n=Number(campo.value);
+    if(campo.value===''||!Number.isFinite(n)||n<0)return false;
     v[m[0]]=n;return true;
   });
   if(!ok){
@@ -394,150 +311,113 @@ function money(){
   document.getElementById('out-receita').textContent=brl(receita);
   document.getElementById('out-gastos').textContent=brl(gastos);
   document.getElementById('out-saldo').textContent=brl(saldo);
-  var equilibrio = margem<=0
+  var equilibrio=margem<=0
     ? 'Cada cliente custa mais do que paga: nenhuma quantidade de clientes fecha a conta. Revejam o preço ou o gasto por cliente.'
     : 'Precisam de '+Math.ceil(v.m_fixed/margem)+' cliente(s) só para cobrir os gastos.';
   document.getElementById('out-note').textContent='Com '+metade+' cliente(s), o saldo seria '+brl(metade*margem-v.m_fixed)+'. '+equilibrio+' O saldo não é lucro: falta o tempo de trabalho da equipe.';
   return {receita:receita,gastos:gastos,saldo:saldo,metade:metade,saldoMetade:metade*margem-v.m_fixed};
 }
 
-// --- Ficha da startup, montada com o que a equipe escreveu ---
-var CARD=[['card-publico','e1a','Para quem é'],['card-solucao','e2b','O que entrega'],['card-papeis','e3a','Quem usa e quem paga'],['card-canal','e3b','Como o cliente chega'],['card-teste','e4b','O que o teste mostrou'],['card-duvida','e4d','O que ainda não sabemos']];
-function card(){
-  var nome=val('e2a'), pitch=val('e2c');
-  document.getElementById('card-name').textContent=nome||'—';
-  document.getElementById('card-name').classList.toggle('blank',!nome);
-  var p=document.getElementById('card-pitch');
-  p.textContent=pitch||'A frase da proposta aparece aqui quando o bloco 2 estiver preenchido.';
-  p.classList.toggle('blank',!pitch);
-  var faltando=[];
+// ---- Ficha da startup, montada com o que a equipe escreveu ----
+var FICHA=[['card-publico','e1a','Para quem é'],['card-solucao','e2b','O que entrega'],['card-papeis','e3a','Quem usa e quem paga'],['card-canal','e3b','Como o cliente chega'],['card-teste','e4b','O que o teste mostrou'],['card-duvida','e4d','O que ainda não sabemos']];
+function ficha(){
+  var nome=val('e2a'), pitch=val('e2c'), faltando=[];
+  var tituloEl=document.getElementById('card-name');
+  tituloEl.textContent=nome||'—';
+  tituloEl.classList.toggle('blank',!nome);
+  var pitchEl=document.getElementById('card-pitch');
+  pitchEl.textContent=pitch||'A frase da proposta aparece aqui quando o bloco 2 estiver preenchido.';
+  pitchEl.classList.toggle('blank',!pitch);
   if(!nome)faltando.push('o nome');
   if(!pitch)faltando.push('a frase da proposta');
-  CARD.forEach(function(c){
-    var v=val(c[1]), el=document.getElementById(c[0]);
-    el.textContent=v||'—';
-    el.classList.toggle('blank',!v);
-    if(!v)faltando.push(c[2].toLowerCase());
+  FICHA.forEach(function(c){
+    var texto=val(c[1]), el=document.getElementById(c[0]);
+    el.textContent=texto||'—';
+    el.classList.toggle('blank',!texto);
+    if(!texto)faltando.push(c[2].toLowerCase());
   });
-  var m=money(), box=document.getElementById('card-money');
-  box.textContent = m
+  var m=conta(), caixa=document.getElementById('card-money');
+  caixa.textContent=m
     ? 'Saldo do primeiro mês: '+brl(m.saldo)+' — receita '+brl(m.receita)+' menos gastos '+brl(m.gastos)+'.'
     : 'A conta do mês aparece aqui quando a calculadora do bloco 3 estiver preenchida.';
   if(m){
-    var s=document.createElement('span');
-    s.textContent='Com '+m.metade+' cliente(s), o saldo seria '+brl(m.saldoMetade)+'. Os números são hipóteses da equipe.';
-    box.appendChild(s);
+    var nota=document.createElement('span');
+    nota.textContent='Com '+m.metade+' cliente(s), o saldo seria '+brl(m.saldoMetade)+'. Os números são hipóteses da equipe.';
+    caixa.appendChild(nota);
   }
-  var total=2+CARD.length, cheios=total-faltando.length;
+  var total=2+FICHA.length, cheios=total-faltando.length;
   document.getElementById('card-fill').textContent=Math.round(cheios/total*100)+'% montada';
-  document.getElementById('card-missing').textContent = faltando.length
+  document.getElementById('card-missing').textContent=faltando.length
     ? 'Ainda falta: '+faltando.join(', ')+'.'
     : 'Ficha completa. Vocês conseguem explicar a startup inteira sem consultar mais nada — e sabem o que ainda precisam descobrir.';
 }
 
-// --- Cronômetro do sprint ---
-var index=0, left=BLOCKS[0].min*60, timer=null, deadline=0, running=false;
-function elapsed(){
-  var before=0;
-  for(var i=0;i<index;i++)before+=BLOCKS[i].min*60;
-  return before+(BLOCKS[index].min*60-left);
+// ---- Cronometro: percorre os blocos em sequencia ----
+var atual=0, restam=BLOCKS[0].min*60, relogio=null, prazo=0, correndo=false;
+var TOTAL=BLOCKS.reduce(function(a,b){return a+b.min},0)*60;
+
+function decorrido(){
+  var antes=0;
+  for(var i=0;i<atual;i++)antes+=BLOCKS[i].min*60;
+  return antes+(BLOCKS[atual].min*60-restam);
 }
-function paint(){
-  var b=BLOCKS[index];
-  document.getElementById('clock').textContent=fmt(left);
+function pintar(){
+  var b=BLOCKS[atual];
+  document.getElementById('clock').textContent=TC.tempo(restam);
   document.getElementById('now-name').textContent=b.n+' · '+b.title;
-  document.getElementById('now-total').textContent=fmt(Math.max(0,TOTAL-elapsed()))+' restantes no sprint';
-  document.getElementById('sprint-bar').style.width=(elapsed()/TOTAL*100)+'%';
-  document.getElementById('start-button').textContent=running?'Pausar':(elapsed()?'Continuar':'Iniciar sprint');
+  document.getElementById('now-total').textContent=TC.tempo(Math.max(0,TOTAL-decorrido()))+' restantes no sprint';
+  document.getElementById('sprint-bar').style.width=(decorrido()/TOTAL*100)+'%';
+  document.getElementById('start-button').textContent=correndo?'Pausar':(decorrido()?'Continuar':'Iniciar sprint');
   BLOCKS.forEach(function(x,i){
-    document.getElementById('bloco-'+x.n).classList.toggle('active',running&&i===index);
+    document.getElementById('bloco-'+x.n).classList.toggle('active',correndo&&i===atual);
   });
 }
-function tick(){
-  left=Math.max(0,Math.ceil((deadline-Date.now())/1000));
-  if(left===0){
-    if(index<BLOCKS.length-1){
-      index++;
-      left=BLOCKS[index].min*60;
-      deadline=Date.now()+left*1000;
-      note('Bloco '+BLOCKS[index].n+' começou: '+BLOCKS[index].title+'.');
-      toast('Tempo! Sigam para o bloco '+BLOCKS[index].n+'.');
-      document.getElementById('bloco-'+BLOCKS[index].n).scrollIntoView({block:'start'});
+function nota(texto){document.getElementById('sprint-note').textContent=texto;}
+function parar(){clearInterval(relogio);relogio=null;correndo=false;}
+function irPara(i,reiniciarPrazo){
+  atual=i;
+  restam=BLOCKS[i].min*60;
+  if(reiniciarPrazo)prazo=Date.now()+restam*1000;
+  document.getElementById('bloco-'+BLOCKS[i].n).scrollIntoView({block:'start'});
+}
+function tique(){
+  restam=Math.max(0,Math.ceil((prazo-Date.now())/1000));
+  if(restam===0){
+    if(atual<BLOCKS.length-1){
+      irPara(atual+1,true);
+      nota('Bloco '+BLOCKS[atual].n+' começou: '+BLOCKS[atual].title+'.');
+      TC.aviso('Tempo! Sigam para o bloco '+BLOCKS[atual].n+'.');
     } else {
-      stop();
-      note('Sprint concluído. Confiram a ficha da startup e o que ficou faltando.');
-      toast('Sprint concluído. Vejam a ficha da sua startup.');
+      parar();
+      nota('Sprint concluído. Confiram a ficha da startup e o que ficou faltando.');
+      TC.aviso('Sprint concluído. Vejam a ficha da sua startup.');
     }
   }
-  paint();
+  pintar();
 }
-function stop(){clearInterval(timer);timer=null;running=false;}
-function note(t){document.getElementById('sprint-note').textContent=t}
 
 document.getElementById('start-button').addEventListener('click',function(){
-  if(running){stop();note('Sprint pausado. O relógio para, o intervalo não.');}
-  else{running=true;deadline=Date.now()+left*1000;timer=setInterval(tick,250);note('Bloco '+BLOCKS[index].n+' em andamento: '+BLOCKS[index].title+'.');}
-  paint();
+  if(correndo){parar();nota('Sprint pausado. O relógio para, o intervalo não.');}
+  else{correndo=true;prazo=Date.now()+restam*1000;relogio=setInterval(tique,250);nota('Bloco '+BLOCKS[atual].n+' em andamento: '+BLOCKS[atual].title+'.');}
+  pintar();
 });
 document.getElementById('next-button').addEventListener('click',function(){
-  if(index<BLOCKS.length-1){
-    index++;
-    left=BLOCKS[index].min*60;
-    if(running)deadline=Date.now()+left*1000;
-    note('Pularam para o bloco '+BLOCKS[index].n+': '+BLOCKS[index].title+'.');
-    document.getElementById('bloco-'+BLOCKS[index].n).scrollIntoView({block:'start'});
-    paint();
-  } else {stop();note('Este era o último bloco. Fechem o pitch e confiram a ficha.');paint();}
+  if(atual<BLOCKS.length-1){
+    irPara(atual+1,correndo);
+    nota('Pularam para o bloco '+BLOCKS[atual].n+': '+BLOCKS[atual].title+'.');
+  } else {parar();nota('Este era o último bloco. Fechem o pitch e confiram a ficha.');}
+  pintar();
 });
 document.getElementById('reset-button').addEventListener('click',function(){
-  stop();index=0;left=BLOCKS[0].min*60;
-  note('Cronômetro zerado. As respostas continuam salvas.');
-  paint();
+  parar();atual=0;restam=BLOCKS[0].min*60;
+  nota('Cronômetro zerado. As respostas continuam salvas.');
+  pintar();
 });
 
-// --- Entradas ---
-var saveTimer;
-document.addEventListener('input',function(e){
-  var el=e.target;
-  if(el.tagName==='TEXTAREA'){state[el.id]=el.value;grow(el);}
-  else if(el.dataset.money){state[el.id]=el.value;}
-  else return;
-  card();
-  clearTimeout(saveTimer);saveTimer=setTimeout(save,500);
-});
-document.addEventListener('change',function(e){
-  if(e.target.type!=='checkbox')return;
-  var n=Number(e.target.id.split('-')[1]);
-  state[e.target.id]=e.target.checked;
-  document.getElementById('bloco-'+n).classList.toggle('done',e.target.checked);
-  save();
-});
-
-// --- Exemplos ---
-var examplesOpen=false;
-document.addEventListener('click',function(e){
-  var btn=e.target.closest('.ex-toggle');
-  if(!btn)return;
-  var box=document.getElementById('ex-'+btn.dataset.example),open=!box.hidden;
-  box.hidden=open;
-  btn.setAttribute('aria-expanded',String(!open));
-  btn.querySelector('span').textContent=open?'Ver exemplo preenchido':'Ocultar exemplo';
-});
-document.getElementById('examples-button').addEventListener('click',function(){
-  examplesOpen=!examplesOpen;
-  Array.prototype.forEach.call(document.querySelectorAll('.example-box'),function(b){b.hidden=!examplesOpen});
-  Array.prototype.forEach.call(document.querySelectorAll('.ex-toggle'),function(b){
-    b.setAttribute('aria-expanded',String(examplesOpen));
-    b.querySelector('span').textContent=examplesOpen?'Ocultar exemplo':'Ver exemplo preenchido';
-  });
-  this.setAttribute('aria-pressed',String(examplesOpen));
-  this.textContent=examplesOpen?'Ocultar exemplos':'Ver exemplos';
-});
-
-// --- Ficha exportada ---
-function summary(){
-  var m=money();
-  var out=['STARTLAB — TRILHA EXTREMA','FICHA DA STARTUP (sprint de 50 minutos)','Gerado em '+new Date().toLocaleString('pt-BR'),'',
+// ---- Ficha exportada ----
+function resumo(){
+  var m=conta();
+  var linhas=['STARTLAB — TRILHA EXTREMA','FICHA DA STARTUP (sprint de 50 minutos)','Gerado em '+new Date().toLocaleString('pt-BR'),'',
     'NOME: '+(val('e2a')||'(em branco)'),
     'PROPOSTA: '+(val('e2c')||'(em branco)'),'',
     '--- A STARTUP ---',
@@ -545,76 +425,45 @@ function summary(){
     'O que trava hoje: '+(val('e1b')||'(em branco)'),
     'O que entrega: '+(val('e2b')||'(em branco)'),
     'Quem usa / paga / autoriza: '+(val('e3a')||'(em branco)'),
-    'Como o cliente chega: '+(val('e3b')||'(em branco)'),''];
-  out.push('--- A CONTA DO PRIMEIRO MES ---');
+    'Como o cliente chega: '+(val('e3b')||'(em branco)'),'',
+    '--- A CONTA DO PRIMEIRO MES ---'];
   if(m){
-    out.push('Receita: '+brl(m.receita)+' | Gastos: '+brl(m.gastos)+' | Saldo: '+brl(m.saldo));
-    out.push('Com '+m.metade+' cliente(s): saldo de '+brl(m.saldoMetade)+'.');
-  } else out.push('(calculadora nao preenchida)');
-  out.push('De onde vieram os numeros: '+(val('e3c')||'(em branco)'),'');
-  out.push('--- A PROVA ---',
+    linhas.push('Receita: '+brl(m.receita)+' | Gastos: '+brl(m.gastos)+' | Saldo: '+brl(m.saldo));
+    linhas.push('Com '+m.metade+' cliente(s): saldo de '+brl(m.saldoMetade)+'.');
+  } else linhas.push('(calculadora nao preenchida)');
+  linhas.push('De onde vieram os numeros: '+(val('e3c')||'(em branco)'),'');
+  linhas.push('--- A PROVA ---',
     'Momentos e criterio (escrito antes): '+(val('e4a')||'(em branco)'),
     'O que as duas pessoas fizeram: '+(val('e4b')||'(em branco)'),'',
     '--- O PITCH DE 2 MINUTOS (maximo 3) ---',
     (val('e4c')||'(em branco)'),'',
     '--- O QUE AINDA NAO SABEMOS ---',
     (val('e4d')||'(em branco)'),'');
-  out.push('LIMITE DESTE SPRINT: esta startup foi montada em 50 minutos, com duas conversas e dois testes.');
-  out.push('Os numeros da conta sao hipoteses da equipe e o teste mostra compreensao, nao demanda de mercado.');
-  out.push('Proximo passo: Trilha Rapida (7 passos) ou trilha completa (12 etapas).');
-  return out.join('\n');
+  linhas.push('LIMITE DESTE SPRINT: esta startup foi montada em 50 minutos, com duas conversas e dois testes.');
+  linhas.push('Os numeros da conta sao hipoteses da equipe e o teste mostra compreensao, nao demanda de mercado.');
+  linhas.push('Exemplo desta trilha: Nubank. Informacoes da empresa sao publicas; os valores sao didaticos.');
+  linhas.push('Proximo passo: Trilha Rapida (7 passos) ou trilha completa (12 etapas).');
+  return linhas.join('\n');
 }
-function toast(msg){
-  var t=document.getElementById('toast');
-  t.textContent=msg;t.hidden=false;
-  clearTimeout(t._t);t._t=setTimeout(function(){t.hidden=true},3200);
-}
-document.getElementById('export-button').addEventListener('click',function(){
-  var blob=new Blob([summary()],{type:'text/plain;charset=utf-8'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='ficha-da-startup.txt';
-  document.body.appendChild(a);a.click();a.remove();
-  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
-  toast('Ficha da startup baixada.');
-});
-document.getElementById('copy-button').addEventListener('click',function(){
-  var text=summary();
-  function fallback(){
-    var ta=document.createElement('textarea');
-    ta.value=text;document.body.appendChild(ta);ta.select();
-    try{document.execCommand('copy');toast('Ficha copiada.')}catch(e){toast('Copie pelo arquivo .txt.')}
-    ta.remove();
+
+TC.ligarCampos(CHAVE,estado,function(campo){
+  if(campo.type==='checkbox'){
+    document.getElementById('bloco-'+campo.id.split('-')[1]).classList.toggle('done',campo.checked);
   }
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(function(){toast('Ficha copiada.')},fallback);
-  }else fallback();
+  ficha();
 });
-document.getElementById('clear-button').addEventListener('click',function(){
-  if(!confirm('Apagar todas as respostas da trilha extrema neste navegador? Não dá para desfazer.'))return;
-  state={};
-  try{localStorage.removeItem(KEY)}catch(e){}
-  render();
-  toast('Respostas apagadas.');
-});
-document.getElementById('print-button').addEventListener('click',function(){window.print()});
-
-var themeBtn=document.getElementById('theme-button');
-function themeLabel(){
-  var dark=document.documentElement.dataset.theme==='dark';
-  themeBtn.textContent=dark?'Tema claro':'Tema escuro';
-  var meta=document.querySelector('meta[name=theme-color]');
-  if(meta)meta.content=dark?'#101b17':'#f6f7f2';
-}
-themeBtn.addEventListener('click',function(){
-  var dark=document.documentElement.dataset.theme==='dark';
-  document.documentElement.dataset.theme=dark?'light':'dark';
-  try{localStorage.setItem('startlab-theme',dark?'light':'dark')}catch(e){}
-  themeLabel();
+TC.ligarExemplos();
+TC.ligarTema();
+TC.ligarAcoes({
+  chave:CHAVE,
+  resumo:resumo,
+  arquivo:'ficha-da-startup.txt',
+  avisoBaixado:'Ficha da startup baixada.',
+  perguntaApagar:'Apagar todas as respostas da trilha extrema neste navegador? Não dá para desfazer.',
+  aoApagar:function(){estado={};desenhar();}
 });
 
-render();
-themeLabel();
+desenhar();
 })();
 </script>
 </body>

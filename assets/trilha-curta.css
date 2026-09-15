@@ -1,0 +1,118 @@
+/* Base compartilhada pelas trilhas curtas (rapida e extrema).
+   Cada pagina define sua cor de marca sobrescrevendo --marca e --marca-suave. */
+:root{
+  color-scheme:light;
+  --bg:#f6f7f2;--surface:#fff;--surface-2:#eef1e8;--text:#203d33;--muted:#65756b;
+  --line:#dfe5db;--forest:#194c3b;--accent:#d8ec91;--accent-text:#274332;
+  --soft-green:#e6eddf;--hero:#eaf0df;--shadow:0 12px 32px #1c3b2d0a;
+  --marca:var(--forest);--marca-suave:var(--soft-green);--marca-hero:var(--hero);
+}
+:root[data-theme=dark]{
+  color-scheme:dark;
+  --bg:#101b17;--surface:#19271f;--surface-2:#223228;--text:#ebf0e6;--muted:#acb9ab;
+  --line:#34463b;--forest:#cae699;--accent:#d8ec91;--accent-text:#203c2d;
+  --soft-green:#2a3d2e;--hero:#22352a;--shadow:0 12px 32px #0002;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 'Segoe UI',Arial,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer;color:inherit;border:0;background:none}
+a{color:inherit}
+h1,h2,h3{margin:0;line-height:1.2;letter-spacing:-.035em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--forest);outline-offset:3px}
+[hidden]{display:none!important}
+.muted{color:var(--muted)}
+.eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.skip-link{position:fixed;top:-70px;left:16px;padding:12px;background:var(--accent);color:var(--accent-text);z-index:100}
+.skip-link:focus{top:12px}
+.wrap{max-width:860px;margin:0 auto;padding-block:22px 60px;padding-left:18px;padding-right:18px}
+
+/* Barra superior */
+.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-bottom:24px}
+.topbar-actions{display:flex;gap:8px;flex-wrap:wrap}
+.back{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.back:hover{background:var(--surface-2)}
+.tool{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 14px;font-weight:600}
+.tool:hover{background:var(--surface-2)}
+
+/* Abertura */
+.hero{background:var(--marca-hero);border:1px solid var(--line);border-radius:22px;padding:28px 26px;box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(28px,6vw,40px);font-weight:680;margin:10px 0 12px}
+.hero p{max-width:62ch;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600}
+.chip.solid{background:var(--marca);color:var(--bg);border-color:transparent}
+
+/* Passo: mesmo componente nas duas trilhas */
+.passo{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow);transition:border-color .2s}
+.passo.done{border-color:var(--forest)}
+.passo.active{border-color:var(--marca);border-width:2px;padding:21px}
+.passo-head{display:flex;gap:14px;align-items:flex-start}
+.passo-head h3{font-size:19px}
+.passo-titulo{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.num{flex:none;width:38px;height:38px;border-radius:12px;background:var(--marca-suave);color:var(--marca);display:grid;place-items:center;font-weight:750;font-size:17px}
+.passo.done .num{background:var(--forest);color:var(--bg)}
+.passo.active .num{background:var(--marca);color:var(--bg)}
+.tempo{font-size:12.5px;font-weight:700;color:var(--marca);white-space:nowrap}
+.goal{margin-top:4px;font-size:14.5px;color:var(--muted)}
+.passo-body{margin-top:16px}
+.passo-body>.eyebrow{display:block;margin-bottom:7px}
+ol.acts{margin:0;padding-left:20px}
+ol.acts li{margin-bottom:6px}
+.passo-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.check{display:inline-flex;align-items:center;gap:9px;font-weight:650;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--forest);margin:0}
+.deep{font-size:13px;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--line);padding-bottom:2px}
+.deep:hover{border-color:var(--marca)}
+
+/* Campos */
+label.field{display:block;margin-top:13px}
+label.field span{display:block;font-size:13px;font-weight:650;margin-bottom:5px}
+textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical;min-height:52px}
+textarea:hover{border-color:var(--forest)}
+
+/* Exemplo preenchido */
+.example-row{margin:13px 0 0}
+.ex-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:12px;font-weight:650;color:var(--muted)}
+.ex-toggle:hover{background:var(--marca-suave);color:var(--text)}
+.ex-toggle[aria-expanded=true]{background:var(--marca-suave);color:var(--text);border-color:var(--marca)}
+.example-box{border-left:4px solid var(--marca);background:var(--marca-suave);border-radius:10px;padding:16px 18px;margin-top:12px}
+.example-tag{display:block;font-size:9.5px;font-weight:750;letter-spacing:.11em;color:var(--muted);margin-bottom:9px}
+.example-text{font-size:13.5px;line-height:1.75}
+.example-warn{margin-top:11px;font-size:11px;line-height:1.6;color:var(--muted)}
+
+/* Criterio de conclusao */
+.ready{margin-top:16px;background:var(--soft-green);border-radius:14px;padding:13px 15px;font-size:14px}
+.ready b{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+
+/* Fechamento */
+.final{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 22px;box-shadow:var(--shadow)}
+.final h2{font-size:21px;margin:8px 0 10px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{border-radius:999px;padding:11px 18px;font-weight:650;border:1px solid var(--line);background:var(--surface)}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--marca);color:var(--bg);border-color:transparent}
+.btn.primary:hover{filter:brightness(.94)}
+.btn.lime{background:var(--accent);color:var(--accent-text);border-color:transparent}
+.btn.lime:hover{filter:brightness(.96)}
+.saved{font-size:13px;color:var(--muted);margin-top:12px}
+.footer{margin-top:34px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--marca);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:650;z-index:80;box-shadow:var(--shadow);max-width:92vw;text-align:center}
+
+@media (max-width:520px){
+  .wrap{padding-block:16px 44px}
+  .hero{padding:22px 18px;border-radius:18px}
+  .passo{padding:18px 16px}
+  .passo.active{padding:17px 15px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{
+  .topbar,.actions,.toast,.deep,.skip-link,.example-row,.example-box{display:none}
+  body{background:#fff}
+  .passo,.hero,.final{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  .passo.active{border-width:1px}
+  textarea{min-height:0;height:auto;overflow:visible}
+}

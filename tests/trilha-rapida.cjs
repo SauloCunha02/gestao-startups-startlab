@@ -15,10 +15,10 @@ const path = require('node:path');
     const page = await context.newPage(), errors = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.goto(url);
-    await page.locator('.step').last().waitFor();
+    await page.locator('.passo').last().waitFor();
 
-    assert.equal(await page.locator('.step').count(), 7, 'sete passos');
-    assert.equal(await page.locator('.step .check input').count(), 7, 'um marcador por passo');
+    assert.equal(await page.locator('.passo').count(), 7, 'sete passos');
+    assert.equal(await page.locator('.passo .check input').count(), 7, 'um marcador por passo');
     assert.equal(await page.locator('a.deep').count(), 7, 'cada passo aponta para a trilha completa');
 
     // --- Exemplos: um por passo, abrindo individualmente e em conjunto ---
@@ -46,7 +46,7 @@ const path = require('node:path');
     await page.locator('#done-2').check();
     assert.match(await page.locator('#progress-text').textContent(), /^2 de 7 passos$/);
     await page.reload();
-    await page.locator('.step').last().waitFor();
+    await page.locator('.passo').last().waitFor();
     assert.equal(await page.locator('#p1a').inputValue(), 'Estudantes do 2º ano enfrentam fila longa na cantina.', 'resposta persiste');
     assert.match(await page.locator('#progress-text').textContent(), /^2 de 7 passos$/, 'progresso persiste');
 
@@ -75,7 +75,7 @@ const path = require('node:path');
 
     // --- Liga as outras duas trilhas ---
     await page.reload();
-    await page.locator('.step').last().waitFor();
+    await page.locator('.passo').last().waitFor();
     assert.ok(await page.locator('a[href*="trilha-extrema"]').count() > 0, 'aponta para a Trilha Extrema');
     await page.locator('.back[href*="../index.html"]').click();
     await page.locator('.lesson-card').last().waitFor();
@@ -88,7 +88,7 @@ const path = require('node:path');
       const errs = [];
       p2.on('pageerror', e => errs.push(e.message));
       await p2.goto(url);
-      await p2.locator('.step').last().waitFor();
+      await p2.locator('.passo').last().waitFor();
       await p2.evaluate(() => document.querySelectorAll('.ex-toggle').forEach(b => b.click()));
       await p2.waitForTimeout(150);
       const over = await p2.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

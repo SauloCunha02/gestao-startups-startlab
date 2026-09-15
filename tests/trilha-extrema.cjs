@@ -15,20 +15,20 @@ const path = require('node:path');
     const page = await context.newPage(), errors = [];
     page.on('pageerror', e => errors.push(e.message));
     await page.goto(url);
-    await page.locator('.block').last().waitFor();
+    await page.locator('.passo').last().waitFor();
 
     // --- Estrutura: quatro blocos somando exatamente 50 minutos ---
-    assert.equal(await page.locator('.block').count(), 4, 'quatro blocos');
-    const minutos = await page.locator('.mins').allTextContents();
+    assert.equal(await page.locator('.passo').count(), 4, 'quatro blocos');
+    const minutos = await page.locator('.tempo').allTextContents();
     assert.deepEqual(minutos, ['10 min', '8 min', '14 min', '18 min'], 'tempos por bloco');
     const soma = minutos.reduce((a, m) => a + parseInt(m, 10), 0);
     assert.equal(soma, 50, 'os blocos somam 50 minutos, uma aula');
-    assert.equal(await page.locator('.block .check input').count(), 4);
+    assert.equal(await page.locator('.passo .check input').count(), 4);
     assert.equal(await page.locator('a.deep').count(), 4, 'cada bloco aponta para a etapa completa');
 
     // A entrega é uma startup montada, não um problema investigado.
     assert.match(await page.locator('h1').textContent(), /Monte sua startup em 50 minutos/);
-    const titulos = await page.locator('.block-head h3').allTextContents();
+    const titulos = await page.locator('.passo-head h3').allTextContents();
     assert.deepEqual(titulos, [
       'Para quem é a sua startup',
       'A startup: nome e proposta',
@@ -56,7 +56,7 @@ const path = require('node:path');
     assert.match(await page.locator('#now-name').textContent(), /^1 · Para quem é a sua startup$/);
     assert.match(await page.locator('#now-total').textContent(), /^50:00 restantes no sprint$/);
     assert.equal(await page.locator('#start-button').textContent(), 'Iniciar sprint');
-    assert.equal(await page.locator('.block.active').count(), 0, 'nenhum bloco ativo antes de iniciar');
+    assert.equal(await page.locator('.passo.active').count(), 0, 'nenhum bloco ativo antes de iniciar');
 
     // --- Iniciar: relógio anda e o bloco 1 fica destacado ---
     await page.getByRole('button', {name: 'Iniciar sprint'}).click();
@@ -64,8 +64,8 @@ const path = require('node:path');
     await page.waitForTimeout(1400);
     const andando = await page.locator('#clock').textContent();
     assert.notEqual(andando, '10:00', 'o relógio corre');
-    assert.equal(await page.locator('#bloco-1').getAttribute('class'), 'block active', 'bloco 1 destacado');
-    assert.equal(await page.locator('.block.active').count(), 1, 'apenas um bloco ativo');
+    assert.equal(await page.locator('#bloco-1').getAttribute('class'), 'passo active', 'bloco 1 destacado');
+    assert.equal(await page.locator('.passo.active').count(), 1, 'apenas um bloco ativo');
     assert.match(await page.locator('#sprint-note').textContent(), /Bloco 1 em andamento/);
 
     // --- Pausar congela o relógio ---
@@ -74,7 +74,7 @@ const path = require('node:path');
     await page.waitForTimeout(1200);
     assert.equal(await page.locator('#clock').textContent(), pausado, 'pausado não avança');
     assert.equal(await page.locator('#start-button').textContent(), 'Continuar');
-    assert.equal(await page.locator('.block.active').count(), 0, 'pausado não destaca bloco');
+    assert.equal(await page.locator('.passo.active').count(), 0, 'pausado não destaca bloco');
 
     // --- Próximo bloco avança e recarrega o tempo daquele bloco ---
     await page.getByRole('button', {name: 'Próximo bloco'}).click();
@@ -137,7 +137,7 @@ const path = require('node:path');
     // --- Respostas persistem e usam chave própria ---
     await page.locator('#done-1').check();
     await page.reload();
-    await page.locator('.block').last().waitFor();
+    await page.locator('.passo').last().waitFor();
     assert.equal(await page.locator('#e2a').inputValue(), 'Troca Justa');
     assert.equal(await page.locator('#card-name').textContent(), 'Troca Justa', 'a ficha remonta ao recarregar');
     assert.equal(await page.locator('#card-fill').textContent(), '100% montada');
@@ -199,11 +199,11 @@ const path = require('node:path');
 
     // --- Navegação entre as três trilhas ---
     await page.locator('.next a[href*="trilha-rapida"]').click();
-    await page.locator('.step').last().waitFor();
-    assert.equal(await page.locator('.step').count(), 7, 'chega na Trilha Rápida');
+    await page.locator('.passo').last().waitFor();
+    assert.equal(await page.locator('.passo').count(), 7, 'chega na Trilha Rápida');
     await page.locator('a[href*="trilha-extrema"]').first().click();
-    await page.locator('.block').last().waitFor();
-    assert.equal(await page.locator('.block').count(), 4, 'a Rápida aponta de volta para a Extrema');
+    await page.locator('.passo').last().waitFor();
+    assert.equal(await page.locator('.passo').count(), 4, 'a Rápida aponta de volta para a Extrema');
     await page.locator('.back[href*="../index.html"]').click();
     await page.locator('.lesson-card').last().waitFor();
     assert.equal(await page.locator('.lesson-card').count(), 12, 'volta para as 12 etapas');
@@ -220,7 +220,7 @@ const path = require('node:path');
     await page.getByRole('button', {name: 'Pausar'}).click();
     await page.evaluate(() => localStorage.setItem('startlab-theme', 'light'));
     await page.reload();
-    await page.locator('.block').last().waitFor();
+    await page.locator('.passo').last().waitFor();
     await page.getByRole('button', {name: /Ver exemplos/}).click();
     await page.screenshot({path: path.join(out, 'extrema-claro.png'), fullPage: true});
 
@@ -232,14 +232,14 @@ const path = require('node:path');
       p3.on('pageerror', e => errs.push(e.message));
       await p3.clock.install();
       await p3.goto(url);
-      await p3.locator('.block').last().waitFor();
+      await p3.locator('.passo').last().waitFor();
       await p3.getByRole('button', {name: 'Iniciar sprint'}).click();
 
       await p3.clock.runFor(10 * 60 * 1000 + 500);
       assert.match(await p3.locator('#now-name').textContent(), /^2 · /, 'ao fim dos 10 min vai sozinho para o bloco 2');
       assert.equal(await p3.locator('#clock').textContent(), '08:00', 'bloco 2 começa cheio');
       assert.match(await p3.locator('#sprint-note').textContent(), /Bloco 2 começou/);
-      assert.equal(await p3.locator('#bloco-2').getAttribute('class'), 'block active');
+      assert.equal(await p3.locator('#bloco-2').getAttribute('class'), 'passo active');
 
       await p3.clock.runFor(8 * 60 * 1000 + 500);
       assert.match(await p3.locator('#now-name').textContent(), /^3 · /, 'segue para o bloco 3');
@@ -252,7 +252,7 @@ const path = require('node:path');
       assert.equal(await p3.locator('#clock').textContent(), '00:00', 'o sprint termina zerado');
       assert.match(await p3.locator('#sprint-note').textContent(), /Sprint concluído/);
       assert.equal(await p3.locator('#start-button').textContent(), 'Continuar', 'o cronômetro para no fim');
-      assert.equal(await p3.locator('.block.active').count(), 0, 'nenhum bloco fica ativo após o fim');
+      assert.equal(await p3.locator('.passo.active').count(), 0, 'nenhum bloco fica ativo após o fim');
       const largura = await p3.locator('#sprint-bar').evaluate(el => el.style.width);
       assert.equal(largura, '100%', 'a barra chega a 100%');
       assert.deepEqual(errs, [], 'sem erros JavaScript durante o sprint completo');
@@ -266,7 +266,7 @@ const path = require('node:path');
       const errs = [];
       p2.on('pageerror', e => errs.push(e.message));
       await p2.goto(url);
-      await p2.locator('.block').last().waitFor();
+      await p2.locator('.passo').last().waitFor();
       await p2.evaluate(() => document.querySelectorAll('.ex-toggle').forEach(b => b.click()));
       await p2.getByRole('button', {name: 'Iniciar sprint'}).click();
       await p2.waitForTimeout(200);
