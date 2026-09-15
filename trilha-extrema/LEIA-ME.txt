@@ -53,10 +53,10 @@ Tres cuidados que a pagina deixa explicitos para o aluno:
   RACIOCINIO. A startup do aluno pode resolver algo do tamanho da escola
   e seguir exatamente o mesmo caminho.
 
-Observacao: a Trilha Rapida e a trilha completa continuam usando o caso
-ficticio Fila Menor, que e de escala escolar e serve de modelo do nivel
-de detalhe esperado do proprio aluno. Aqui, num primeiro contato de uma
-aula, um caso conhecido faz o conceito encaixar mais rapido.
+Observacao: cada percurso usa uma empresa diferente como exemplo —
+Airbnb nas fichas da trilha completa, Duolingo na Trilha Rapida e Nubank
+aqui. Isso reforca o ponto central do material: a base de trabalho e a
+mesma, a startup e que muda.
 
 A conta do primeiro mes
 -----------------------

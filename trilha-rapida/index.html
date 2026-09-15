@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f6f7f2">
-<meta name="description" content="Trilha rápida: 7 passos diretos ao ponto para sair de um problema real e chegar ao primeiro teste da sua startup.">
+<meta name="description" content="Trilha rápida: construa a sua startup em 7 passos — território, cliente, solução, modelo de negócio, prova e pitch —, com o caso real do Duolingo como exemplo.">
 <title>Trilha Rápida — StartLab</title>
 <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('startlab-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
@@ -126,13 +126,13 @@ textarea:hover{border-color:var(--forest)}
   <header class="hero">
     <span class="eyebrow">StartLab · Direto ao ponto</span>
     <h1>Trilha Rápida</h1>
-    <p>O caminho mais curto entre um problema real e o primeiro teste da sua startup. Sete passos, o essencial de cada um, sem rodeio. Se quiser aprofundar, cada passo aponta para as etapas completas.</p>
+    <p>Construa a sua startup em sete passos: o território, o cliente, a solução com nome, o modelo de negócio, a prova e o pitch. O essencial de cada passo, sem rodeio. Em cada um você vê como o <strong>Duolingo</strong> resolveu aquele mesmo ponto — e, se quiser aprofundar, o passo aponta para as etapas completas.</p>
     <div class="chips">
       <span class="chip solid">7 passos</span>
       <span class="chip">≈ 6 aulas de 50 min</span>
-      <span class="chip">Papel e caneta bastam</span>
+      <span class="chip">1 startup construída</span>
+      <span class="chip">Exemplo real: Duolingo</span>
       <span class="chip">Sem programar</span>
-      <span class="chip">Equipes de 3 a 5</span>
     </div>
   </header>
 
@@ -190,30 +190,31 @@ textarea:hover{border-color:var(--forest)}
 'use strict';
 var KEY='startlab-rapida-v1';
 
-// Exemplo fictício Fila Menor, condensado: um por passo.
+// Caso real do Duolingo, condensado: um por passo. As informacoes sobre a
+// empresa sao publicas; entrevistas, notas e tempos de teste sao ilustrativos.
 var EXEMPLOS={
- 1:'Frase do problema: “Estudantes do 2º ano que compram na cantina enfrentam espera longa quando o intervalo começa e todos chegam ao mesmo tempo.”\n\nSuposição mais arriscada: “pedidos antecipados reduziriam a espera”. Se for falsa, o projeto inteiro cai.',
- 2:'P1 · 2º ano, compra quase todo dia — terça: esperou 8 min e comeu andando; acontece 4x por semana; chega antes do sinal e mesmo assim pega fila.\nP2 · 1º ano — ontem desistiu ao ver a fila e ficou sem comer; passou a trazer bolacha de casa.\nP3 · 3º ano — quinta: 10 min entre entrar na fila e receber; pede para um colega guardar lugar.\n\nNão esperávamos: P1 e P3 reclamaram do momento de PAGAR, não do preparo.',
- 3:'Dor prioritária: comprar dentro do tempo do intervalo — importância 4,6 contra satisfação 2,0 (5 respostas).\n\nPersona: Lia, 16 anos, chega antes do sinal para pegar fila menor, gasta de 8 a 10 min e come andando até a sala.\n\nUsuário: estudante · Pagador: cantina (hipótese, ninguém falou em pagar) · Decisor: direção.\n\nDesafio: como podemos ajudar estudantes que compram na cantina a receber o lanche dentro do intervalo, nos dias de maior movimento?',
- 4:'Três opções e notas (benefício · facilidade · recursos):\n1) Pedido em papel antes do sinal — 3·3·3 = 9\n2) Fila separada para quem já decidiu — 2·3·3 = 8\n3) Cardápio com os prontos sinalizados — 2·2·3 = 7\n\nEscolhida: a 1, única que ataca a causa observada (todos chegam juntos) e dá para testar só com papel.\n\nProposta: Ajudamos estudantes que compram no intervalo a receber o lanche dentro do tempo, organizando os pedidos antes de o sinal tocar.',
- 5:'Modelo: usa = estudante · paga = cantina (hipótese) · recebe = lanche sem fila · chega = papel entregue na sala · fazemos = recolher e organizar pedidos · precisamos = papel, caneta e 10 min de duas pessoas.\n\nConta do mês: 4 cantinas × R$ 30 = R$ 120 de receita. Gastos: 4 × R$ 5 + R$ 60 fixos = R$ 80. Saldo = R$ 40.\nCom metade (2 cantinas): 60 − (10 + 60) = − R$ 10. O gasto fixo derruba o cenário menor.\n\nNão entrou na conta: as ~10 horas de trabalho da equipe por mês.',
- 6:'Plano (escrito ANTES): hipótese — estudantes entendem sozinhos como pedir. Tarefa — “faça um pedido usando este material”. Medida — concluiu sem ajuda e em quanto tempo. Critério — 2 de 3 concluem sem ajuda em até 2 min.\n\nResultados: T1 concluiu em 1min20 sem ajuda · T2 não concluiu, 2min40, pediu ajuda, não achou a confirmação · T3 não concluiu, 2min10, marcou 3 itens sem ver o limite de 2.\n\nCritério NÃO atingido (1 de 3). NÃO prova que a fila diminuiria: testamos compreensão em papel, não a operação real.',
- 7:'Mudança: o terceiro cartão só dizia “pedido recebido”. Passou a trazer número do pedido, itens, valor e “retire no balcão lateral quando chamarem seu número”.\nNovo teste: T4 concluiu em 1min05, sem ajuda. Uma pessoa só — ainda precisa repetir.\n\nPitch: problema (30s) · evidências: 4 de 5 com prejuízo concreto, importância 4,6 x satisfação 2,0 (30s) · demonstrar os 3 cartões (60s) · modelo: cantina pagaria R$ 30/mês, ainda hipótese (30s) · teste e próximo passo: medir a fila real (30s).\n\nUma evidência: a espera passa de 8 min. Uma estimativa: o preço de R$ 30. Uma dúvida: alguém pagaria?'
+ 1:'DUOLINGO, 2011.\n\nTerritório: pessoas que querem aprender um idioma e não conseguem pagar um curso — e que já passam tempo no celular todo dia.\n\nFrase: “Quem quer aprender um idioma desiste quando o curso custa caro e exige horário fixo.”\n\nSuposição mais arriscada: “as pessoas estudariam sozinhas, sem professor cobrando presença”. Se for falsa, o projeto inteiro cai — porque é nisso que o produto se apoia.',
+ 2:'P1 · estudante, tentou inglês duas vezes — abandonou no segundo mês do curso pago; hoje assiste a vídeos soltos e não sabe se está evoluindo.\nP2 · trabalha o dia todo — desistiu porque o curso era 19h e ele nunca chegava a tempo; estuda no ônibus quando lembra.\nP3 · quer viajar no ano que vem — nunca começou por causa do preço; usa tradutor na hora do aperto.\n\nNão esperávamos: nenhum dos três falou em “aulas melhores”. Os três falaram em CONSEGUIR MANTER a rotina.',
+ 3:'Dor prioritária: manter o estudo todo dia — importância 4,8 contra satisfação 1,8 (5 respostas). Preço apareceu como barreira de entrada; constância apareceu como a dor que faz desistir.\n\nPersona: Rafa, 17 anos, quer aprender inglês, tem 10 minutos livres no ônibus e já começou e parou duas vezes.\n\nUsuário: quem estuda · Pagador: ainda não é o estudante (o produto é grátis) — a receita vem de anúncios e de quem assina depois · Decisor: o próprio estudante.\n\nDesafio: como podemos ajudar quem quer aprender um idioma a estudar todo dia, sem depender de dinheiro nem de horário fixo?',
+ 4:'Três opções e notas (benefício · facilidade · recursos):\n1) Lições curtas, gratuitas e com cara de jogo — 3·3·3 = 9\n2) Videoaulas gravadas mais baratas — 2·3·2 = 7\n3) Grupo de conversação com voluntários — 3·1·1 = 5\n\nEscolhida: a 1. É a única que ataca a causa observada (manter a rotina) e cabe nos 10 minutos que a persona realmente tem.\n\nNome: Duolingo.\n\nProposta: A Duolingo ajuda quem quer aprender um idioma a estudar todo dia, por meio de lições curtas e gratuitas que cabem em poucos minutos.',
+ 5:'Modelo: usa = quem estuda · paga = anunciantes e quem assina a versão sem anúncios · recebe = lições curtas e acompanhamento do progresso · chega = aplicativo · fazemos = criar e corrigir as lições · precisamos = conteúdo, aplicativo e servidor.\n\nA LIÇÃO: o usuário não paga. Quem sustenta é outro lado — por isso um produto grátis não é mágica.\n\nConta do mês (valores ILUSTRATIVOS, para aprender a conta — não são os números do Duolingo): 300 usuários ativos, R$ 1,20 de receita por usuário = R$ 360. Gastos: R$ 0,40 por usuário + R$ 150 fixos = R$ 270. Saldo R$ 90.\nCom 150 usuários: 180 − (60 + 150) = − R$ 30. O gasto fixo derruba o cenário menor.\n\nNão entrou na conta: as horas da equipe produzindo as lições.',
+ 6:'Plano (escrito ANTES): hipótese — a pessoa entende e conclui uma lição sozinha. Tarefa — “complete a primeira lição usando este material”. Medida — concluiu sem ajuda e em quanto tempo. Critério — 2 de 3 concluem sem ajuda em até 2 min.\n\nResultados (ilustrativos): T1 concluiu em 1min40 sem ajuda · T2 concluiu em 1min55, perguntou uma vez o que significava o ícone de vida · T3 não concluiu, 2min30, não entendeu que podia errar e continuar.\n\nCritério atingido por pouco (2 de 3). NÃO prova que a pessoa voltaria no dia seguinte: testamos a primeira lição, não a constância — que era justamente a dor priorizada.',
+ 7:'Mudança: o material não deixava claro que errar não encerra a lição. Passou a mostrar, logo na primeira tela, quantas tentativas a pessoa tem e que dá para continuar depois do erro.\nNovo teste: T4 concluiu em 1min10, sem ajuda, e disse “ah, então posso errar”. Uma pessoa só — ainda precisa repetir.\n\nPitch: problema (30s) · evidências: 3 de 5 já tinham começado e parado; importância 4,8 x satisfação 1,8 (30s) · demonstrar uma lição de 1 minuto (60s) · modelo: grátis para quem estuda, receita em anúncios e assinatura (30s) · teste e próximo passo: medir quantos voltam no segundo dia (30s).\n\nUma evidência: 3 de 5 desistiram antes. Uma estimativa: a receita por usuário. Uma dúvida: a pessoa volta amanhã?'
 };
 
 var STEPS=[
- {n:1,title:'Escolha o problema',time:'25 min',etapas:'Etapas 01 e 02',link:'../index.html#/etapa/1',
-  goal:'Sair da ideia e chegar a uma dificuldade real, que dá para observar.',
-  acts:['Cada integrante conta uma dificuldade que viu na escola ou no bairro nos últimos sete dias.',
-        'Escolham a que mais se repete <b>e</b> cujo público vocês conseguem encontrar amanhã.',
+ {n:1,title:'Escolha o território da sua startup',time:'25 min',etapas:'Etapas 01 e 02',link:'../index.html#/etapa/1',
+  goal:'Escolher o grupo de pessoas que a sua startup vai atender e o que trava para elas hoje.',
+  acts:['Cada integrante descreve um grupo de pessoas que conhece de perto e uma dificuldade que se repete para elas.',
+        'Escolham o território mais frequente <b>e</b> cujo cliente vocês conseguem encontrar amanhã.',
         'Escrevam em uma frase: “[público] enfrenta [dificuldade] quando [situação]”.'],
-  fields:[['p1a','A frase do problema','Ex.: Estudantes do 2º ano perdem quase todo o intervalo esperando atendimento na cantina.',2],
-          ['p1b','A suposição que derruba o projeto se for falsa','O que a equipe está torcendo para ser verdade, mas ainda não verificou?',2]],
-  ready:'A frase descreve o que acontece (não a solução) e vocês já sabem onde encontrar essas pessoas.',
+  fields:[['p1a','O território: [público] enfrenta [dificuldade] quando [situação]','Descreva o que acontece, não o que vocês querem construir.',2],
+          ['p1b','A suposição que derruba a startup se for falsa','O que a equipe está torcendo para ser verdade, mas ainda não verificou?',2]],
+  ready:'A frase descreve o que acontece (não a solução) e vocês já sabem onde encontrar esse cliente.',
   trap:'“Falta um aplicativo de X” não é problema — é solução disfarçada. Reescreva.'},
 
  {n:2,title:'Ouça cinco pessoas',time:'50 min',etapas:'Etapa 03',link:'../index.html#/etapa/3',
-  goal:'Trocar a opinião da equipe por evidência de quem vive o problema.',
+  goal:'Trocar a opinião da equipe por evidência de quem seria cliente da startup.',
   acts:['Peçam cinco minutos: “É um trabalho da escola, vamos anotar sem identificar você.” Quem não quiser, tudo bem.',
         'Façam sempre as mesmas quatro perguntas: <b>Quando foi a última vez? Com que frequência acontece? Como você resolve hoje? O que mais incomoda?</b>',
         'Anotem o que a pessoa disse, não o que vocês concluíram. Marquem tudo que contraria a ideia da equipe.'],
@@ -222,32 +223,32 @@ var STEPS=[
   ready:'Existem cinco registros com episódio concreto. Nenhum foi inventado para fechar a conta.',
   trap:'Perguntar “você usaria nosso app?” só gera resposta educada. Pergunte sobre o que já aconteceu.'},
 
- {n:3,title:'Escolha a dor e o público',time:'25 min',etapas:'Etapas 04 e 05',link:'../index.html#/etapa/4',
-  goal:'Fechar o foco: uma dor, um público. Nunca “todo mundo”.',
+ {n:3,title:'Escolha a dor e o cliente',time:'25 min',etapas:'Etapas 04 e 05',link:'../index.html#/etapa/4',
+  goal:'Fechar o foco da startup: uma dor, um cliente. Nunca “todo mundo”.',
   acts:['Para as necessidades que apareceram, dê notas de 1 a 5 de importância e de satisfação atual. Prioridade = importância alta com satisfação baixa.',
         'Escrevam a persona em uma linha: quem é, em que situação e o que quer conseguir.',
         'Separem os papéis: quem <b>usa</b>, quem <b>pagaria</b> e quem <b>autoriza</b>. Podem ser três pessoas diferentes.'],
   fields:[['p3a','Dor prioritária e as médias (importância / satisfação)','Somem as notas válidas e dividam pelo número de respostas.',2],
           ['p3b','Persona em uma linha','Nome fictício, comportamento real observado nas entrevistas.',2],
           ['p3c','Usuário / possível pagador / decisor','Marquem quem ainda não foi ouvido.',2],
-          ['p3d','O desafio: “Como podemos ajudar [público] a [resultado] em [contexto]?”','',2]],
+          ['p3d','O desafio: “Como podemos ajudar [cliente] a [resultado] em [contexto]?”','',2]],
   ready:'A dor escolhida aparece em pelo menos três dos cinco registros do passo 2.',
   trap:'Escolher a dor que a equipe acha mais interessante em vez da que apareceu nas conversas.'},
 
- {n:4,title:'Decida a solução',time:'30 min',etapas:'Etapas 06 e 07',link:'../index.html#/etapa/6',
-  goal:'Gerar muitas opções, escolher uma e saber justificar a escolha.',
+ {n:4,title:'Desenhe a solução e dê nome à startup',time:'30 min',etapas:'Etapas 06 e 07',link:'../index.html#/etapa/6',
+  goal:'Gerar opções, escolher a solução da sua startup e escrever a proposta de valor.',
   acts:['Cinco minutos de ideias em silêncio, cada um escrevendo as suas. Depois juntem tudo: mínimo de oito opções, sem julgar.',
         'Escolham três e dê notas de 1 a 3 para: resolve a dor · dá para testar esta semana · temos os recursos. Somem.',
         'Comparem com o que as pessoas fazem hoje — inclusive “não fazer nada” — e digam o que a sua opção muda.'],
   fields:[['p4a','As três opções e as notas (com o total)','Opção · benefício · facilidade · recursos · total',3],
           ['p4b','Solução escolhida e o motivo','',2],
-          ['p4c','Proposta de valor: “Ajudamos [público] a [benefício] por meio de [solução]”','',2],
+          ['p4c','Nome da startup + proposta: “A [nome] ajuda [cliente] a [benefício] por meio de [solução]”','Nome curto. Dá para trocar depois — nome é rótulo, não estratégia.',3],
           ['p4d','Como resolvem hoje e o que mudamos','',2]],
-  ready:'A proposta cita público, benefício e meio — e se sustenta sem as palavras “inovador” ou “revolucionário”.',
+  ready:'A startup tem nome e a proposta cita cliente, benefício e meio — sem “inovador” nem “revolucionário”.',
   trap:'Escolher a ideia mais bonita em vez da que dá para testar já, com o que vocês têm.'},
 
- {n:5,title:'Mostre como o negócio se sustenta',time:'25 min',etapas:'Etapa 08',link:'../index.html#/etapa/8',
-  goal:'Explicar de onde viria o dinheiro, com contas simples e honestas.',
+ {n:5,title:'Monte o modelo de negócio',time:'25 min',etapas:'Etapa 08',link:'../index.html#/etapa/8',
+  goal:'Explicar de onde viria o dinheiro da startup, com contas simples e honestas.',
   acts:['Preencham seis campos: quem usa · quem paga · o que recebe · como chega até vocês · o que precisamos fazer · o que precisamos ter.',
         'Simulem um mês: <b>receita = preço × clientes</b>; <b>gastos = variáveis + fixos</b>; <b>saldo = receita − gastos</b>.',
         'Refaçam a conta com metade dos clientes. Se o saldo virar negativo, escrevam o que teria de mudar.'],
@@ -259,17 +260,17 @@ var STEPS=[
   trap:'Chamar o saldo de lucro. Faltam o tempo de trabalho da equipe e os gastos que ninguém lembrou.'},
 
  {n:6,title:'Construa e teste com três pessoas',time:'50 min',etapas:'Etapas 09 e 10',link:'../index.html#/etapa/9',
-  goal:'Colocar algo que possa ser usado na mão de quem vive o problema.',
+  goal:'Colocar a primeira versão da startup na mão de quem seria cliente.',
   acts:['Em papel, montem três momentos: <b>entrada → ação principal → resultado</b>. Escrevam o que esta versão ainda não faz.',
         '<b>Antes</b> de chamar alguém, escrevam hipótese, tarefa, medida e critério. Ex.: “2 de 3 concluem sozinhos em até 2 minutos”.',
-        'Testem com três pessoas do público, fora da equipe. Entreguem a tarefa e fiquem calados. Anotem tempo, conclusão e pedidos de ajuda.'],
+        'Testem com três pessoas do território, fora da equipe. Entreguem a tarefa e fiquem calados. Anotem tempo, conclusão e pedidos de ajuda.'],
   fields:[['p6a','Plano do teste: hipótese · tarefa · medida · critério','Preenchido antes de começar.',3],
           ['p6b','Resultado dos três testes','Código · concluiu? · tempo · pediu ajuda? · dificuldade observada',4],
           ['p6c','O critério foi atingido? O que este teste NÃO prova?','',3]],
   ready:'Os três resultados estão anotados e o critério foi definido antes do primeiro teste.',
   trap:'Explicar a solução durante o teste. Isso apaga exatamente a dificuldade que você precisava enxergar.'},
 
- {n:7,title:'Melhore e apresente',time:'40 min',etapas:'Etapas 11 e 12',link:'../index.html#/etapa/11',
+ {n:7,title:'Melhore e apresente a sua startup',time:'40 min',etapas:'Etapas 11 e 12',link:'../index.html#/etapa/11',
   goal:'Uma mudança justificada pelas evidências e um pitch de três minutos.',
   acts:['Peguem a maior dificuldade observada, mudem <b>uma</b> coisa e testem de novo, de preferência com outra pessoa.',
         'Montem cinco cartões: problema/público · evidências · solução (demonstrem) · modelo de negócio · teste e próximo passo.',
@@ -296,9 +297,9 @@ function render(){
     var acts=s.acts.map(function(a){return '<li>'+a+'</li>'}).join('');
     var exemplo=EXEMPLOS[s.n]
       ? '<p class="example-row"><button class="ex-toggle" data-example="'+s.n+'" aria-expanded="false" aria-controls="ex-'+s.n+'">💡 <span>Ver exemplo preenchido</span></button></p>'+
-        '<div class="example-box" id="ex-'+s.n+'" hidden><span class="example-tag">EXEMPLO FICTÍCIO · FILA MENOR</span>'+
+        '<div class="example-box" id="ex-'+s.n+'" hidden><span class="example-tag">EXEMPLO REAL · DUOLINGO</span>'+
         '<p class="example-text">'+esc(EXEMPLOS[s.n]).replace(/\n/g,'<br>')+'</p>'+
-        '<p class="example-warn">Referência de detalhe, não resposta pronta. Copiar o exemplo não gera evidência: escreva com os registros da sua equipe.</p></div>'
+        '<p class="example-warn">O Duolingo está aqui como referência de <b>raciocínio</b>, não de tamanho: a sua startup pode atender vinte pessoas do bairro e seguir o mesmo caminho. As informações sobre a empresa são públicas; entrevistas, notas e valores são ilustrativos, para mostrar o formato. Copiar o exemplo não cria a sua startup.</p></div>'
       : '';
     return '<section class="step" id="passo-'+s.n+'">'+
       '<div class="step-head"><div class="num">'+s.n+'</div><div style="flex:1">'+

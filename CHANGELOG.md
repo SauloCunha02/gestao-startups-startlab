@@ -1,5 +1,17 @@
 # Histórico de versões
 
+## 3.4.0
+
+- **Todo o material reorientado à construção de uma startup.** A sequência das 12 etapas deixou de ser “investigar um problema” e passou a construir a startup: escolher o território, separar fato de suposição, ouvir o cliente, priorizar a dor, definir o cliente, desenhar a proposta, estudar o mercado, montar o modelo, construir, testar, melhorar e apresentar.
+- **O caso fictício Fila Menor foi aposentado.** No lugar, cada etapa mostra uma startup real e conhecida resolvendo aquele passo: iFood (território), Netflix (suposição arriscada), Airbnb (ouvir, testar e apresentar), Spotify (priorizar a dor), Nubank (cliente), Duolingo (proposta de valor), 99 (alternativas), Mercado Livre (modelo de negócio), Dropbox (primeira versão) e Instagram (pivô).
+- Cada percurso usa uma empresa diferente — Airbnb nas fichas da trilha completa, Duolingo na Trilha Rápida, Nubank na Trilha Extrema —, reforçando que a base é a mesma e a startup é que muda.
+- As 12 perguntas de revisão foram reescritas: as antigas ainda citavam o exemplo aposentado.
+- Trilha Rápida reorientada: os sete passos agora vão de território a pitch, com campo para o nome da startup.
+- Ressalvas explícitas em todo lugar: informações das empresas são públicas; entrevistas, notas e tempos de teste do exemplo são ilustrativos; valores financeiros são didáticos; os casos são referência de raciocínio, não de tamanho. O guia orienta a não avaliar o tamanho da ideia.
+- **Fonte única de conteúdo.** Até a 3.3 havia duas cópias do conteúdo e os DOCX/PDF continuavam sendo gerados a partir de um texto da versão 2. Agora `apoio/gerar_material.py` lê `projeto/conteudo/material.py`, e `apoio/conteudo.py` apenas reexporta essa fonte.
+- Word, PDF e HTML regenerados, já com frase-chave, essencial e termos — que só existiam no site.
+- Nova guarda de coerência em `test:interativo`: percorre as 12 etapas conferindo que cada uma cita uma startup real, traz a ressalva de tamanho, tem revisão com devolutiva e não guarda resquício de exemplo antigo.
+
 ## 3.3.0
 
 - Pitch da Trilha Extrema passou de 60 segundos para **2 minutos, com teto de 3**, alinhando-se ao formato da etapa 12. O roteiro tem cinco partes cronometradas que somam 120 segundos.

@@ -47,6 +47,34 @@ const path = require('node:path');
     assert.match(await page.locator('#tasks-count').textContent(), /^2 de 4 tarefas$/, 'tarefas persistem após recarregar');
     await page.screenshot({path: path.join(out, 'v3-etapa.png'), fullPage: true});
 
+    // --- Coerência do conteúdo: toda etapa constrói a startup e cita um caso real ---
+    // Guarda contra a regressão em que o exemplo muda e o texto de apoio fica para trás.
+    const CASOS = ['iFood', 'Netflix', 'Airbnb', 'Spotify', 'Nubank', 'Duolingo', '99', 'Mercado Livre', 'Dropbox', 'Instagram'];
+    // Só o "99" precisa de fronteira, para não casar com anos como 1997 e 1999.
+    // Os demais usam busca simples: textContent cola o rótulo no texto e apagaria a fronteira à esquerda.
+    const cita = (texto, nome) => nome === '99' ? /(^|[^\d])99([^\d]|$)/.test(texto) : texto.includes(nome);
+    const citados = new Set();
+    for (let n = 1; n <= 12; n++) {
+      await page.goto(base + '/#/etapa/' + n);
+      await page.locator('.example-panel').waitFor();
+      const exemplo = await page.locator('.example-panel').textContent();
+      const achados = CASOS.filter(c => cita(exemplo, c));
+      assert.ok(achados.length > 0, `etapa ${n}: o exemplo precisa citar uma startup real`);
+      achados.forEach(c => citados.add(c));
+      assert.match(exemplo, /referência de raciocínio, não de tamanho/i, `etapa ${n}: falta a ressalva sobre tamanho`);
+
+      // A pergunta de revisão tem três opções e devolutiva que não ficou presa ao exemplo antigo.
+      assert.equal(await page.locator('.quiz-option').count(), 3, `etapa ${n}: três opções na revisão`);
+      await page.locator('.quiz-option input').first().check();
+      const devolutiva = await page.locator('#quiz-feedback').textContent();
+      assert.ok(devolutiva.trim().length > 40, `etapa ${n}: devolutiva da revisão vazia`);
+
+      const pagina = await page.locator('main').textContent();
+      assert.doesNotMatch(pagina, /Fila Menor/i, `etapa ${n}: resquício do caso antigo`);
+      assert.doesNotMatch(pagina, /cantina/i, `etapa ${n}: resquício do caso antigo`);
+    }
+    assert.ok(citados.size >= 8, `as 12 etapas devem mostrar startups variadas (citadas: ${citados.size})`);
+
     // --- Exemplo preenchido por campo, no caderno ---
     await page.goto(base + '/#/caderno/1');
     await page.locator('.worksheet').waitFor();
@@ -54,8 +82,9 @@ const path = require('node:path');
     assert.ok(await box.isHidden(), 'exemplo começa oculto');
     await page.locator('[data-example="f1_0"]').click();
     await box.waitFor({state: 'visible'});
-    assert.match(await box.textContent(), /Fila Menor/, 'exemplo identificado como fictício');
+    assert.match(await box.textContent(), /Airbnb/, 'exemplo identificado pelo caso real');
     assert.match(await box.textContent(), /Copiar o exemplo não gera evidência/, 'aviso pedagógico presente');
+    assert.match(await box.textContent(), /referência de raciocínio, não de tamanho/i, 'avisa que o tamanho não é a meta');
     assert.equal(await page.locator('[data-answer="f1_0"]').inputValue(), '', 'exemplo não preenche o campo do aluno');
     await page.locator('[data-example="f1_0"]').click();
     assert.ok(await box.isHidden(), 'exemplo fecha no segundo clique');
@@ -225,7 +254,7 @@ const path = require('node:path');
     await page.getByRole('button', {name: 'Ativar tema claro'}).click();
 
     assert.deepEqual(errors, [], 'sem erros JavaScript');
-    console.log('PASS: frase-chave, essencial, termos, aprofundar, checklist de tarefas, exemplos por campo nas 12 fichas e na entrevista, botão global de exemplos, médias com envio para a matriz, soma de notas com empate, contagem do teste, ponto de equilíbrio, progresso por ficha, exportação/importação com os campos novos, compatibilidade com cópias antigas, telas 320/390/768 e tema escuro.');
+    console.log('PASS: frase-chave, essencial, termos, aprofundar, checklist de tarefas, coerência das 12 etapas (cada uma cita uma startup real, com ressalva de tamanho, revisão com devolutiva e sem resquício do caso antigo), exemplos por campo nas 12 fichas e na entrevista, botão global de exemplos, médias com envio para a matriz, soma de notas com empate, contagem do teste, ponto de equilíbrio, progresso por ficha, exportação/importação com os campos novos, compatibilidade com cópias antigas, telas 320/390/768 e tema escuro.');
   } finally {
     await browser.close();
   }

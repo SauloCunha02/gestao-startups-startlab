@@ -25,7 +25,7 @@ const path = require('node:path');
     await page.getByRole('button',{name:'Definir',exact:true}).click();assert.equal(await page.locator('.lesson-card').count(),2);
     await page.getByRole('button',{name:'Todas as etapas',exact:true}).click();
     await page.locator('a[href="#/etapa/1"]').first().click();
-    await page.getByRole('radio',{name:'Investigar uma dificuldade de um público.'}).check();
+    await page.getByRole('radio',{name:'Escolher um território: pessoas e uma dificuldade que se repete.'}).check();
     assert.match(await page.locator('#quiz-feedback').textContent(),/Isso mesmo/);
     await page.getByRole('button',{name:'Marcar como concluída'}).click();
     await page.reload();assert.equal(await page.locator('#complete-button').getAttribute('aria-pressed'),'true');

@@ -3,9 +3,9 @@ TRILHA RAPIDA — StartLab / Gestao de Startups
 
 O que e
 -------
-Uma versao curta e direta ao ponto da trilha de 12 etapas. Sao 7 passos com o
-essencial para sair de um problema real e chegar ao primeiro teste da startup,
-em cerca de 6 aulas de 50 minutos.
+Uma versao curta e direta ao ponto da trilha de 12 etapas. Sao 7 passos que
+constroem uma startup — territorio, cliente, solucao com nome, modelo de
+negocio, prova e pitch — em cerca de 6 aulas de 50 minutos.
 
 Como abrir
 ----------
@@ -14,21 +14,39 @@ Abra o arquivo index.html desta pasta com duplo clique, ou clique em
 
 Os 7 passos
 -----------
-1. Escolha o problema ........................ 25 min  (etapas 01 e 02)
+1. Escolha o territorio da sua startup ....... 25 min  (etapas 01 e 02)
 2. Ouca cinco pessoas ........................ 50 min  (etapa 03)
-3. Escolha a dor e o publico ................. 25 min  (etapas 04 e 05)
-4. Decida a solucao .......................... 30 min  (etapas 06 e 07)
-5. Mostre como o negocio se sustenta ......... 25 min  (etapa 08)
+3. Escolha a dor e o cliente ................. 25 min  (etapas 04 e 05)
+4. Desenhe a solucao e de nome a startup ..... 30 min  (etapas 06 e 07)
+5. Monte o modelo de negocio ................. 25 min  (etapa 08)
 6. Construa e teste com tres pessoas ......... 50 min  (etapas 09 e 10)
-7. Melhore e apresente ....................... 40 min  (etapas 11 e 12)
+7. Melhore e apresente a sua startup ......... 40 min  (etapas 11 e 12)
 
 Cada passo traz: objetivo, tres acoes para fazer agora, campos para registrar,
-um exemplo preenchido do caso ficticio Fila Menor, um criterio de "pronto
-quando", o erro mais comum e um link para a etapa completa correspondente.
+um exemplo do caso real do DUOLINGO, um criterio de "pronto quando", o erro
+mais comum e um link para a etapa completa correspondente.
+
+O exemplo: Duolingo
+-------------------
+Os sete passos acompanham como o Duolingo resolveu cada ponto: o territorio
+(quem quer aprender um idioma e nao consegue pagar curso), a dor que faz
+desistir (manter a rotina, e nao o preco), a solucao em licoes curtas, o modelo
+em que o usuario nao paga e a receita vem de anuncios e assinatura, e o teste
+da primeira licao.
+
+Tres cuidados que a pagina deixa explicitos:
+- As informacoes sobre o negocio do Duolingo sao publicas.
+- Entrevistas, notas de 1 a 5, tempos de teste e os valores da conta do mes
+  sao ILUSTRATIVOS: mostram o formato esperado, nao dados da empresa.
+- O tamanho dela nao e a meta. A startup do aluno pode atender vinte pessoas
+  do bairro e ter percorrido o mesmo caminho.
+
+Cada percurso do StartLab usa uma empresa diferente — Airbnb nas fichas da
+trilha completa, Duolingo aqui e Nubank na Trilha Extrema. A base de trabalho
+e a mesma; a startup e que muda.
 
 O botao "Ver exemplos", no alto da pagina, abre e fecha todos os exemplos de
-uma vez. O exemplo serve de referencia do nivel de detalhe esperado; copiar o
-exemplo nao gera evidencia.
+uma vez. Copiar o exemplo nao cria a startup do aluno.
 
 Respostas
 ---------
