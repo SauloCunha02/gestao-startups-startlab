@@ -8,7 +8,7 @@ Material didático para estudantes do 2º ano: 12 etapas para sair da observaç�
 | --- | --- | --- |
 | Trilha completa (`index.html`) | 12 etapas · 24 aulas | O percurso que vale nota, com fichas, portfólio e avaliação de 10 pontos. |
 | Trilha Rápida (`trilha-rapida/`) | 7 passos · ~6 aulas | Carga horária reduzida, recuperação de percurso, feira ou revisão antes de apresentar. |
-| Trilha Extrema (`trilha-extrema/`) | 4 blocos · 50 minutos | Sprint cronometrado de uma aula em que a equipe monta uma startup inteira: público, nome, proposta, receita, prova e pitch. A ficha da startup se monta sozinha. Primeira versão, não negócio comprovado. |
+| Trilha Extrema (`trilha-extrema/`) | 4 blocos · 50 minutos | Sprint cronometrado de uma aula em que a equipe monta uma startup inteira: público, nome, proposta, receita, prova e pitch de 2 minutos. Usa o caso real da Nubank como exemplo e a ficha da startup se monta sozinha. Primeira versão, não negócio comprovado. |
 
 As três guardam respostas em espaços separados no navegador: uma não apaga a outra.
 
@@ -22,7 +22,7 @@ Site estático interativo, com temas claro e escuro e layout adaptado para celul
 - Widgets que calculam: médias de importância e satisfação com envio para a matriz (etapa 04), soma das notas das ideias com destaque da melhor e aviso de empate (etapa 06), contagem do teste (etapa 10) e ponto de equilíbrio na calculadora (etapa 08).
 - Progresso por ficha na navegação do caderno e números vivos na página inicial: etapas concluídas, tarefas marcadas e campos preenchidos.
 - Trilha Rápida (`trilha-rapida/`): versão curta de sete passos, também com exemplo preenchido em cada passo.
-- Trilha Extrema (`trilha-extrema/`): sprint de 50 minutos em quatro blocos que montam uma startup — público, nome e proposta, modelo de receita com calculadora, prova e pitch. Um cronômetro avança sozinho de bloco em bloco e a ficha “A sua startup em uma folha” se monta enquanto a equipe escreve.
+- Trilha Extrema (`trilha-extrema/`): sprint de 50 minutos em quatro blocos que montam uma startup — público, nome e proposta, modelo de receita com calculadora, prova e pitch de 2 minutos (teto de 3). Um cronômetro avança sozinho de bloco em bloco e a ficha “A sua startup em uma folha” se monta enquanto a equipe escreve. O exemplo é o caso real da Nubank, com aviso de que serve como referência de raciocínio, não de tamanho, e de que os valores da conta são simplificados.
 - Trilha com busca, filtros, progresso e retomada de etapa.
 - Caderno digital com 12 fichas e cinco registros de entrevistas.
 - Respostas salvas no navegador, cópia/restauração em JSON e exportação em texto para compartilhar com o professor.

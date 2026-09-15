@@ -20,9 +20,43 @@ Abra o arquivo index.html desta pasta com duplo clique, ou clique em
 Os 4 blocos (50 minutos)
 ------------------------
 1. Para quem e a sua startup ......... 10 min  (etapa 05 · passos 1 e 3 da Rapida)
-2. A startup: nome e proposta ........ 10 min  (etapa 06 · passo 4 da Rapida)
-3. Como a startup ganha dinheiro ..... 15 min  (etapa 08 · passo 5 da Rapida)
-4. A prova e o pitch de 60 segundos .. 15 min  (etapa 10 · passos 6 e 7 da Rapida)
+2. A startup: nome e proposta ........  8 min  (etapa 06 · passo 4 da Rapida)
+3. Como a startup ganha dinheiro ..... 14 min  (etapa 08 · passo 5 da Rapida)
+4. A prova e o pitch de 2 minutos .... 18 min  (etapa 10 · passos 6 e 7 da Rapida)
+
+O pitch
+-------
+O pitch final dura 2 minutos, com teto de 3. O roteiro tem cinco partes
+cronometradas que somam 120 segundos:
+  1. Problema e publico ........................ 25 s
+  2. A startup e demonstracao .................. 35 s
+  3. Como ganha dinheiro ....................... 25 s
+  4. O que o teste mostrou ..................... 25 s
+  5. O que falta descobrir e proximo passo ..... 10 s
+O bloco 4 reserva 8 dos seus 18 minutos so para montar e ensaiar esse
+roteiro com o relogio na mao. O mesmo formato aparece na etapa 12 da
+trilha completa, onde o pitch e de 3 minutos.
+
+O exemplo: Nubank
+-----------------
+Os quatro blocos usam o caso REAL da Nubank, para o raciocinio ficar
+concreto: bloco 1 mostra o cliente e o que travava para ele em 2013;
+bloco 2, o nome e a proposta; bloco 3 responde "se nao cobra anuidade,
+de onde vem o dinheiro?"; bloco 4 traz a prova por convite e o pitch de
+2 minutos escrito por inteiro.
+
+Tres cuidados que a pagina deixa explicitos para o aluno:
+- As informacoes sobre o negocio da Nubank sao publicas.
+- Os valores da conta do mes sao SIMPLIFICADOS para ensinar o calculo e
+  nao sao os numeros reais da empresa.
+- O tamanho da Nubank nao e a meta. Ela esta ali como referencia de
+  RACIOCINIO. A startup do aluno pode resolver algo do tamanho da escola
+  e seguir exatamente o mesmo caminho.
+
+Observacao: a Trilha Rapida e a trilha completa continuam usando o caso
+ficticio Fila Menor, que e de escala escolar e serve de modelo do nivel
+de detalhe esperado do proprio aluno. Aqui, num primeiro contato de uma
+aula, um caso conhecido faz o conceito encaixar mais rapido.
 
 A conta do primeiro mes
 -----------------------
@@ -75,11 +109,11 @@ etapas. Uma nao apaga a outra. Antes de trocar de aparelho, use
 proposta, publico, papeis, canal, a conta do mes, a prova, o pitch, o
 que a equipe ainda nao sabe e o aviso sobre os limites.
 
-Exemplo
--------
-Cada bloco traz um exemplo preenchido do caso ficticio Fila Menor,
-mostrando a startup sendo montada parte por parte. O botao "Ver
-exemplos", no alto, abre e fecha todos de uma vez.
+Exemplos na tela
+----------------
+O botao "Ver exemplos", no alto da pagina, abre e fecha de uma vez os
+exemplos dos quatro blocos. Cada um tambem abre sozinho, pelo botao
+"Ver exemplo preenchido" dentro do bloco.
 
 Impressao
 ---------

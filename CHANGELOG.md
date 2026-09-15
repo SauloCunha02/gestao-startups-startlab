@@ -1,5 +1,13 @@
 # Histórico de versões
 
+## 3.3.0
+
+- Pitch da Trilha Extrema passou de 60 segundos para **2 minutos, com teto de 3**, alinhando-se ao formato da etapa 12. O roteiro tem cinco partes cronometradas que somam 120 segundos.
+- Blocos rebalanceados para abrir espaço ao ensaio: 10 · 8 · 14 · 18 minutos, mantendo os 50 minutos de uma aula. O bloco 4 reserva 8 minutos só para montar e ensaiar o pitch com o relógio.
+- Exemplos da Trilha Extrema trocados do caso fictício Fila Menor para o caso **real da Nubank**, em todos os quatro blocos: o cliente e o que travava em 2013, o nome e a proposta, a pergunta “se não cobra anuidade, de onde vem o dinheiro?” e o pitch de 2 minutos escrito por inteiro.
+- Três ressalvas explícitas junto ao exemplo: as informações do negócio são públicas, os valores da conta do mês são simplificados e não são os da empresa, e o tamanho dela não é a meta — serve como referência de raciocínio.
+- A Trilha Rápida e a trilha completa seguem com o Fila Menor, que é de escala escolar e mostra o nível de detalhe esperado do próprio aluno.
+
 ## 3.2.0
 
 - Trilha Extrema reorientada: a entrega deixou de ser um problema investigado e passou a ser **uma startup montada**. Os quatro blocos agora são para quem é a startup, nome e proposta, como ela ganha dinheiro, e a prova com o pitch.

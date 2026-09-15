@@ -20,7 +20,7 @@ const path = require('node:path');
     // --- Estrutura: quatro blocos somando exatamente 50 minutos ---
     assert.equal(await page.locator('.block').count(), 4, 'quatro blocos');
     const minutos = await page.locator('.mins').allTextContents();
-    assert.deepEqual(minutos, ['10 min', '10 min', '15 min', '15 min'], 'tempos por bloco');
+    assert.deepEqual(minutos, ['10 min', '8 min', '14 min', '18 min'], 'tempos por bloco');
     const soma = minutos.reduce((a, m) => a + parseInt(m, 10), 0);
     assert.equal(soma, 50, 'os blocos somam 50 minutos, uma aula');
     assert.equal(await page.locator('.block .check input').count(), 4);
@@ -33,8 +33,17 @@ const path = require('node:path');
       'Para quem é a sua startup',
       'A startup: nome e proposta',
       'Como a startup ganha dinheiro',
-      'A prova e o pitch de 60 segundos'
-    ], 'os blocos constroem a startup');
+      'A prova e o pitch de 2 minutos'
+    ], 'os blocos constroem a startup e fecham com pitch de 2 minutos');
+
+    // O pitch é de 2 minutos, com teto de 3, e o roteiro traz as cinco partes cronometradas.
+    assert.match(await page.locator('#bloco-4 .goal').textContent(), /2 minutos \(no máximo 3\)/);
+    assert.match(await page.locator('#bloco-4 .ready').textContent(), /2 minutos \(3 no máximo\)/);
+    assert.match(await page.locator('#bloco-4 .acts').textContent(), /Passou de 3 minutos, corte/);
+    const roteiro = await page.locator('#e4c').getAttribute('placeholder');
+    ['(25s)', '(35s)', '(25s)', '(25s)', '(10s)'].forEach((s, i) => assert.ok(roteiro.includes(s), 'parte ' + (i + 1) + ' do roteiro tem tempo'));
+    const segundos = [...roteiro.matchAll(/\((\d+)s\)/g)].reduce((a, m) => a + Number(m[1]), 0);
+    assert.equal(segundos, 120, 'as partes do roteiro somam exatamente 2 minutos');
 
     // --- O aviso pedagógico precisa estar visível, não escondido ---
     const aviso = page.locator('.warn');
@@ -69,16 +78,16 @@ const path = require('node:path');
 
     // --- Próximo bloco avança e recarrega o tempo daquele bloco ---
     await page.getByRole('button', {name: 'Próximo bloco'}).click();
-    assert.equal(await page.locator('#clock').textContent(), '10:00', 'bloco 2 tem 10 minutos');
+    assert.equal(await page.locator('#clock').textContent(), '08:00', 'bloco 2 tem 8 minutos');
     assert.match(await page.locator('#now-name').textContent(), /^2 · A startup: nome e proposta$/);
     await page.getByRole('button', {name: 'Próximo bloco'}).click();
-    assert.equal(await page.locator('#clock').textContent(), '15:00', 'bloco 3 tem 15 minutos');
+    assert.equal(await page.locator('#clock').textContent(), '14:00', 'bloco 3 tem 14 minutos');
     await page.getByRole('button', {name: 'Próximo bloco'}).click();
-    assert.match(await page.locator('#now-name').textContent(), /^4 · A prova e o pitch de 60 segundos$/);
-    assert.equal(await page.locator('#clock').textContent(), '15:00');
+    assert.match(await page.locator('#now-name').textContent(), /^4 · A prova e o pitch de 2 minutos$/);
+    assert.equal(await page.locator('#clock').textContent(), '18:00', 'bloco 4 tem 18 minutos para testar e ensaiar');
     // No último bloco, "próximo" encerra em vez de estourar o índice.
     await page.getByRole('button', {name: 'Próximo bloco'}).click();
-    assert.match(await page.locator('#now-name').textContent(), /^4 · A prova e o pitch de 60 segundos$/, 'não passa do último bloco');
+    assert.match(await page.locator('#now-name').textContent(), /^4 · A prova e o pitch de 2 minutos$/, 'não passa do último bloco');
     assert.match(await page.locator('#sprint-note').textContent(), /último bloco/);
 
     // --- Zerar volta ao início sem apagar respostas ---
@@ -106,31 +115,31 @@ const path = require('node:path');
     const ficha = page.locator('.card');
     assert.match(await page.locator('#card-name').textContent(), /^—$/, 'sem nome ainda');
     assert.match(await page.locator('#card-missing').textContent(), /Ainda falta:.*o nome/);
-    await page.locator('#e2a').fill('Fila Menor');
-    assert.equal(await page.locator('#card-name').textContent(), 'Fila Menor', 'o nome aparece na ficha ao digitar');
-    await page.locator('#e2c').fill('A Fila Menor ajuda estudantes a receber o lanche dentro do intervalo, organizando os pedidos antes do sinal.');
-    assert.match(await page.locator('#card-pitch').textContent(), /^A Fila Menor ajuda estudantes/);
+    await page.locator('#e2a').fill('Troca Justa');
+    assert.equal(await page.locator('#card-name').textContent(), 'Troca Justa', 'o nome aparece na ficha ao digitar');
+    await page.locator('#e2c').fill('A Troca Justa ajuda estudantes a aproveitar material escolar parado, organizando trocas na entrada da escola.');
+    assert.match(await page.locator('#card-pitch').textContent(), /^A Troca Justa ajuda estudantes/);
     assert.match(await page.locator('#card-publico').textContent(), /^Estudantes do 2º ano/, 'o público do bloco 1 chega na ficha');
     assert.match(await page.locator('#card-money').textContent(), /Saldo do primeiro mês: R\$\s?40,00/, 'a conta entra na ficha');
     assert.match(await page.locator('#card-money').textContent(), /hipóteses da equipe/);
     const antes = await page.locator('#card-fill').textContent();
-    await page.locator('#e2b').fill('O estudante pede antes do sinal e retira o lanche sem entrar na fila.');
-    await page.locator('#e3a').fill('Usa: estudante. Paga: cantina (hipótese). Autoriza: direção.');
-    await page.locator('#e3b').fill('Formulário em papel entregue na sala.');
+    await page.locator('#e2b').fill('O estudante deixa o material parado e leva outro de que precisa.');
+    await page.locator('#e3a').fill('Usa: estudante. Paga: grêmio (hipótese). Autoriza: direção.');
+    await page.locator('#e3b').fill('Mesa na entrada da escola, na segunda de manhã.');
     await page.locator('#e4b').fill('T1 concluiu em 50 s. T2 não achou a confirmação.');
     assert.notEqual(await page.locator('#card-fill').textContent(), antes, 'a porcentagem montada acompanha o preenchimento');
-    await page.locator('#e4d').fill('Se a cantina pagaria. Falamos com estudantes, não com quem assina.');
+    await page.locator('#e4d').fill('Se o grêmio pagaria. Falamos com estudantes, não com quem assina.');
     assert.equal(await page.locator('#card-fill').textContent(), '100% montada', 'ficha completa');
     assert.match(await page.locator('#card-missing').textContent(), /Ficha completa/);
-    assert.match(await page.locator('#card-duvida').textContent(), /Se a cantina pagaria/);
+    assert.match(await page.locator('#card-duvida').textContent(), /Se o grêmio pagaria/);
     assert.ok(await ficha.isVisible());
 
     // --- Respostas persistem e usam chave própria ---
     await page.locator('#done-1').check();
     await page.reload();
     await page.locator('.block').last().waitFor();
-    assert.equal(await page.locator('#e2a').inputValue(), 'Fila Menor');
-    assert.equal(await page.locator('#card-name').textContent(), 'Fila Menor', 'a ficha remonta ao recarregar');
+    assert.equal(await page.locator('#e2a').inputValue(), 'Troca Justa');
+    assert.equal(await page.locator('#card-name').textContent(), 'Troca Justa', 'a ficha remonta ao recarregar');
     assert.equal(await page.locator('#card-fill').textContent(), '100% montada');
     assert.ok(await page.locator('#done-1').isChecked(), 'bloco marcado persiste');
     assert.equal(await page.locator('#clock').textContent(), '10:00', 'o cronômetro reinicia ao recarregar');
@@ -145,15 +154,28 @@ const path = require('node:path');
     assert.ok(await box.isHidden());
     await page.locator('[data-example="1"]').click();
     await box.waitFor({state: 'visible'});
-    assert.match(await box.textContent(), /fila menor/i);
+    // O exemplo agora é uma empresa real e conhecida, identificada como tal.
+    assert.equal(await page.locator('#bloco-1 .example-tag').textContent(), 'EXEMPLO REAL · NUBANK');
+    assert.match(await box.textContent(), /nubank/i);
+    assert.match(await box.textContent(), /referência de raciocínio, não de tamanho/i, 'avisa que o tamanho não é a meta');
     assert.match(await box.textContent(), /Copiar o exemplo não cria a sua startup/);
-    // O exemplo do bloco 2 mostra a identidade da startup; o do 3, a conta.
+    // Nenhum resquício do exemplo fictício antigo nesta trilha.
+    assert.doesNotMatch(await page.locator('main').textContent(), /Fila Menor/i, 'a Extrema não usa mais o caso fictício');
+    // Cada bloco mostra a parte correspondente do caso: identidade, receita e pitch.
     await page.locator('[data-example="2"]').click();
-    assert.match(await page.locator('#ex-2').textContent(), /NOME: Fila Menor/);
+    assert.match(await page.locator('#ex-2').textContent(), /NOME: Nubank/);
     await page.locator('[data-example="3"]').click();
-    assert.match(await page.locator('#ex-3').textContent(), /Saldo R\$ 40/);
+    const ex3 = await page.locator('#ex-3').textContent();
+    assert.match(ex3, /se a Nubank não cobra anuidade, de onde vem o dinheiro\?/i, 'bloco 3 faz a pergunta do modelo de receita');
+    assert.match(ex3, /nem sempre quem usa é quem paga/i, 'ensina a separar usuário de pagador');
+    assert.match(ex3, /NÃO são os números reais da Nubank/, 'a conta é declarada como simplificada');
+    await page.locator('[data-example="4"]').click();
+    const ex4 = await page.locator('#ex-4').textContent();
+    assert.match(ex4, /PITCH DE 2 MINUTOS/);
+    ['(25s)', '(35s)', '(10s)'].forEach(s => assert.ok(ex4.includes(s), 'o pitch do exemplo é cronometrado: ' + s));
     await page.locator('[data-example="2"]').click();
     await page.locator('[data-example="3"]').click();
+    await page.locator('[data-example="4"]').click();
     await page.getByRole('button', {name: 'Ver exemplos'}).click();
     assert.equal(await page.locator('.example-box:visible').count(), 4, 'botão global abre todos');
     await page.getByRole('button', {name: 'Ocultar exemplos'}).click();
@@ -166,12 +188,13 @@ const path = require('node:path');
     await arquivo.saveAs(path.join(out, 'ficha-da-startup.txt'));
     const texto = fs.readFileSync(path.join(out, 'ficha-da-startup.txt'), 'utf8');
     assert.match(texto, /FICHA DA STARTUP/);
-    assert.match(texto, /NOME: Fila Menor/, 'nome da startup');
-    assert.match(texto, /PROPOSTA: A Fila Menor ajuda/, 'proposta');
+    assert.match(texto, /NOME: Troca Justa/, 'nome da startup');
+    assert.match(texto, /PROPOSTA: A Troca Justa ajuda/, 'proposta');
     assert.match(texto, /Quem usa \/ paga \/ autoriza: Usa: estudante/, 'papéis');
     assert.match(texto, /Saldo: R\$\s?40,00/, 'a conta do mês entra na ficha');
+    assert.match(texto, /O PITCH DE 2 MINUTOS \(maximo 3\)/, 'a ficha traz o pitch de 2 minutos');
     assert.match(texto, /O QUE AINDA NAO SABEMOS/, 'a dúvida tem seção própria');
-    assert.match(texto, /Se a cantina pagaria/);
+    assert.match(texto, /Se o grêmio pagaria/);
     assert.match(texto, /hipoteses da equipe/i, 'ficha leva o aviso para o professor');
 
     // --- Navegação entre as três trilhas ---
@@ -214,18 +237,18 @@ const path = require('node:path');
 
       await p3.clock.runFor(10 * 60 * 1000 + 500);
       assert.match(await p3.locator('#now-name').textContent(), /^2 · /, 'ao fim dos 10 min vai sozinho para o bloco 2');
-      assert.equal(await p3.locator('#clock').textContent(), '10:00', 'bloco 2 começa cheio');
+      assert.equal(await p3.locator('#clock').textContent(), '08:00', 'bloco 2 começa cheio');
       assert.match(await p3.locator('#sprint-note').textContent(), /Bloco 2 começou/);
       assert.equal(await p3.locator('#bloco-2').getAttribute('class'), 'block active');
 
-      await p3.clock.runFor(10 * 60 * 1000 + 500);
+      await p3.clock.runFor(8 * 60 * 1000 + 500);
       assert.match(await p3.locator('#now-name').textContent(), /^3 · /, 'segue para o bloco 3');
-      await p3.clock.runFor(15 * 60 * 1000 + 500);
+      await p3.clock.runFor(14 * 60 * 1000 + 500);
       assert.match(await p3.locator('#now-name').textContent(), /^4 · /, 'segue para o bloco 4');
-      // A folga de 500 ms somada a cada virada faz o total fechar em 14:5x.
-      assert.match(await p3.locator('#now-total').textContent(), /^(15:00|14:5\d) restantes/, 'sobram os 15 min do último bloco');
+      // A folga de 500 ms somada a cada virada faz o total fechar em 17:5x.
+      assert.match(await p3.locator('#now-total').textContent(), /^(18:00|17:5\d) restantes/, 'sobram os 18 min do último bloco');
 
-      await p3.clock.runFor(15 * 60 * 1000 + 500);
+      await p3.clock.runFor(18 * 60 * 1000 + 500);
       assert.equal(await p3.locator('#clock').textContent(), '00:00', 'o sprint termina zerado');
       assert.match(await p3.locator('#sprint-note').textContent(), /Sprint concluído/);
       assert.equal(await p3.locator('#start-button').textContent(), 'Continuar', 'o cronômetro para no fim');
@@ -254,7 +277,7 @@ const path = require('node:path');
     }
 
     assert.deepEqual(errors, [], 'sem erros JavaScript');
-    console.log('PASS: 4 blocos que montam a startup somando 50 min, conta do mês com ponto de equilíbrio e campo vazio tratado, ficha da startup montada sozinha com porcentagem, aviso dos limites visível, cronômetro (iniciar, pausar, avançar, zerar, avanço automático pelo sprint inteiro), respostas em chave própria, exemplos por bloco, ficha exportada com nome/proposta/conta/dúvida, navegação entre as três trilhas, tema escuro e telas 320/390/768.');
+    console.log('PASS: 4 blocos que montam a startup somando 50 min (10/8/14/18), pitch de 2 minutos com roteiro somando 120s e teto de 3 min, exemplo real da Nubank em todos os blocos com aviso de raciocínio e não de tamanho, conta do mês com ponto de equilíbrio e campo vazio tratado, ficha da startup montada sozinha com porcentagem, aviso dos limites visível, cronômetro (iniciar, pausar, avançar, zerar, avanço automático pelo sprint inteiro), respostas em chave própria, ficha exportada com nome/proposta/conta/pitch/dúvida, navegação entre as três trilhas, tema escuro e telas 320/390/768.');
   } finally {
     await browser.close();
   }
