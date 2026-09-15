@@ -40,7 +40,9 @@ scripts/pagina.html     Molde do index.html.
 assets/app.js           Aplicação da trilha completa.
 assets/styles.css       Estilos da trilha completa.
 assets/trilha-curta.css Base visual compartilhada pelas duas trilhas curtas.
-assets/trilha-curta.js  Comportamentos compartilhados: salvar, exemplos, tema, ações.
+assets/trilha-curta.js  Comportamentos compartilhados: salvar, exemplos, tema,
+                        ações e a cópia .json de salvar/subir.
+assets/gerar-pitch.js   Monta a página de pitch autocontida (Trilha Extrema).
 assets/conteudo.js      Gerado. Não edite à mão.
 
 tests/                  Quatro suítes em Chromium (ver abaixo).
@@ -92,8 +94,9 @@ python -m http.server 8765 --bind 127.0.0.1
 | `npm run test:interativo` | Conteúdo em camadas, termos, checklist, **coerência das 12 etapas**, exemplos nas fichas, os quatro widgets de cálculo, progresso por ficha, compatibilidade com cópias antigas. |
 | `npm run test:rapida` | Os 7 passos, exemplos, progresso, resumo exportado, armazenamento separado. |
 | `npm run test:extrema` | Os 4 blocos, o cronômetro (sprint inteiro adiantado com relógio virtual), a conta do mês, a ficha da startup, o aviso dos limites. |
+| `npm run test:entrega` | Ficha em PDF, geração da página de pitch (aberta por `file://` e apresentada de verdade) e cópia `.json` salva/restaurada nas duas trilhas. |
 
-`npm test` roda as quatro. `npm run check` confere a sintaxe do JavaScript. As evidências vão para `test-results/`, ignorada pelo Git.
+`npm test` roda as cinco. `npm run check` confere a sintaxe do JavaScript. As evidências vão para `test-results/`, ignorada pelo Git.
 
 Nota: o Playwright não instala dentro do Google Drive — a extração do pacote é corrompida. Instale-o fora do Drive e aponte `NODE_PATH` para lá.
 

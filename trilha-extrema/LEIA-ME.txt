@@ -100,12 +100,36 @@ pedem cinco entrevistas, criterio previo e registro de evidencias. Se
 receber um sprint como entrega de nota, peca a investigacao antes de
 pontuar.
 
+Levar a startup embora
+----------------------
+FICHA EM PDF
+  "Baixar a ficha em PDF" imprime so o cartao "A sua startup em uma
+  folha", sozinho em uma folha A4. Sai pela impressao do navegador:
+  serve para salvar em PDF ou imprimir em papel.
+
+PAGINA DO PITCH
+  "Gerar a pagina do pitch" baixa UM arquivo HTML com CSS, JavaScript e
+  os dados da startup dentro. Abre com duplo clique em qualquer
+  computador, sem internet. Tem capa, as cinco partes do roteiro,
+  transicoes simples, navegacao por botoes e por setas, e cronometro de
+  2, 3 ou 5 minutos. O tempo escolhido e rateado entre as partes na
+  mesma proporcao do roteiro, e a pagina mostra quanto resta na parte
+  atual. Campos em branco aparecem marcados, para a equipe ver o buraco
+  durante o ensaio.
+
+SALVAR E SUBIR A COPIA
+  "Salvar copia (.json)" baixa tudo o que a equipe escreveu.
+  "Subir copia" devolve, para continuar a startup na aula seguinte ou em
+  outro computador. A copia so entra se for desta trilha e se todos os
+  campos forem reconhecidos; qualquer outra coisa e recusada sem
+  sobrescrever o que ja estava escrito.
+
 Respostas
 ---------
 Ficam apenas no navegador daquele aparelho, na chave
 startlab-extrema-v2 — separada da Trilha Rapida e do caderno das 12
-etapas. Uma nao apaga a outra. Antes de trocar de aparelho, use
-"Baixar a ficha da startup (.txt)". A ficha exportada traz nome,
+etapas. Uma nao apaga a outra. Para nao depender do navegador, salve a
+copia .json. O "Baixar a ficha (.txt)" continua disponivel e traz nome,
 proposta, publico, papeis, canal, a conta do mes, a prova, o pitch, o
 que a equipe ainda nao sabe e o aviso sobre os limites.
 

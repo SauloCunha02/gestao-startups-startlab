@@ -23,6 +23,7 @@
 .section-title h2{font-size:22px}
 .trap{margin-top:10px;border-left:3px solid #efcead;padding:4px 0 4px 12px;font-size:14px;color:var(--muted)}
 :root[data-theme=dark] .trap{border-left-color:#795437}
+.grupo-titulo{font-size:13px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:24px 0 0}
 .final ul{margin:14px 0 0;padding-left:20px}
 .final li{margin-bottom:6px}
 @media print{.progress-card{display:none}.rule{box-shadow:none;border-color:#bbb}}
@@ -88,12 +89,21 @@
       <li>Uma melhoria justificada e um novo teste.</li>
       <li>O pitch de três minutos ensaiado.</li>
     </ul>
+    <h3 class="grupo-titulo">Guardar e continuar depois</h3>
     <div class="actions">
-      <button class="btn primary" id="export-button" type="button">Baixar meu resumo (.txt)</button>
+      <button class="btn primary" id="save-copy" type="button">Salvar cópia (.json)</button>
+      <button class="btn" id="load-copy" type="button">Subir cópia</button>
+    </div>
+    <p class="saved">A cópia guarda tudo o que vocês escreveram. Salve no fim da aula, leve o arquivo e suba de volta para continuar de onde parou — em qualquer computador.</p>
+
+    <h3 class="grupo-titulo">Levar o resumo</h3>
+    <div class="actions">
+      <button class="btn lime" id="export-button" type="button">Baixar meu resumo (.txt)</button>
       <button class="btn" id="copy-button" type="button">Copiar tudo</button>
       <button class="btn" id="clear-button" type="button">Apagar respostas</button>
     </div>
-    <p class="saved">As respostas ficam só neste navegador e neste aparelho. Antes de trocar de computador, de celular ou de navegador, baixe o resumo.</p>
+    <p class="saved">As respostas ficam só neste navegador e neste aparelho.</p>
+    <input id="copy-file" type="file" accept="application/json,.json" hidden>
   </div>
 
   <div class="footer">
@@ -267,6 +277,19 @@ function resumo(){
   linhas.push('Trilha completa: 12 etapas no StartLab.');
   return linhas.join('\n');
 }
+
+var CAMPOS_VALIDOS=/^(p[1-7][a-d]|done-[1-7])$/;
+TC.ligarCopia({
+  trilha:'trilha-rapida',
+  arquivo:'startup-trilha-rapida.json',
+  estado:function(){return estado;},
+  valida:function(chave){return CAMPOS_VALIDOS.test(chave);},
+  aoRestaurar:function(limpo){
+    estado=limpo;
+    TC.salvar(CHAVE,estado);
+    desenhar();
+  }
+});
 
 TC.ligarCampos(CHAVE,estado,function(campo){
   if(campo.type==='checkbox'){marcar(Number(campo.id.split('-')[1]));progresso();}

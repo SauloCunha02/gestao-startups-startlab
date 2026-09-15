@@ -176,6 +176,78 @@
     });
   }
 
+  function baixarArquivo(texto, arquivo, tipo) {
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([texto], {type: tipo}));
+    link.download = arquivo;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
+  }
+
+  // Uma copia restaurada substitui tudo: so aceitamos o que reconhecemos.
+  function validarCopia(bruto, valida) {
+    if (!bruto || typeof bruto !== 'object' || Array.isArray(bruto)) throw Error('formato');
+    var chaves = Object.keys(bruto);
+    if (chaves.length > 300) throw Error('tamanho');
+    var limpo = {};
+    chaves.forEach(function (k) {
+      var v = bruto[k];
+      if (!valida(k)) throw Error('campo desconhecido: ' + k);
+      if (typeof v === 'boolean') { limpo[k] = v; return; }
+      if (typeof v !== 'string' || v.length > 20000) throw Error('valor invalido em ' + k);
+      limpo[k] = v;
+    });
+    return limpo;
+  }
+
+  // Salvar a copia em .json e subir de volta depois, para continuar a startup.
+  function ligarCopia(opcoes) {
+    var salvarBtn = document.getElementById('save-copy');
+    var subirBtn = document.getElementById('load-copy');
+    var entrada = document.getElementById('copy-file');
+    if (!salvarBtn || !subirBtn || !entrada) return;
+
+    salvarBtn.addEventListener('click', function () {
+      var pacote = {
+        startlab: opcoes.trilha,
+        versao: 1,
+        salvoEm: new Date().toISOString(),
+        dados: opcoes.estado()
+      };
+      baixarArquivo(JSON.stringify(pacote, null, 2), opcoes.arquivo, 'application/json');
+      aviso('Cópia salva. Guarde o arquivo para continuar depois.');
+    });
+
+    subirBtn.addEventListener('click', function () { entrada.click(); });
+
+    entrada.addEventListener('change', function (e) {
+      var arquivo = e.target.files[0];
+      if (!arquivo) return;
+      var leitor = new FileReader();
+      leitor.onload = function () {
+        try {
+          if (arquivo.size > 2000000) throw Error('arquivo muito grande');
+          var pacote = JSON.parse(leitor.result);
+          var bruto = pacote && pacote.dados ? pacote.dados : pacote;
+          if (pacote && pacote.startlab && pacote.startlab !== opcoes.trilha) {
+            throw Error('esta cópia é de outra trilha');
+          }
+          var limpo = validarCopia(bruto, opcoes.valida);
+          if (!confirm('Subir esta cópia substitui o que está escrito nesta trilha. Continuar?')) return;
+          opcoes.aoRestaurar(limpo);
+          aviso('Cópia restaurada. Você pode continuar a sua startup.');
+        } catch (erro) {
+          aviso('Não foi possível ler esta cópia. Escolha um arquivo .json salvo por esta trilha.', 5000);
+        }
+      };
+      leitor.onerror = function () { aviso('Não foi possível ler o arquivo.'); };
+      leitor.readAsText(arquivo);
+      e.target.value = '';
+    });
+  }
+
   raiz.TrilhaCurta = {
     esc: esc,
     pad: pad,
@@ -185,9 +257,11 @@
     salvar: salvar,
     crescer: crescer,
     aviso: aviso,
+    baixarArquivo: baixarArquivo,
     ligarCampos: ligarCampos,
     ligarExemplos: ligarExemplos,
     ligarTema: ligarTema,
-    ligarAcoes: ligarAcoes
+    ligarAcoes: ligarAcoes,
+    ligarCopia: ligarCopia
   };
 })(window);

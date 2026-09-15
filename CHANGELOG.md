@@ -1,5 +1,14 @@
 # Histórico de versões
 
+## 4.1.0
+
+Três formas de levar a startup embora, pedidas depois de usar a Trilha Extrema em aula.
+
+- **Ficha em PDF.** O botão “Baixar a ficha em PDF” imprime só o cartão “A sua startup em uma folha”, sozinho em uma folha A4, sem cronômetro, blocos nem exemplos. Sai pela impressão do navegador, então também dá para salvar como PDF ou imprimir em papel.
+- **Página do pitch.** “Gerar a página do pitch” baixa um arquivo HTML único, com CSS, JavaScript e os dados da startup dentro dele. Abre sem internet, em qualquer computador. Traz capa, as cinco partes do roteiro, transições simples, navegação por botões e por setas, barra de progresso e **cronômetro de 2, 3 ou 5 minutos** — o tempo escolhido é rateado entre as partes na mesma proporção do roteiro (25/35/25/25/10), pelo método do maior resto, e a página mostra quanto resta na parte atual.
+- **Salvar e subir a cópia.** “Salvar cópia (.json)” baixa tudo o que a equipe escreveu; “Subir cópia” devolve, para continuar a startup em outra aula ou em outro computador. Vale para a **Trilha Rápida e a Trilha Extrema**, porque ficou na base compartilhada. A cópia só é aceita se todos os campos forem reconhecidos e se for da mesma trilha; qualquer coisa fora disso é recusada sem sobrescrever nada.
+- Nova suíte `test:entrega`, que gera o pitch, abre o arquivo resultante por `file://` e confere que ele funciona sozinho, além de salvar, apagar e restaurar a cópia nas duas trilhas.
+
 ## 4.0.0
 
 Refatoração. Nenhuma mudança de conteúdo pedagógico: as quatro suítes de teste passam sem alteração de comportamento.

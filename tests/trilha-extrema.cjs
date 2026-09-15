@@ -183,7 +183,7 @@ const path = require('node:path');
 
     // --- Ficha exportada traz a startup inteira e o aviso dos limites ---
     const dl = page.waitForEvent('download');
-    await page.getByRole('button', {name: /Baixar a ficha da startup/}).click();
+    await page.getByRole('button', {name: /Baixar a ficha \(\.txt\)/}).click();
     const arquivo = await dl;
     await arquivo.saveAs(path.join(out, 'ficha-da-startup.txt'));
     const texto = fs.readFileSync(path.join(out, 'ficha-da-startup.txt'), 'utf8');

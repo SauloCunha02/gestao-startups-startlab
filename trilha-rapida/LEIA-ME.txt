@@ -48,11 +48,19 @@ e a mesma; a startup e que muda.
 O botao "Ver exemplos", no alto da pagina, abre e fecha todos os exemplos de
 uma vez. Copiar o exemplo nao cria a startup do aluno.
 
+Salvar e continuar depois
+-------------------------
+"Salvar copia (.json)" baixa tudo o que a equipe escreveu. "Subir copia"
+devolve, para continuar a startup na aula seguinte ou em outro computador. A
+copia so entra se for desta trilha e se todos os campos forem reconhecidos;
+qualquer outra coisa e recusada sem sobrescrever o que ja estava escrito.
+
 Respostas
 ---------
 O que o aluno escreve fica salvo apenas no navegador daquele aparelho. Nao ha
-login, servidor nem sincronizacao. Antes de trocar de computador, de celular ou
-de navegador, use o botao "Baixar meu resumo (.txt)".
+login, servidor nem sincronizacao. Para nao depender do navegador, salve a copia
+.json. O botao "Baixar meu resumo (.txt)" continua disponivel para entregar ao
+professor.
 
 As respostas da trilha rapida sao guardadas separadamente das respostas do
 caderno digital (chave startlab-rapida-v1). Uma nao apaga a outra.

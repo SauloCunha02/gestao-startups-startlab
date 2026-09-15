@@ -70,9 +70,22 @@
 .next b{display:block;margin-bottom:4px}
 .next small{color:var(--muted);font-size:12px;line-height:1.6;display:block}
 
+.card-actions{margin-top:20px}
+.card-nota{margin-top:11px;font-size:12px;line-height:1.6;color:var(--muted)}
+.grupo-titulo{font-size:13px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:24px 0 0}
+
 @media (max-width:620px){.money-grid{grid-template-columns:repeat(2,1fr)}.money-out{grid-template-columns:1fr}}
 @media (max-width:520px){.clock{font-size:34px}.sprint{position:static}.card{padding:20px 17px}}
-@media print{.sprint,.next{display:none}.warn,.card{box-shadow:none;break-inside:avoid;border-color:#bbb}}
+@media print{
+  .sprint,.next,.card-actions,.card-nota,.grupo-titulo{display:none}
+  .warn,.card{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  /* "Baixar a ficha em PDF" imprime só a ficha, sozinha em uma folha. */
+  body.so-ficha .wrap>*:not(.card){display:none}
+  body.so-ficha .card{margin:0;border:1px solid #bbb;padding:22px}
+  body.so-ficha .card-grid div{background:#fff;border:1px solid #ddd}
+  body.so-ficha .card-money{background:#f4f4f4}
+}
+@page{size:A4;margin:14mm}
 </style>
 </head>
 <body>
@@ -153,6 +166,11 @@
     </div>
     <div class="card-money" id="card-money"></div>
     <p class="card-missing" id="card-missing"></p>
+    <div class="actions card-actions">
+      <button class="btn primary" id="pdf-button" type="button">Baixar a ficha em PDF</button>
+      <button class="btn" id="pitch-button" type="button">Gerar a página do pitch</button>
+    </div>
+    <p class="card-nota">O PDF sai em uma folha, só com a ficha. A página do pitch é um arquivo só, com os seus dados dentro, cronômetro de 2, 3 ou 5 minutos e navegação por setas — funciona sem internet, em qualquer computador.</p>
   </section>
 
   <div class="final">
@@ -163,12 +181,21 @@
       <a href="../trilha-rapida/index.html"><b>Continuar na Trilha Rápida →</b><small>7 passos, cerca de 6 aulas. Aprofunda esta startup com cinco entrevistas, alternativas de mercado e um modelo de negócio testado.</small></a>
       <a href="../index.html#/trilha"><b>Ir para a trilha completa →</b><small>12 etapas, 24 aulas. O percurso com avaliação, fichas e portfólio da equipe.</small></a>
     </div>
+    <h3 class="grupo-titulo">Guardar e continuar depois</h3>
     <div class="actions">
-      <button class="btn lime" id="export-button" type="button">Baixar a ficha da startup (.txt)</button>
+      <button class="btn primary" id="save-copy" type="button">Salvar cópia (.json)</button>
+      <button class="btn" id="load-copy" type="button">Subir cópia</button>
+    </div>
+    <p class="saved">A cópia guarda tudo o que vocês escreveram. Salve no fim da aula, leve o arquivo e suba de volta para continuar a startup de onde parou — em qualquer computador.</p>
+
+    <h3 class="grupo-titulo">Levar a ficha</h3>
+    <div class="actions">
+      <button class="btn lime" id="export-button" type="button">Baixar a ficha (.txt)</button>
       <button class="btn" id="copy-button" type="button">Copiar tudo</button>
       <button class="btn" id="clear-button" type="button">Apagar respostas</button>
     </div>
-    <p class="saved">As respostas ficam só neste navegador e neste aparelho, em espaço separado das outras trilhas. Antes de trocar de aparelho, baixe a ficha.</p>
+    <p class="saved">As respostas ficam só neste navegador e neste aparelho, em espaço separado das outras trilhas.</p>
+    <input id="copy-file" type="file" accept="application/json,.json" hidden>
   </div>
 
   <div class="footer">
@@ -180,6 +207,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script src="../assets/trilha-curta.js"></script>
+<script src="../assets/gerar-pitch.js"></script>
 <script>
 (function(){
 'use strict';
@@ -445,6 +473,48 @@ function resumo(){
   linhas.push('Proximo passo: Trilha Rapida (7 passos) ou trilha completa (12 etapas).');
   return linhas.join('\n');
 }
+
+// ---- Ficha em PDF: imprime só o cartão, sozinho em uma folha ----
+document.getElementById('pdf-button').addEventListener('click',function(){
+  document.body.classList.add('so-ficha');
+  window.print();
+});
+window.addEventListener('afterprint',function(){document.body.classList.remove('so-ficha');});
+
+// ---- Página do pitch: um arquivo só, com os dados dentro ----
+document.getElementById('pitch-button').addEventListener('click',function(){
+  var m=conta();
+  var pacote={
+    nome:val('e2a'), proposta:val('e2c'),
+    publico:val('e1a'), trava:val('e1b'), entrega:val('e2b'),
+    papeis:val('e3a'), canal:val('e3b'),
+    prova:val('e4a'), resultado:val('e4b'), duvida:val('e4d'),
+    conta:m?{receita:brl(m.receita),gastos:brl(m.gastos),saldo:brl(m.saldo)}:null
+  };
+  if(!pacote.nome&&!pacote.proposta&&!pacote.publico){
+    TC.aviso('Preencha ao menos o bloco 1 e o nome da startup antes de gerar o pitch.',5000);
+    return;
+  }
+  var apelido=(pacote.nome||'startup').toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)||'startup';
+  TC.baixarArquivo(window.GerarPitch.montar(pacote),'pitch-'+apelido+'.html','text/html;charset=utf-8');
+  TC.aviso('Página do pitch baixada. Abra o arquivo para apresentar.');
+});
+
+// ---- Salvar e subir a cópia ----
+var CAMPOS_VALIDOS=/^(e[1-4][a-d]|done-[1-4]|m_(price|clients|var|fixed))$/;
+TC.ligarCopia({
+  trilha:'trilha-extrema',
+  arquivo:'startup-trilha-extrema.json',
+  estado:function(){return estado;},
+  valida:function(chave){return CAMPOS_VALIDOS.test(chave);},
+  aoRestaurar:function(limpo){
+    estado=limpo;
+    TC.salvar(CHAVE,estado);
+    desenhar();
+  }
+});
 
 TC.ligarCampos(CHAVE,estado,function(campo){
   if(campo.type==='checkbox'){
